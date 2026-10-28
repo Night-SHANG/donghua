@@ -1,0 +1,73 @@
+{
+  "source": "https://github.com/ZLHad/OpenVideoHarness/tree/main/showcase/01-handdrawn-clawd-leaf",
+  "engine": "ClaudeAnimationBase",
+  "dependencies": {
+    "p5": "2.3.3",
+    "p5.brush": "2.2.3"
+  },
+  "dependency_tarball_integrity": "SHA512 matches upstream package-lock.json",
+  "source_changes": "None in any animation/engine JS; index.html adjusts node_modules paths to vendor only",
+  "run_result": "Cloud browser throws Error creating webgl context at core.js:277; no frames rendered",
+  "files": [
+    {
+      "path": "LICENSE-engine",
+      "bytes": 1069,
+      "sha256": "0bc3b0dcd0540a08bd21949aece56a806ea42c784952f007ca36b82286cb45c3"
+    },
+    {
+      "path": "LICENSE-harness",
+      "bytes": 1101,
+      "sha256": "95d68046d412a958f1abbecb631a4cf94483ce8beb32379841d8e7af7762b158"
+    },
+    {
+      "path": "index.html",
+      "bytes": 1556,
+      "sha256": "516e527e9a615040cd1c3c15e152a821f8bfca897aac8e731a924f921041c123"
+    },
+    {
+      "path": "src/clawd.js",
+      "bytes": 50585,
+      "sha256": "cb5668ee5759e019779d32723f3f1477925349fd14418d191868495536ca5098"
+    },
+    {
+      "path": "src/config.js",
+      "bytes": 464,
+      "sha256": "06d3f38e79d293b7d68488b02338fc31a609ea6f6365ff55ea0d89bae4d2af43"
+    },
+    {
+      "path": "src/core.js",
+      "bytes": 22922,
+      "sha256": "a46e35ab137280ce03c4db758b76eeafd51bf8edc0f740319696947df0bb7efb"
+    },
+    {
+      "path": "src/scenes/leaf.js",
+      "bytes": 32137,
+      "sha256": "d25ad3783c0d6551685b3fdcd366e478f20e8974a52567d040a9234016344562"
+    },
+    {
+      "path": "src/sheets.js",
+      "bytes": 2652,
+      "sha256": "e7e83a9bb13807c66223ad49ad9393a0836314cbbe9d029a2b812177bccfed6b"
+    },
+    {
+      "path": "src/timeline.js",
+      "bytes": 2995,
+      "sha256": "d838a2c4e5fc83278acd1a0d6ef4f72263647503d05e0082e05236c65e821050"
+    },
+    {
+      "path": "vendor/p5/lib/p5.min.js",
+      "bytes": 990372,
+      "sha256": "3f8a0c739bd3c6350e239ff7187d38656ed2247e30a2b8084fd16a91e6e843ac"
+    },
+    {
+      "path": "vendor/p5/license.txt",
+      "bytes": 24480,
+      "sha256": "eb2f25f8f165d5f20682c1ce7e99ce69144ecfd80fbed8c17dfd327ecd8b6cb6"
+    },
+    {
+      "path": "vendor/p5.brush/dist/p5.brush.js",
+      "bytes": 71792,
+      "sha256": "41c25108c69a8eb1cca500d68f3603593e33b53e90a773fc024a6cff461fc31a"
+    }
+  ]
+}

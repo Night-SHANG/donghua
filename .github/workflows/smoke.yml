@@ -1,0 +1,36 @@
+name: Sandbox WebGL2 and original frames
+on:
+  push:
+    paths: ['src/**', 'scripts/**', 'package*.json', 'index.html', '.github/workflows/smoke.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Exact locked dependencies without lifecycle scripts
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Default headless WebGL2 and original showcase frames
+        id: default
+        continue-on-error: true
+        run: npm run smoke
+      - name: Standard Xvfb and Mesa fallback (sandbox retained)
+        if: steps.default.outcome == 'failure'
+        env:
+          GL_MODE: mesa
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: xvfb-run -a npm run smoke
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: webgl2-smoke
+          path: out/
+          retention-days: 7
