@@ -49,12 +49,23 @@ export function entryMetadata(loop) {
 }
 export function encoderPreflight(film,out) {
  execFileSync('ffmpeg',['-version'],{stdio:'ignore'});execFileSync('ffprobe',['-version'],{stdio:'ignore'});
- const file=resolve(out,'encoder-preflight.mp4');
- execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-y','-f','lavfi','-i',`color=c=orange:s=${film.width}x${film.height}:r=${film.fps}`,'-f','lavfi','-i','anullsrc=r=48000:cl=stereo','-frames:v','1','-t',String(1/film.fps),'-c:v','libx264','-pix_fmt','yuv420p','-c:a','aac',file]);
+ const file=resolve(out,'encoder-preflight.mp4'),audio=resolve(out,'encoder-preflight-audio.m4a');
+ // Encode AAC first. ffmpeg4.4 can stop a simultaneous AAC encoder on -frames:v1
+ // before priming emits any audio packets; muxing an already encoded input avoids it.
+ execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-y','-f','lavfi','-i','anullsrc=r=48000:cl=stereo','-t','1','-c:a','aac',audio]);
+ execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-xerror','-i',audio,'-f','null','-']);
+ const audioPreflight=JSON.parse(execFileSync('ffprobe',['-v','error','-show_streams','-of','json',audio]));
+ if(!audioPreflight.streams.some(s=>s.codec_name==='aac'&&s.sample_rate==='48000'&&s.channels===2))throw new Error('AAC preflight missing stereo48k audio');
+ execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-y','-f','lavfi','-i',`color=c=orange:s=${film.width}x${film.height}:r=${film.fps}`,'-i',audio,'-frames:v','1','-t',String(1/film.fps),'-c:v','libx264','-pix_fmt','yuv420p','-c:a','copy',file]);
  execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-xerror','-i',file,'-f','null','-']);
  const p=JSON.parse(execFileSync('ffprobe',['-v','error','-show_streams','-of','json',file]));
  if(!p.streams.some(s=>s.codec_name==='h264')||!p.streams.some(s=>s.codec_name==='aac'))throw new Error('Encoder/mux preflight missing streams');
- return p;
+ return {...p,audioPreflight};
+}
+export function stagePreflight(loop,film,out) {
+ if(loop==='breadViews')return {skipped:true,reason:'PNG views do not encode audio or video'};
+ if(loop!=='breadPilot')throw new Error('Unknown render stage');
+ return encoderPreflight(film,out);
 }
 async function processTreeRss(rootPid) {
  // Linux real process tree including Chrome renderers, not just Node heap.
@@ -71,7 +82,7 @@ export async function render(options) {
   await mkdir(out,{recursive:true});
   const film=entryMetadata(options.loop),plan=planFrames(options,film);
   Object.assign(manifest,{film,plan});
-  manifest.preflight=encoderPreflight(film,out);
+  manifest.preflight=stagePreflight(options.loop,film,out);
   manifest.sourceSHA=process.env.GITHUB_SHA||execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
   server=createServer(async(req,res)=>{try{const file=resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));if(!file.startsWith(root+'/')){res.writeHead(403).end();return;}res.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.json':'application/json'})[extname(file)]||'application/octet-stream');res.end(await readFile(file));}catch{res.writeHead(404).end();}});
   await new Promise((ok,no)=>{server.once('error',no);server.listen(0,'127.0.0.1',ok);});

@@ -47,7 +47,7 @@ jobs:
           command -v ffprobe
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Focused runner and character contracts
-        run: node --test tests/last-bread/characters.test.mjs tests/last-bread/runner.test.mjs
+        run: BREAD_PNG_ONLY=1 node --test tests/last-bread/characters.test.mjs tests/last-bread/runner.test.mjs
       - name: Actual watercolor views (ten representative angles and expressions)
         if: steps.stage.outputs.stage == 'views'
         run: |
