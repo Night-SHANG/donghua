@@ -5,6 +5,7 @@
 - [制作经验与验收流程](production-lessons.md)
 - [系列主题与喜剧机制：《这屋我说了算》](series-direction.md)
 - [已确认双主角基线：扣扣／溜溜](../../film/cast/CAST_BASELINE.md)
+- [第 01 集《安静一点》：文字分镜工作草案](../../film/house-comedy/episode-01/STORYBOARD.md)
 - [《泡泡吹过头》交付及复现记录](../../film/teapot/DELIVERY.md)
 
 当前阶段：扣扣／溜溜 r3 实际模型表已获用户确认，作为固定系列角色复用；《安静一点》仅在文字分镜阶段，尚无新一集成片。本次更新仅维护文档。
