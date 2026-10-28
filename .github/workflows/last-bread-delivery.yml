@@ -1,0 +1,91 @@
+name: Last bread existing pilot delivery
+on:
+  push:
+    branches: ['deliver/last-bread-pilot']
+    paths: ['film/last-bread/delivery-request.json']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  package:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 40632153486
+          artifact-ids: 12792748097
+          path: original-artifact
+          merge-multiple: true
+      - name: Copy fixed original pilot bytes and verify provenance
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import shutil
+
+          source_sha = '262fc1f4ba6266625db076fc79740c144b8c7127'
+          run_id, artifact_id = 40632153486, 12792748097
+          request = json.loads(Path('film/last-bread/delivery-request.json').read_text())
+          assert request['operation'] == 'copy-existing-pilot-only', 'Unexpected operation'
+          assert request['originalRunId'] == run_id, 'Unexpected original run'
+          assert request['originalArtifactId'] == artifact_id, 'Unexpected original artifact'
+          assert request['sourceSHA'] == source_sha, 'Unexpected original source'
+          source, target = Path('original-artifact'), Path('delivery')
+          names = ['last-bread-pilot-1080p.mp4', 'pilot-technical-qa.json',
+                   'render-manifest.json', 'pilot-contact-sheet.jpg']
+          for name in names:
+              assert (source / name).is_file() and not (source / name).is_symlink(), name
+          manifest = json.loads((source / 'render-manifest.json').read_text())
+          assert manifest['sourceSHA'] == source_sha, 'Original source mismatch'
+          assert manifest['status'] == 'encoded-and-technically-verified', 'Pilot not verified'
+          assert manifest['encodedFrameCount'] == 120, 'Incorrect encoded frame count'
+          assert manifest['film'] == {'width': 1920, 'height': 1080, 'fps': 24, 'duration': 5}, 'Incorrect film metadata'
+
+          def digest(path):
+              result = hashlib.sha256()
+              with path.open('rb') as stream:
+                  for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+                      result.update(chunk)
+              return result.hexdigest()
+
+          mp4 = names[0]
+          original_hash = digest(source / mp4)
+          checksum_file = source / 'SHA256SUMS'
+          if checksum_file.exists():
+              assert not checksum_file.is_symlink(), 'Symlink checksum file'
+              matches = []
+              for line in checksum_file.read_text().splitlines():
+                  fields = line.split(maxsplit=1)
+                  if len(fields) == 2 and Path(fields[1].lstrip('*')).name == mp4:
+                      matches.append(fields[0])
+              assert matches == [original_hash], 'Original MP4 checksum mismatch or missing entry'
+          if (source / 'webgl2.json').exists():
+              assert (source / 'webgl2.json').is_file() and not (source / 'webgl2.json').is_symlink()
+              names.append('webgl2.json')
+          assert sum((source / name).stat().st_size for name in names) < 500 * 1024 * 1024, 'Delivery too large'
+          target.mkdir(exist_ok=True)
+          assert not any(target.iterdir()), 'Delivery directory must be empty'
+          for name in names:
+              shutil.copyfile(source / name, target / name)
+          assert digest(target / mp4) == original_hash, 'Copied MP4 bytes changed'
+          provenance = {'originalRunId': run_id, 'originalArtifactId': artifact_id,
+                        'sourceSHA': source_sha, 'originalMP4SHA256': original_hash,
+                        'operation': 'byte-copy-only-no-render-or-encoding'}
+          (target / 'source-version.json').write_text(json.dumps(provenance, indent=2) + '\n')
+          files = sorted(target.iterdir())
+          (target / 'SHA256SUMS').write_text(''.join(f'{digest(path)}  {path.name}\n' for path in files))
+          print(f'Packaged {len(files)} original/provenance files; MP4 SHA256 {original_hash}')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: last-bread-pilot-delivery-${{ github.run_id }}
+          path: delivery/
+          if-no-files-found: error
+          retention-days: 7
