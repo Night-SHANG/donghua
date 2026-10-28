@@ -40,10 +40,23 @@ try {
   await page.waitForFunction(()=>window.ready===true,{timeout:120000});
   const metadata=await page.evaluate(()=>({width:film.width,height:film.height,fps:film.fps,duration:film.duration,font:document.fonts.check('100px "Permanent Marker"'),renderer:gpuInfo()}));
   console.log('FILM',metadata);assert.equal(metadata.width,1920);assert.equal(metadata.height,1080);assert.equal(metadata.fps,24);assert.equal(metadata.duration,12);
-  for(const t of [0,6,11.958333333333334]) {
+  for(const t of [0.5,6,11.8]) {
     const result=await page.evaluate(async t=>{await film.frame(t);const c=document.getElementById('out');const d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let min=255,max=0;for(let i=0;i<d.length;i+=64){min=Math.min(min,d[i]);max=Math.max(max,d[i]);}return {url:c.toDataURL('image/png'),min,max};},t);
-    assert.ok(result.max-result.min>50,'Blank or near-uniform frame');
-    await writeFile(`out/smoke-${t.toFixed(3)}.png`,Buffer.from(result.url.split(',')[1],'base64'));console.log('FRAME PASS',t,result.min,result.max);
+    console.log('FRAME RANGE',t,result.min,result.max);
+    await writeFile(`out/smoke-${t.toFixed(3)}.png`,Buffer.from(result.url.split(',')[1],'base64'));assert.ok(result.max-result.min>50,'Blank or near-uniform visible frame');console.log('FRAME PASS',t,result.min,result.max);
   }
   await writeFile('out/smoke-pass.json',JSON.stringify({mode,metadata,probe},null,2));
+  if(process.env.RENDER_FULL==='1') {
+    await mkdir('out/frames',{recursive:true});
+    for(let frame=0;frame<288;frame++) {
+      const start=Date.now();
+      const url=await page.evaluate(async t=>{await film.frame(t);return document.getElementById('out').toDataURL('image/png');},frame/24);
+      await writeFile(`out/frames/f${String(frame).padStart(5,'0')}.png`,Buffer.from(url.split(',')[1],'base64'));
+      console.log('RENDER',frame+1,'/288',Date.now()-start,'ms');
+    }
+    const sheet=await page.evaluate(()=>renderSheet([0.5,3,5,8.2,10.5,11.8],3,640));
+    await writeFile('out/contact-sheet.jpg',Buffer.from(sheet.url.split(',')[1],'base64'));
+    await writeFile('out/render-manifest.json',JSON.stringify({frames:288,fps:24,duration:12,width:1920,height:1080,mode,metadata,commit:process.env.GITHUB_SHA},null,2));
+  }
+
 } finally {if(browser)await browser.close();server.close();}
