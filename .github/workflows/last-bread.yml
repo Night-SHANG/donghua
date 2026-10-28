@@ -46,18 +46,39 @@ jobs:
           command -v ffmpeg
           command -v ffprobe
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Focused runner and character contracts
-        run: node --test tests/last-bread/characters.test.mjs tests/last-bread/runner.test.mjs
-      - name: Actual watercolor views (ten representative angles and expressions)
-        if: steps.stage.outputs.stage == 'views'
-        run: |
-          node scripts/render-last-bread.mjs --loop breadViews --out out/last-bread
-          ffmpeg -hide_banner -loglevel error -y -pattern_type glob -i 'out/last-bread/frames/f*.png' -vf 'scale=640:360,tile=2x5' -frames:v 1 out/last-bread/character-contact-sheet.jpg
-      - name: Pilot is not yet available in this checkpoint
+      - uses: actions/setup-python@v5
+        if: steps.stage.outputs.stage == 'pilot'
+        with:
+          python-version: '3.12'
+      - name: Locked pilot audio dependencies
         if: steps.stage.outputs.stage == 'pilot'
         run: |
-          echo 'Pilot implementation is pending; this reviewed checkpoint enables views only.' >&2
-          exit 1
+          pip install --only-binary=:all: -r requirements-audio.txt
+      - name: PNG-only runner and character contracts
+        if: steps.stage.outputs.stage == 'views'
+        run: BREAD_PNG_ONLY=1 node --test tests/last-bread/characters.test.mjs tests/last-bread/runner.test.mjs
+      - name: Full pilot contracts and original soundtrack
+        if: steps.stage.outputs.stage == 'pilot'
+        run: |
+          node --test
+          bash scripts/build-last-bread-audio.sh
+      - name: Focused watercolor art regression (front, side, back)
+        if: steps.stage.outputs.stage == 'views'
+        run: |
+          mkdir -p out/last-bread/frames
+          for frame in 0 48 96; do
+            node scripts/render-last-bread.mjs --loop breadViews --start "$frame" --end "$((frame + 1))" --out "out/last-bread/view-$frame"
+            cp out/last-bread/view-$frame/frames/*.png out/last-bread/frames/
+          done
+          ffmpeg -hide_banner -loglevel error -y -pattern_type glob -i 'out/last-bread/frames/f*.png' -vf 'scale=640:360,tile=3x1' -frames:v 1 out/last-bread/character-contact-sheet.jpg
+      - name: Render120 continuous pilot frames, then encode and measure
+        if: steps.stage.outputs.stage == 'pilot'
+        run: |
+          node scripts/render-last-bread.mjs --loop breadPilot --start 0 --end 120 --out out/last-bread
+          node scripts/encode-last-bread.mjs out/last-bread film/last-bread/audio/mix-aac.m4a
+          cp film/last-bread/audio/technical-qa.json out/last-bread/audio-technical-qa.json
+          cp film/last-bread/events.json film/last-bread/score.json out/last-bread/
+          sha256sum out/last-bread/*.mp4 > out/last-bread/SHA256SUMS
       - uses: actions/upload-artifact@v4
         if: always()
         with:

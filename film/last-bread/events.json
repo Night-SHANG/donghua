@@ -1,0 +1,314 @@
+[
+  {
+    "motionEvent": "tuantuan-step-0",
+    "t": 0,
+    "sfx": "pop",
+    "gain_db": -21,
+    "pitch": -12,
+    "pan": -0.4375,
+    "role": "detail",
+    "why": "Original pilot cue at motion event tuantuan-step-0"
+  },
+  {
+    "motionEvent": "jiujiao-step-0",
+    "t": 0,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.5979166666666667,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-0"
+  },
+  {
+    "motionEvent": "jiujiao-step-1",
+    "t": 0.16000000000000014,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.5722499999999999,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-1"
+  },
+  {
+    "motionEvent": "tuantuan-step-1",
+    "t": 0.21999999999999886,
+    "sfx": "pop",
+    "gain_db": -21,
+    "pitch": -12,
+    "pan": -0.40220833333333356,
+    "role": "detail",
+    "why": "Original pilot cue at motion event tuantuan-step-1"
+  },
+  {
+    "motionEvent": "jiujiao-step-2",
+    "t": 0.3200000000000003,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.5465833333333332,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-2"
+  },
+  {
+    "motionEvent": "tuantuan-step-2",
+    "t": 0.4400000000000013,
+    "sfx": "pop",
+    "gain_db": -21,
+    "pitch": -12,
+    "pan": -0.3669166666666664,
+    "role": "detail",
+    "why": "Original pilot cue at motion event tuantuan-step-2"
+  },
+  {
+    "motionEvent": "jiujiao-step-3",
+    "t": 0.4800000000000004,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.5209166666666666,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-3"
+  },
+  {
+    "motionEvent": "jiujiao-step-4",
+    "t": 0.6400000000000006,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.4952499999999998,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-4"
+  },
+  {
+    "motionEvent": "tuantuan-step-3",
+    "t": 0.6600000000000001,
+    "sfx": "pop",
+    "gain_db": -21,
+    "pitch": -12,
+    "pan": -0.331625,
+    "role": "detail",
+    "why": "Original pilot cue at motion event tuantuan-step-3"
+  },
+  {
+    "motionEvent": "jiujiao-step-5",
+    "t": 0.8000000000000007,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.4695833333333332,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-5"
+  },
+  {
+    "motionEvent": "tuantuan-step-4",
+    "t": 0.879999999999999,
+    "sfx": "pop",
+    "gain_db": -21,
+    "pitch": -12,
+    "pan": -0.29633333333333345,
+    "role": "detail",
+    "why": "Original pilot cue at motion event tuantuan-step-4"
+  },
+  {
+    "motionEvent": "jiujiao-step-6",
+    "t": 0.9600000000000009,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.44391666666666657,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-6"
+  },
+  {
+    "motionEvent": "crouch",
+    "t": 1.1000000000000014,
+    "sfx": "paper",
+    "gain_db": -20,
+    "dur": 0.15,
+    "pan": -0.26104166666666667,
+    "role": "detail",
+    "why": "Original pilot cue at motion event crouch"
+  },
+  {
+    "motionEvent": "jiujiao-step-7",
+    "t": 1.120000000000001,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.41824999999999984,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-7"
+  },
+  {
+    "motionEvent": "jiujiao-step-8",
+    "t": 1.2800000000000011,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.3925833333333331,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-8"
+  },
+  {
+    "motionEvent": "takeoff",
+    "t": 1.4200000000000017,
+    "sfx": "whoosh",
+    "gain_db": -15,
+    "dur": 0.3,
+    "bright": -0.4,
+    "pan": -0.2260416666666666,
+    "role": "detail",
+    "why": "Original pilot cue at motion event takeoff"
+  },
+  {
+    "motionEvent": "jiujiao-step-9",
+    "t": 1.4400000000000013,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.3669166666666664,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-9"
+  },
+  {
+    "motionEvent": "jiujiao-step-10",
+    "t": 1.6000000000000014,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.3412499999999997,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-10"
+  },
+  {
+    "motionEvent": "jiujiao-step-11",
+    "t": 1.7600000000000016,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.31558333333333316,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-11"
+  },
+  {
+    "motionEvent": "miss",
+    "t": 1.8999999999999986,
+    "sfx": "whip",
+    "gain_db": -15,
+    "dur": 0.16,
+    "tone": 0.2,
+    "pan": -0.12283653846153879,
+    "role": "detail",
+    "why": "Original pilot cue at motion event miss"
+  },
+  {
+    "motionEvent": "jiujiao-step-12",
+    "t": 1.9200000000000017,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.28991666666666643,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-12"
+  },
+  {
+    "motionEvent": "jiujiao-step-13",
+    "t": 2.0799999999999983,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.26425000000000015,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-13"
+  },
+  {
+    "motionEvent": "land",
+    "t": 2.1999999999999993,
+    "sfx": "impact",
+    "gain_db": -14,
+    "pitch": -5,
+    "role": "hero",
+    "pan": -0.058333333333333355,
+    "why": "Original pilot cue at motion event land"
+  },
+  {
+    "motionEvent": "jiujiao-step-14",
+    "t": 2.240000000000002,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.238583333333333,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-14"
+  },
+  {
+    "motionEvent": "jiujiao-step-15",
+    "t": 2.3999999999999986,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.21291666666666692,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-15"
+  },
+  {
+    "motionEvent": "jiujiao-step-16",
+    "t": 2.5599999999999987,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.18710032142186356,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-16"
+  },
+  {
+    "motionEvent": "jiujiao-step-17",
+    "t": 2.719999999999999,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.16317652853431017,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-17"
+  },
+  {
+    "motionEvent": "brakeEnd",
+    "t": 2.75,
+    "sfx": "paper",
+    "gain_db": -19,
+    "dur": 0.2,
+    "pan": -0.01822916666666664,
+    "role": "detail",
+    "why": "Original pilot cue at motion event brakeEnd"
+  },
+  {
+    "motionEvent": "jiujiao-step-18",
+    "t": 2.879999999999999,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.14621760416666676,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-18"
+  },
+  {
+    "motionEvent": "jiujiao-step-19",
+    "t": 3.039999999999999,
+    "sfx": "tick",
+    "gain_db": -25,
+    "pan": -0.13502529136927124,
+    "role": "detail",
+    "why": "Original pilot cue at motion event jiujiao-step-19"
+  },
+  {
+    "motionEvent": "birdBrake",
+    "t": 3.16,
+    "sfx": "paper",
+    "gain_db": -21,
+    "dur": 0.17,
+    "pan": -0.1296945691679188,
+    "role": "detail",
+    "why": "Original pilot cue at motion event birdBrake"
+  },
+  {
+    "motionEvent": "birdStop",
+    "t": 3.6499999999999986,
+    "sfx": "pop",
+    "gain_db": -19,
+    "pitch": 7,
+    "pan": -0.12395833333333335,
+    "role": "detail",
+    "why": "Original pilot cue at motion event birdStop"
+  },
+  {
+    "motionEvent": "settle",
+    "t": 4.600000000000001,
+    "sfx": "paper",
+    "gain_db": -24,
+    "dur": 0.12,
+    "pan": -0.01822916666666664,
+    "role": "detail",
+    "why": "Original pilot cue at motion event settle"
+  }
+]

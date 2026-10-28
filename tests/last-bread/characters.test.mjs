@@ -5,8 +5,10 @@ import vm from 'node:vm';
 
 // Geometry is real production code. Only the unavailable WebGL paint boundary is recorded.
 function load() {
-  const calls = [];
-  const ctx = vm.createContext({console, LOOPS: {},
+  const calls = [];let points=[],baseColor;
+  const ctx = vm.createContext({console, LOOPS: {},CLOSE:'close',
+    flushBrush:()=>calls.push({kind:'flush'}),push:()=>{},pop:()=>{},noStroke:()=>{},fill:c=>baseColor=c,
+    beginShape:()=>{points=[];},vertex:(x,y)=>points.push([x,y]),endShape:()=>calls.push({kind:'base',points,color:baseColor}),
     paint: (points, style) => calls.push({kind:'paint', points, style}),
     inkLine: (points, sw, col) => calls.push({kind:'line', points, sw, col}),
     boilSeed: key => calls.push({kind:'seed', key}),
@@ -94,10 +96,10 @@ test('hands, apron corners, beak and feet coincide with drawn attachment landmar
     const points=id=>g.layers.find(l=>l.id===id).points;
     const contains=(ps,p)=>ps.some(q=>q.every((n,i)=>Math.abs(n-p[i])<1e-8));
     g.anchors.feet.forEach((p,i)=>assert.ok(contains(points(i?'footR':'footL'),p)));
-    if(s==='jiujiao') assert.ok(contains(points('beak'),g.anchors.beak));
+    if(s==='jiujiao') {if(g.layers.some(l=>l.id==='beak'))assert.ok(contains(points('beak'),g.anchors.beak));}
     else {
       g.anchors.hands.forEach((p,i)=>assert.ok(contains(points(i?'armR':'armL'),p)));
-      g.anchors.apron.forEach(p=>assert.ok(contains(points('apron'),p)));
+      if(g.layers.some(l=>l.id==='apron'))g.anchors.apron.forEach(p=>assert.ok(contains(points('apron'),p)));
     }
   }
 });
@@ -118,12 +120,16 @@ test('draw uses geometry in order and stable species/part boil seeds',()=>{
     const pose={x:100,y:300,u:30,view:'q'}, g=Bread.characterGeometry(s,pose);
     const returned=Bread[draw](pose);
     assert.deepEqual(plain(returned),plain(g));
-    assert.equal(calls.length,g.layers.length*2);
-    g.layers.forEach((l,i)=>{
-      assert.equal(calls[2*i].key,`bread/${s}/${l.id}`);
-      assert.deepEqual(plain(calls[2*i+1].points),plain(l.points));
-      assert.equal(calls[2*i+1].kind,l.kind==='line'?'line':'paint');
-    });
+    let cursor=0;
+    for(const l of g.layers){
+      assert.equal(calls[cursor++].key,`bread/${s}/${l.id}`);
+      if(l.kind==='paint'){
+        assert.equal(calls[cursor++].kind,'flush','flush deferred masks before opaque base');
+        const base=calls[cursor++];assert.equal(base.kind,'base');assert.equal(base.color,l.base);assert.deepEqual(plain(base.points),plain(l.points));
+      }
+      const mark=calls[cursor++];assert.deepEqual(plain(mark.points),plain(l.points));assert.equal(mark.kind,l.kind==='line'?'line':'paint');
+    }
+    assert.equal(cursor,calls.length);
   }
 });
 test('breadViews loop draws five angles and both facing directions, with five-second contract',()=>{
@@ -155,4 +161,20 @@ test('standalone HTML registers its loop with unchanged core/timeline and expose
   assert.equal(window.film.duration,5);
   assert.equal(typeof window.LOOP,'function');
   assert.equal(typeof window.renderAt,'function');
+});
+test('rear art omits hidden bib and beak instead of relying on translucent occlusion',()=>{
+ const {Bread}=load();
+ const back=Bread.characterGeometry('tuantuan',{view:'back'});
+ assert.equal(back.layers.some(l=>l.id==='apron'),false,'back must not paint the front bib');
+ assert.ok(back.layers.some(l=>l.id==='apron/back-straps'));
+ for(const view of ['back','qback'])assert.equal(Bread.characterGeometry('jiujiao',{view}).layers.some(l=>l.id==='beak'),false,'rear head must not paint hidden beak');
+});
+test('opaque underpaint provides facial silhouette while watercolor remains a restrained overlay',()=>{
+ const {Bread}=load();const g=Bread.characterGeometry('tuantuan',{view:'front'});
+ for(const id of ['body','head','mask0','eye0/pupil','nose']){
+  const l=g.layers.find(l=>l.id===id);assert.equal(typeof l.base,'string',id+' needs opaque material');assert.equal(l.style.wash,undefined,'no second opaque-looking deferred wash');assert.ok(l.style.fillOp>0&&l.style.fillOp<=32);
+ }
+ const body=g.layers.find(l=>l.id==='body').points;
+ const width=Math.max(...body.map(p=>p[0]))-Math.min(...body.map(p=>p[0]));const height=Math.max(...body.map(p=>p[1]))-Math.min(...body.map(p=>p[1]));assert.ok(width/height>1.1,'pear torso should be broader than tall');
+ const bird=Bread.characterGeometry('jiujiao');assert.ok(bird.layers.find(l=>l.id==='legL').style.sw>=.5);
 });

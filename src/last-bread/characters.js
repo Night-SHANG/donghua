@@ -12,8 +12,13 @@
     return [origin[0]+dx*Math.cos(a)-dy*Math.sin(a),origin[1]+dx*Math.sin(a)+dy*Math.cos(a)];
   });
   const move = (pts,x,y) => pts.map(p=>[p[0]+x,p[1]+y]);
-  const shape = (layers,id,points,color,opts={}) => layers.push({id,kind:'paint',points,
-    style:{wash:color,fill:color,fillOp:65,bleed:.055,tex:.55,border:.3,ink:C.ink,sw:.23,curv:.12,...opts}});
+  const shape = (layers,id,points,color,opts={}) => {
+    // Real opaque underpaint handles painter-order occlusion. Pigment is an overlay,
+    // not a replacement for opacity (p5.brush wash mixes with what is underneath).
+    const feature=/mask|pupil|nose|mouth/.test(id);
+    layers.push({id,kind:'paint',points,base:color,
+      style:{fill:color,fillOp:feature?8:24,bleed:.025,tex:.25,border:.12,ink:C.ink,sw:.32,curv:.12,...opts}});
+  };
   const line = (layers,id,points,color=C.ink,sw=.14) => layers.push({id,kind:'line',points,style:{ink:color,sw}});
   const noInk={ink:null};
 
@@ -40,10 +45,10 @@
     draw('tail/tip',[[-5.05,-5.03],[-4.95,-5.61],[-4.65,-6],[-4.25,-6.23],[-4.1,-6.05],[-3.93,-6.2],[-3.45,-5.82],[-3.2,-5.2]],C.furDark,noInk);
     line(layers,'tail/fur',rotate([[-4.65,-5.75],[-4.44,-5.83],[-4.33,-5.61]],pivot,a),C.furLight);
   }
-  function raccoonLeg(layers,side,phase,view) {
+  function raccoonLeg(layers,side,phase,view,target) {
     const sign=side==='L'?-1:1, s=Math.sin(phase)*sign;
-    const hip=[sign*(view==='side'?.57:1.12),-1.8], foot=[hip[0]+s*.95,-Math.max(0,s)*.8];
-    const knee=[hip[0]+s*.48,-.9-Math.max(0,s)*.25];
+    const hip=[sign*(view==='side'?.57:1.12),-1.8], foot=target||[hip[0]+s*.95,-Math.max(0,s)*.8];
+    const knee=target?[(hip[0]+foot[0])*.5-.15,(-1.8+foot[1])*.5-.15]:[hip[0]+s*.48,-.9-Math.max(0,s)*.25];
     shape(layers,'leg'+side,[[hip[0]-.49,hip[1]],[hip[0]+.48,hip[1]], [knee[0]+.38,knee[1]], [foot[0]+.31,foot[1]-.16],[foot[0]-.38,foot[1]-.08],[knee[0]-.43,knee[1]]],C.fur);
     shape(layers,'foot'+side,[[foot[0]-.43,foot[1]-.25],[foot[0]-.08,foot[1]-.4],[foot[0]+.45,foot[1]-.27],[foot[0]+.74,foot[1]-.1],[foot[0]+.67,foot[1]],foot,[foot[0]-.48,foot[1]]],C.furDark);
     line(layers,'foot'+side+'/toes',[[foot[0]+.3,foot[1]-.23],[foot[0]+.43,foot[1]-.08]],C.furLight,.1);
@@ -72,14 +77,12 @@
   function tuantuan(p) {
     const v=raccoonViews[p.view], L=[], A={feet:[],hands:[],apron:[]};
     if(!v.rear) tail(L,p,false);
-    A.feet=[raccoonLeg(L,'L',p.legPhase,p.view),raccoonLeg(L,'R',p.legPhase,p.view)];
+    A.feet=[raccoonLeg(L,'L',p.legPhase,p.view,p._feet?.[0]),raccoonLeg(L,'R',p.legPhase,p.view,p._feet?.[1])];
     A.hands[1]=raccoonArm(L,'armR',v.shoulders[1],p.armR-.14,true);
-    shape(L,'apron',v.apron,C.apron); // Back angles naturally occlude the bib beneath the torso.
-    if(v.rear) shape(L,'body',v.body,C.fur);
-    else { // Put the body underneath the bib without duplicating geometry IDs.
-      const at=L.findIndex(l=>l.id==='apron');
-      const body=[];shape(body,'body',v.body,C.fur);L.splice(at,0,...body);
-    }
+    shape(L,'body',v.body,C.fur);
+    // Do not draw a hidden front bib on the back. The qback panel is the narrow
+    // exposed side hem, not a front bib painted under a supposedly opaque torso.
+    if(p.view!=='back') shape(L,'apron',v.apron,C.apron);
     if(!v.rear) {
       const x=p.view==='front'?0:p.view==='side'?1.28:.43;
       if(p.view!=='side') {
@@ -149,12 +152,12 @@
     qback:{body:[[-1.4,-3.87],[-1.66,-2.8],[-1.35,-1.72],[-.42,-1.06],[.71,-1.12],[1.5,-1.9],[1.54,-3.02],[.92,-3.95]],head:[[-1.38,-3.51],[-1.44,-4.21],[-.89,-4.9],[.14,-5.2],[1.12,-4.88],[1.53,-4.12],[1.42,-3.5],[.73,-3.15],[-.39,-3.04]],eyes:[],beak:[1.6,-3.75],wing:[[-1.19,-3.36],[1.12,-3.25]],rear:true},
     back:{body:[[-1.18,-3.94],[-1.54,-3.1],[-1.48,-2.07],[-.9,-1.31],[0,-1.0],[.98,-1.31],[1.49,-2.12],[1.54,-3.12],[1.13,-3.96]],head:[[-1.24,-3.42],[-1.47,-4.17],[-.91,-4.94],[0,-5.14],[.96,-4.92],[1.47,-4.15],[1.23,-3.43],[.51,-3.13],[-.52,-3.13]],eyes:[],beak:[0,-3.7],wing:[[-1.15,-3.36],[1.15,-3.36]],rear:true}
   };
-  function birdLeg(L,side,phase) {
+  function birdLeg(L,side,phase,target) {
     const sign=side==='L'?-1:1, s=Math.sin(phase)*sign, hip=[sign*.63,-1.55];
-    const foot=[hip[0]+s*.62,-Math.max(0,s)*.58], ankle=[foot[0]-.08,-.22-Math.max(0,s)*.58];
-    line(L,'leg'+side,[hip,[hip[0]-.15+s*.2,-.8],ankle],C.ink,.22);
-    line(L,'foot'+side,[[foot[0]-.4,foot[1]+.02],ankle,foot,[foot[0]+.44,foot[1]+.02]],C.ink,.2);
-    line(L,'foot'+side+'/toe',[[foot[0]-.02,foot[1]-.11],[foot[0]+.2,foot[1]+.1]],C.ink,.12);
+    const foot=target||[hip[0]+s*.62,-Math.max(0,s)*.58], ankle=[foot[0]-.08,foot[1]-.22];
+    line(L,'leg'+side,[hip,target?[(hip[0]+foot[0])*.5-.15,(-1.55+foot[1])*.5]:[hip[0]-.15+s*.2,-.8],ankle],C.ink,.6);
+    line(L,'foot'+side,[[foot[0]-.4,foot[1]+.02],ankle,foot,[foot[0]+.44,foot[1]+.02]],C.ink,.55);
+    line(L,'foot'+side+'/toe',[[foot[0]-.02,foot[1]-.11],[foot[0]+.2,foot[1]+.1]],C.ink,.4);
     return foot;
   }
   function birdWing(L,id,origin,angle,right,far) {
@@ -171,13 +174,12 @@
     const tailX=p.view==='front'||p.view==='back'?0:-1.2;
     shape(L,'tail',[[tailX,-2.13],[tailX-1.51,-2.41],[tailX-2.05,-2.2],[tailX-1.73,-1.96],[tailX-2.2,-1.77],[tailX-1.85,-1.61],[tailX-1.3,-1.59],[tailX-.4,-1.71]],C.birdDark);
     line(L,'tail/feathers',[[tailX-1.81,-2.1],[tailX-.8,-1.95],[tailX-.25,-1.83]],C.birdLight,.13);
-    A.feet=[birdLeg(L,'L',p.legPhase),birdLeg(L,'R',p.legPhase)];
+    A.feet=[birdLeg(L,'L',p.legPhase,p._feet?.[0]),birdLeg(L,'R',p.legPhase,p._feet?.[1])];
     birdWing(L,'wingR',v.wing[1],p.wingR,true,true);
     const [bx,by]=v.beak;
     const front=p.view==='front'||p.view==='back';
     const beakTip=front?[bx,by+.53]:[bx+.71,by-.05];
     const beak=front?[[bx-.35,by],[bx+.34,by],beakTip]:[[bx-.19,by-.27],beakTip,[bx+.01,by+.38]];
-    if(v.rear) shape(L,'beak',beak,C.beak); // Hidden behind head for a true rear view.
     shape(L,'body',v.body,C.bird);
     if(!v.rear) {
       const dx=p.view==='front'?0:.36;
@@ -221,10 +223,16 @@
     if(!Bread.views.includes(p.view)) throw new RangeError(`Unknown Bread view: ${p.view}`);
     for(const key of Object.keys(Bread.poseDefaults)) if(typeof Bread.poseDefaults[key]==='number'&&!Number.isFinite(p[key])) throw new TypeError(`Non-finite pose.${key}`);
     if(p.u<=0||Math.abs(p.squash)>=1) throw new RangeError('u must be positive and squash must be between -1 and 1');
+    const c=Math.cos(p.bodyRot),s=Math.sin(p.bodyRot),ax=species==='tuantuan'?1.14:1,ay=species==='tuantuan'?.9:1;
+    // Optional explicit WORLD foot contacts. Inverse affine mapping only: no IK solver.
+    // The same target becomes an actual foot vertex, with hip/knee art connecting to it.
+    if(p.footTargets!==undefined) {
+      if(!Array.isArray(p.footTargets)||p.footTargets.length!==2||p.footTargets.some(a=>!Array.isArray(a)||a.length!==2||a.some(v=>!Number.isFinite(v)))) throw new TypeError('footTargets must be two finite world points');
+      p._feet=p.footTargets.map(([x,y])=>{const dx=x-p.x,dy=y-p.y;return [(dx*c+dy*s)/(p.u*(p.flip?-1:1)*(1+p.squash)*ax),(-dx*s+dy*c)/(p.u*(1-p.squash)*ay)];});
+    }
     const g=species==='tuantuan'?tuantuan(p):jiujiao(p);
-    const c=Math.cos(p.bodyRot),s=Math.sin(p.bodyRot);
     const world=([x,y])=>{
-      const xx=x*p.u*(p.flip?-1:1)*(1+p.squash), yy=y*p.u*(1-p.squash);
+      const xx=x*ax*p.u*(p.flip?-1:1)*(1+p.squash), yy=y*ay*p.u*(1-p.squash);
       return [p.x+xx*c-yy*s,p.y+xx*s+yy*c];
     };
     g.layers=g.layers.map(l=>({...l,points:l.points.map(world)}));
@@ -236,7 +244,14 @@
     for(const l of g.layers) {
       boilSeed(`bread/${species}/${l.id}`);
       if(l.kind==='line') inkLine(l.points,l.style.sw,l.style.ink,'ink',.18);
-      else paint(l.points,l.style);
+      else {
+        // Drain deferred brush masks BEFORE native p5 underpaint, preserving the
+        // actual layer stack. The original engine's flush helper is unchanged.
+        flushBrush();push();noStroke();fill(l.base);beginShape();
+        for(const [x,y] of l.points) vertex(x,y);
+        endShape(CLOSE);pop();
+        paint(l.points,l.style);
+      }
     }
     return g;
   }

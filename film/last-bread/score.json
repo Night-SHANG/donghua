@@ -1,0 +1,12 @@
+{
+ "scope":"5-second motion pilot; not the full film score",
+ "_about":"Original warm C-major chase miniature: dry pizzicato scurries, a little flute question misses its answer, bass absorbs the landing, celesta answers as the sparrow catches up. Synthesized from this score, never the old film soundtrack.",
+ "bpm":120,"beats_per_bar":10,"key":"C","mode":"major","seed":873,"stereo":true,"space":"room",
+ "sections":[{"name":"chase-pilot","bars":1,"chords":["I"]}],
+ "parts":[
+  {"inst":"pizzicato","id":"small-feet","loop":1,"gain_db":-7,"pan":-0.15,"send":0.13,"pattern":[[0,0.22,"C3",0.6],[0.44,0.22,"G3",0.55],[0.88,0.22,"E3",0.65],[1.32,0.22,"G3",0.5],[1.76,0.22,"C4",0.68],[2.2,0.28,"D4",0.55],[2.7,0.2,"E4",0.45],[4.4,0.6,"G2",0.7]]},
+  {"inst":"flute","id":"reach-question","gain_db":-8,"send":0.2,"loop":1,"pattern":[[0.25,0.35,"E5",0.42],[1.05,0.35,"G5",0.48],[1.9,0.4,"A5",0.5],[2.84,0.55,"C6",0.65],[3.6,0.32,"B5",0.5],[3.9,0.45,"G5",0.4]]},
+  {"inst":"celesta","id":"bird-answer","gain_db":-10,"pan":-0.25,"send":0.2,"loop":1,"pattern":[[6.2,0.25,"G5",0.45],[6.65,0.25,"E5",0.5],[7.3,0.55,"C5",0.56],[8.55,0.6,["E5","G5"],0.35]]},
+  {"inst":"strings","id":"warm-floor","gain_db":-21,"send":0.22,"loop":1,"pattern":[[0,2.5,["C3","E3"],0.45],[4.4,2,["G2","D3"],0.45],[7.3,2.5,["C3","E3"],0.4]]}
+ ]
+}
