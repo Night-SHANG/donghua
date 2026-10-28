@@ -50,13 +50,13 @@ export function entryMetadata(loop) {
 export function encoderPreflight(film,out) {
  execFileSync('ffmpeg',['-version'],{stdio:'ignore'});execFileSync('ffprobe',['-version'],{stdio:'ignore'});
  const file=resolve(out,'encoder-preflight.mp4'),audio=resolve(out,'encoder-preflight-audio.m4a');
- // Encode AAC first. ffmpeg4.4 can stop a simultaneous AAC encoder on -frames:v1
- // before priming emits any audio packets; muxing an already encoded input avoids it.
+ // Encode AAC first, then mux a quarter-second clip. A one-video-frame cutoff
+ // can omit AAC on ffmpeg4.4 even when the audio input is already encoded.
  execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-y','-f','lavfi','-i','anullsrc=r=48000:cl=stereo','-t','1','-c:a','aac',audio]);
  execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-xerror','-i',audio,'-f','null','-']);
  const audioPreflight=JSON.parse(execFileSync('ffprobe',['-v','error','-show_streams','-of','json',audio]));
  if(!audioPreflight.streams.some(s=>s.codec_name==='aac'&&s.sample_rate==='48000'&&s.channels===2))throw new Error('AAC preflight missing stereo48k audio');
- execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-y','-f','lavfi','-i',`color=c=orange:s=${film.width}x${film.height}:r=${film.fps}`,'-i',audio,'-frames:v','1','-t',String(1/film.fps),'-c:v','libx264','-pix_fmt','yuv420p','-c:a','copy',file]);
+ execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-y','-f','lavfi','-i',`color=c=orange:s=${film.width}x${film.height}:r=${film.fps}`,'-i',audio,'-t','0.25','-c:v','libx264','-pix_fmt','yuv420p','-c:a','copy',file]);
  execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-xerror','-i',file,'-f','null','-']);
  const p=JSON.parse(execFileSync('ffprobe',['-v','error','-show_streams','-of','json',file]));
  if(!p.streams.some(s=>s.codec_name==='h264')||!p.streams.some(s=>s.codec_name==='aac'))throw new Error('Encoder/mux preflight missing streams');
