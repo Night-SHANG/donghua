@@ -1,0 +1,72 @@
+name: Native Rain Garden complete 15-second sample
+run-name: Rain Garden / ${{ github.sha }}
+on:
+  push:
+    branches: ['feat/huashu-rain-garden', 'render/huashu-rain-garden', 'render/huashu-rain-garden-*', 'feat/huashu-fox-stork']
+    paths:
+      - '.github/workflows/huashu-rain-garden.yml'
+      - 'huashu/tools/render_garden.py'
+      - 'huashu/garden-tests/**'
+      - 'huashu/rain-garden/**'
+      - 'requirements-huashu-garden.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: native-rain-garden-${{ github.ref }}
+  cancel-in-progress: false
+env:
+  PYTHONUNBUFFERED: '1'
+  PYTHONUTF8: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  complete-short:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install standard native renderer and audio tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg
+          python -m pip install --only-binary=:all: -r requirements-huashu-garden.txt
+          python -m playwright install --with-deps chromium
+      - name: Verify render/evidence contracts
+        run: python -m unittest discover -s huashu/garden-tests -v
+      - name: Fetch clean exact native engine
+        env:
+          HUASHU_SHA: 8a0d7d72ca65fcce6f8ba82c4a6c8dfe35b8422c
+        run: |
+          set -euo pipefail
+          mkdir -p .native-garden/upstream
+          git -C .native-garden/upstream init
+          git -C .native-garden/upstream remote add origin https://github.com/alchaincyf/huashu-art-motion.git
+          git -C .native-garden/upstream fetch --depth=1 origin "$HUASHU_SHA"
+          git -C .native-garden/upstream checkout --detach FETCH_HEAD
+          test "$(git -C .native-garden/upstream rev-parse HEAD)" = "$HUASHU_SHA"
+          test -z "$(git -C .native-garden/upstream status --porcelain --untracked-files=no)"
+      - name: One complete 15-second render, music and dense sequence evidence
+        run: python huashu/tools/render_garden.py render --out garden-output
+      - name: Guard every upload including diagnostic artifacts
+        id: size
+        if: always()
+        continue-on-error: true
+        run: python huashu/tools/render_garden.py check-size --out garden-output
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.size.outcome == 'success'
+        with:
+          name: rain-garden-15s-${{ github.sha }}-${{ github.run_attempt }}
+          path: garden-output/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error

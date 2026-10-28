@@ -1,0 +1,240 @@
+{
+  "duration": 15,
+  "sampleRate": 48000,
+  "seed": 271028,
+  "shots": [
+    {
+      "start": 0,
+      "end": 3.8,
+      "name": "dew"
+    },
+    {
+      "start": 3.8,
+      "end": 7,
+      "name": "ripple"
+    },
+    {
+      "start": 7,
+      "end": 11,
+      "name": "bloom"
+    },
+    {
+      "start": 11,
+      "end": 15,
+      "name": "island"
+    }
+  ],
+  "cues": [
+    {
+      "time": 2.8,
+      "kind": "air",
+      "description": "露珠脱离叶尖，轻柔气流",
+      "duration": 0.65
+    },
+    {
+      "time": 3.8,
+      "kind": "water_drop",
+      "description": "主水滴触池，精确触水点",
+      "duration": 0.46
+    },
+    {
+      "time": 4.05,
+      "kind": "water_drop",
+      "description": "小回弹水珠再落",
+      "duration": 0.46
+    },
+    {
+      "time": 7.2,
+      "kind": "flower_glass",
+      "description": "睡莲依次展开的轻玻璃泛音",
+      "midi": 79,
+      "duration": 1.7
+    },
+    {
+      "time": 8.3,
+      "kind": "flower_glass",
+      "description": "睡莲依次展开的轻玻璃泛音",
+      "midi": 81,
+      "duration": 1.7
+    },
+    {
+      "time": 9.4,
+      "kind": "flower_glass",
+      "description": "睡莲依次展开的轻玻璃泛音",
+      "midi": 83,
+      "duration": 1.7
+    },
+    {
+      "time": 12.2,
+      "kind": "flower_glass",
+      "description": "拉远浮岛的柔和高音",
+      "midi": 86,
+      "duration": 1.7
+    }
+  ],
+  "notes": [
+    {
+      "time": 0.15,
+      "midi": 62,
+      "kind": "piano",
+      "gain": 0.16,
+      "pan": -0.2
+    },
+    {
+      "time": 0.72,
+      "midi": 66,
+      "kind": "piano",
+      "gain": 0.12,
+      "pan": 0.05
+    },
+    {
+      "time": 1.48,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.14,
+      "pan": 0.18
+    },
+    {
+      "time": 2.35,
+      "midi": 64,
+      "kind": "piano",
+      "gain": 0.1,
+      "pan": -0.08
+    },
+    {
+      "time": 4.42,
+      "midi": 66,
+      "kind": "piano",
+      "gain": 0.13,
+      "pan": 0.12
+    },
+    {
+      "time": 5.17,
+      "midi": 62,
+      "kind": "piano",
+      "gain": 0.1,
+      "pan": -0.1
+    },
+    {
+      "time": 6.12,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.115,
+      "pan": 0.2
+    },
+    {
+      "time": 7.18,
+      "midi": 67,
+      "kind": "piano",
+      "gain": 0.13,
+      "pan": -0.12
+    },
+    {
+      "time": 8.28,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.13,
+      "pan": 0.05
+    },
+    {
+      "time": 9.38,
+      "midi": 71,
+      "kind": "piano",
+      "gain": 0.12,
+      "pan": 0.18
+    },
+    {
+      "time": 10.45,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.1,
+      "pan": 0.1
+    },
+    {
+      "time": 11.18,
+      "midi": 66,
+      "kind": "piano",
+      "gain": 0.11,
+      "pan": -0.1
+    },
+    {
+      "time": 12.2,
+      "midi": 74,
+      "kind": "piano",
+      "gain": 0.095,
+      "pan": 0.12
+    },
+    {
+      "time": 12.85,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.065,
+      "pan": -0.08
+    },
+    {
+      "time": 0.12,
+      "midi": 50,
+      "kind": "piano",
+      "gain": 0.095,
+      "pan": -0.1
+    },
+    {
+      "time": 3.85,
+      "midi": 47,
+      "kind": "piano",
+      "gain": 0.095,
+      "pan": -0.1
+    },
+    {
+      "time": 7.05,
+      "midi": 43,
+      "kind": "piano",
+      "gain": 0.095,
+      "pan": -0.1
+    },
+    {
+      "time": 11.05,
+      "midi": 50,
+      "kind": "piano",
+      "gain": 0.095,
+      "pan": -0.1
+    },
+    {
+      "time": 0.45,
+      "midi": 57,
+      "kind": "piano",
+      "gain": 0.055,
+      "pan": 0.1
+    },
+    {
+      "time": 4.65,
+      "midi": 54,
+      "kind": "piano",
+      "gain": 0.055,
+      "pan": 0.1
+    },
+    {
+      "time": 7.75,
+      "midi": 59,
+      "kind": "piano",
+      "gain": 0.055,
+      "pan": 0.1
+    },
+    {
+      "time": 11.65,
+      "midi": 61,
+      "kind": "piano",
+      "gain": 0.055,
+      "pan": 0.1
+    },
+    {
+      "time": 1.1,
+      "midi": 81,
+      "kind": "glass",
+      "gain": 0.028,
+      "pan": 0.22
+    }
+  ],
+  "score": "Original D-major/B-minor pentatonic miniature; modal felt-piano and glass synthesis, no samples.",
+  "end": "Natural instrumental decay with final one-second cos² tail; exact zero endpoints."
+}
