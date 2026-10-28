@@ -40,14 +40,14 @@ test('invalid range fails early with a diagnostic manifest, not silent bootstrap
   assert.equal(m.status,'failed');assert.match(m.error,/Invalid frame range/);assert.equal(m.stage,'breadViews');assert.ok(m.nodePeakRssKiB>0);assert.deepEqual(m.frameTimes,[]);
  }finally{await rm(out,{recursive:true,force:true});}
 });
-test('encoder preflight prepares decodable AAC before single-frame mux and verifies both real streams',{skip:process.env.BREAD_PNG_ONLY==='1'},async()=>{
+test('encoder preflight preserves AAC in a decodable quarter-second clip',{skip:process.env.BREAD_PNG_ONLY==='1'},async()=>{
  const {mkdtemp,rm}=await import('node:fs/promises');const {tmpdir}=await import('node:os');const {join}=await import('node:path');
  const out=await mkdtemp(join(tmpdir(),'bread-encoder-'));
  try{
   const result=runner.encoderPreflight(film,out);
-  assert.ok(result.audioPreflight?.streams?.some(s=>s.codec_name==='aac'&&s.sample_rate==='48000'&&s.channels===2),'AAC must be encoded and probed before one-frame mux');
+  assert.ok(result.audioPreflight?.streams?.some(s=>s.codec_name==='aac'&&s.sample_rate==='48000'&&s.channels===2),'AAC must be encoded and probed before short-clip mux');
   assert.ok(result.streams.some(s=>s.codec_type==='audio'&&s.codec_name==='aac'));
-  const video=result.streams.find(s=>s.codec_type==='video');assert.equal(video.codec_name,'h264');assert.equal(video.nb_frames,'1');
+  const video=result.streams.find(s=>s.codec_type==='video');assert.equal(video.codec_name,'h264');assert.equal(video.nb_frames,'6');assert.equal(Number(video.duration),.25);
  }finally{await rm(out,{recursive:true,force:true});}
 });
 test('views PNG path has no AAC or video encoder dependency',()=>{
