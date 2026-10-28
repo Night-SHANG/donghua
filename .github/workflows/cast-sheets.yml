@@ -1,0 +1,30 @@
+name: Original comedy duo model sheets
+on:
+  push:
+    branches: ['design/house-comedy-cast']
+    paths: ['film/cast/render-request.json']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: cast-${{ github.ref }}-${{ github.sha }}
+  cancel-in-progress: false
+jobs:
+  sheets:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node scripts/cast/check_geometry.mjs
+      - name: Actual p5 brush sheets with default browser sandbox
+        run: node scripts/cast/render_sheets.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: original-comedy-duo-sheets
+          path: out/cast/
+          retention-days: 7
