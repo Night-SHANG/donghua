@@ -109,6 +109,11 @@ F.drawEnvironment=(c,home,t)=>{
  c.restore();
  c.save();c.translate(ox,0);
  // Native independent table/ground/shadows remain in shared world coordinates.
+ // Visible oak step-stool is the physical support for fox's dining feet y836.8.
+ for(const x of [402,538]){paper(c,[[x-10,833],[x+12,833],[x+20,957],[x-18,957]],'#795631',Math.round(x),34);}
+ paper(c,[[376,824],[570,824],[584,841],[371,845]],'#BD8E51',720,50);
+ P.impasto(c,[[378,824],[570,824]],3,'#DEB171');
+ c.strokeStyle='#8E6338';c.lineWidth=11;c.beginPath();c.moveTo(402,912);c.lineTo(538,912);c.stroke();
  ellipse(c,960,983,675,77,'rgba(106,77,36,.16)');
  for(const [x,y] of [[420,910],[1500,920]]){ellipse(c,x,y,110,23,'rgba(82,65,34,.12)');}
  c.restore();

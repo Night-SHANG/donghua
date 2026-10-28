@@ -15,6 +15,7 @@ F.draw=(c,t)=>{
   const ox=F.origin(st.home);
   // Behind-table leg contact is retained at foot anchors, upper body can lean.
   g.save();g.translate(ox,0);
+  for(const o of [st.fox,st.stork]){g.fillStyle='rgba(75,55,27,.23)';g.beginPath();g.ellipse(o.x,o.y+3,50,9,0,0,Math.PI*2);g.fill();}
   actorHalf(g,'fox',st.fox,false);actorHalf(g,'stork',st.stork,false);g.restore();
   F.drawTable(g,0);F.drawTable(g,1);
   // Preserve both dinner settings during the one geographical bridge.
@@ -30,6 +31,7 @@ F.draw=(c,t)=>{
    g.restore();
   }
   g.save();g.translate(ox,0);
+  for(const o of [st.fox,st.stork]){g.fillStyle='rgba(75,55,27,.23)';g.beginPath();g.ellipse(o.x,o.y+3,50,9,0,0,Math.PI*2);g.fill();}
   actorHalf(g,'fox',st.fox,true);actorHalf(g,'stork',st.stork,true);
   // Front ceramic shells are live redraws; actor pixels below their rims vanish.
   if(st.home===0&&!traveling){F.drawBowl(g,730,st.leftSoup,t,true,-st.drop*50);F.drawBowl(g,1190,1,t,true);}

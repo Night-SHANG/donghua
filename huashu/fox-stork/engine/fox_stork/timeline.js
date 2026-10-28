@@ -12,7 +12,7 @@ F.SHOTS = [
   {id:'s06_fox_finish',a:24,b:28,cam:[950,568,1.08]},
   {id:'s07_return_invite',a:28,b:33,cam:[960,555,0.98]},
   {id:'s08_jars',a:33,b:38,cam:[960,545,1.08]},
-  {id:'s09_stork_drink',a:38,b:43,cam:[1220,520,1.65]},
+  {id:'s09_stork_drink',a:38,b:43,cam:[1210,435,1.40]},
   {id:'s10_fox_blocked',a:43,b:48,cam:[740,520,1.7]},
   {id:'s11_fox_lick',a:48,b:53,cam:[740,542,1.68]},
   {id:'s12_deadpan',a:53,b:57,cam:[1260,425,1.83]},
@@ -60,7 +60,8 @@ F.state = t => {
   } else if(t<33){leftSoup=0;f.pose=t<29.8?'look_up':'stand';s.pose=t<30.1?'host':'stand';
     // Exit is a deliberately brief pose-to-pose cut-paper step, not an endless idle drift.
     const q=F.e(t,30.3,32.7); f.x+=q*2800;s.x+=q*2800;f.y+=93.2*F.e(t,29.8,30.3);
-    if(q>0&&q<1){f.y-=Math.abs(Math.sin(q*Math.PI*8))*12;s.y-=Math.abs(Math.sin(q*Math.PI*8))*8;}
+    // Grounded travel: no vertical bob is added to planted feet.
+    f.travel=q;s.travel=q;
   } else if(t<38){f.pose='look_up';s.pose='host';leftJarDrop=1-F.e(t,33.4,34.2);jarDrop=1-F.e(t,33.7,34.55);}
   else if(t<43){f.pose='look_up';s.pose=t<38.5?'content':t<41.8?'vertical_peck':'content';
     if(t>=38.5&&t<41.8){let tipY=t<39.35?F.mix(350,422,F.e(t,38.5,39.35)):F.mix(422,590,F.e(t,39.35,40.2));tipY=F.mix(tipY,350,F.e(t,40.95,41.65));action(s,'vertical_peck',[1188,tipY],1,0);}
