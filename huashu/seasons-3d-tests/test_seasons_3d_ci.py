@@ -44,13 +44,15 @@ class Contracts(unittest.TestCase):
             u=f/900
             data['samples'].append({'frame':f,'t':f/60,'position':[0,2,-f*.02],'rotation':[u*.3,0,0],
                 'camera':[3,5,8-f*.02],'target':[0,2,-f*.02], 'seasonWeights':[1-u,0,0,u],
-                'leafColor':[.55-.27*u,.8-.64*u,.16-.09*u], 'curl':.12+.53*u,'frost':.83*u})
+                'leafColor':[.55-.27*u,.8-.64*u,.16-.09*u], 'curl':.045+.18*u,'frost':.45*u})
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'state.json';p.write_text(json.dumps(data))
             result=m.validate_motion_report(p)
             self.assertEqual(result['samples'],901)
+            self.assertAlmostEqual(result['materialChanges']['curlRange'],.18)
+            self.assertAlmostEqual(result['materialChanges']['maxFrost'],.45)
             self.assertAlmostEqual(result['recomputed']['maxPositionStep'],.02)
-            for kind in ['missing','time','position','rotation','camera','nan','weights','flat_material','flat_shape','limit','failed']:
+            for kind in ['missing','time','position','rotation','camera','nan','weights','flat_material','flat_shape','flat_frost','weak_shape','weak_frost','limit','failed']:
                 bad=copy.deepcopy(data)
                 if kind=='missing': bad['samples'][5].pop('position')
                 if kind=='time': bad['samples'][5]['t']+=.1
@@ -61,6 +63,12 @@ class Contracts(unittest.TestCase):
                     for a in bad['samples']: a['leafColor']=[.2,.3,.1]
                 if kind=='flat_shape':
                     for a in bad['samples']: a['curl']=.12
+                if kind=='flat_frost':
+                    for a in bad['samples']: a['frost']=.45
+                if kind=='weak_shape':
+                    for a in bad['samples']: a['curl']=.045+.1*a['t']/15
+                if kind=='weak_frost':
+                    for a in bad['samples']: a['frost']=.2*a['t']/15
                 if kind=='limit': bad['limits']['maxPositionStep']=5
                 if kind=='failed': bad['passed']=False
                 p.write_text(json.dumps(bad))

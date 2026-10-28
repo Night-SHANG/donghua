@@ -8,7 +8,9 @@ for(let t of [3.15,3.75,4.35,6.9,7.5,8.1,10.65,11.25,11.85,11]){let h=1e-4,a=sta
 assert(state(1).leafColor[1]>state(5).leafColor[1]);assert(state(9).leafColor[0]>state(5).leafColor[0]);assert(state(14).frost>.4);assert(state(14).curl>state(1).curl);
 const report={schema:1,fps:60,duration:15,samples,limits:{maxPositionStep:.04,maxRotationStep:.02,maxCameraStep:.09},summary:{maxPositionStep,maxRotationStep,maxCameraStep},passed:true};if(process.env.STATE_REPORT)fs.writeFileSync(process.env.STATE_REPORT,JSON.stringify(report,null,2));console.log('PASS: 901 deterministic 3D states; continuous motion/camera/season material; seasonal color, curl and frost actually change. WebGL pixel review pending.');
 
-assert(state(14).rotation[0]<0);assert(state(14).curl<.25);console.log('PASS: hero face tilted toward elevated camera; maximum curl <.25. Woodland safe corridor is enforced during generation.');
+assert(state(14).rotation[0]>.3);assert(state(14).curl<.25);console.log('PASS: hero face tilted toward elevated camera; maximum curl <.25. Woodland safe corridor is enforced during generation.');
 let seed=32771;const rnd=()=>{seed=(1664525*seed+1013904223)>>>0;return seed/4294967296};let minClear=100;
 for(let i=0;i<58;i++){let z=9-i*.83,x=(i%2?1:-1)*(4.3+rnd()*7),h=3.3+rnd()*3.8;while(SEASONS_LEAF_3D.corridorClearance(x,z)<3.2)x+=Math.sign(x)*1.5;minClear=Math.min(minClear,SEASONS_LEAF_3D.corridorClearance(x,z));for(let j=0;j<3;j++){rnd();rnd()}}
 assert(minClear>=3.2);console.log('PASS: all58 woodland tree centers outside entire camera-to-hero corridor; min horizontal clearance '+minClear.toFixed(3));
+
+let minFacing=1;for(const s of samples){const [x,y,z]=s.rotation,n=[-Math.cos(y)*Math.sin(z),Math.cos(x)*Math.cos(z)-Math.sin(x)*Math.sin(y)*Math.sin(z),Math.sin(x)*Math.cos(z)+Math.cos(x)*Math.sin(y)*Math.sin(z)],v=s.camera.map((q,i)=>q-s.position[i]),len=Math.hypot(...v);minFacing=Math.min(minFacing,n.reduce((a,q,i)=>a+q*v[i]/len,0));}assert(minFacing>.5);console.log('PASS: all901 leaf central normals face view; min dot '+minFacing.toFixed(3));

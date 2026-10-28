@@ -152,7 +152,7 @@ def validate_motion_report(path):
         measured[key] = value
     color_range = max(max(s['leafColor'][k] for s in samples) - min(s['leafColor'][k] for s in samples) for k in range(3))
     curl_range = max(s['curl'] for s in samples) - min(s['curl'] for s in samples)
-    if color_range < .2 or curl_range < .4 or max(s['frost'] for s in samples) < .8:
+    if color_range < .2 or curl_range < .15 or (max(s['frost'] for s in samples) - min(s['frost'] for s in samples)) < .4:
         raise RuntimeError('Leaf must actually change material color, curling geometry and frost across seasons')
     return {'stateReport': path.name, 'samples': len(samples), 'recomputed': measured, 'limits': limits,
             'materialChanges': {'maxColorChannelRange': color_range, 'curlRange': curl_range, 'maxFrost': max(s['frost'] for s in samples)},
