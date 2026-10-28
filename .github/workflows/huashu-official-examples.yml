@@ -1,0 +1,75 @@
+name: Reproduce unchanged official huashu examples
+run-name: Official huashu / ${{ github.sha }}
+on:
+  push:
+    branches: ['feat/huashu-fox-stork', 'render/huashu-official-examples', 'render/huashu-official-examples-*']
+    paths:
+      - '.github/workflows/huashu-official-examples.yml'
+      - 'huashu/tools/official_examples.py'
+      - 'huashu/official-tests/**'
+      - 'requirements-huashu-official.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: official-huashu-${{ github.ref }}
+  cancel-in-progress: false
+env:
+  PYTHONUNBUFFERED: '1'
+  PYTHONUTF8: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  official-demo:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        example: [gallery, long-scroll]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install only native renderer prerequisites
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg
+          python -m pip install --only-binary=:all: -r requirements-huashu-official.txt
+          python -m playwright install --with-deps chromium
+      - name: Check orchestration contracts
+        run: python -m unittest discover -s huashu/official-tests -v
+      - name: Fetch exact official upstream without movie overlays
+        env:
+          HUASHU_SHA: 8a0d7d72ca65fcce6f8ba82c4a6c8dfe35b8422c
+        run: |
+          set -euo pipefail
+          mkdir -p .native-official/upstream
+          git -C .native-official/upstream init
+          git -C .native-official/upstream remote add origin https://github.com/alchaincyf/huashu-art-motion.git
+          git -C .native-official/upstream fetch --depth=1 origin "$HUASHU_SHA"
+          git -C .native-official/upstream checkout --detach FETCH_HEAD
+          test "$(git -C .native-official/upstream rev-parse HEAD)" = "$HUASHU_SHA"
+          test -z "$(git -C .native-official/upstream status --porcelain --untracked-files=no)"
+      - name: Render original global-time excerpt and verify evidence
+        env:
+          EXAMPLE: ${{ matrix.example }}
+        run: python huashu/tools/official_examples.py render --example "$EXAMPLE" --out official-output
+      - name: Enforce artifact size even for diagnostic uploads
+        id: size
+        if: always()
+        continue-on-error: true
+        run: python huashu/tools/official_examples.py check-size --out official-output
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.size.outcome == 'success'
+        with:
+          name: official-huashu-${{ matrix.example }}-${{ github.sha }}-${{ github.run_attempt }}
+          path: official-output/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error

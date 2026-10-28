@@ -1,0 +1,3 @@
+# Native renderer + read-only image verification. No media service, key or model.
+playwright==1.56.0
+Pillow==11.2.1
