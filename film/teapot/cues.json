@@ -1,0 +1,83 @@
+{
+  "duration": 14,
+  "fps": 24,
+  "bpm": 120,
+  "events": [
+    {
+      "id": "small_release",
+      "t": 0.55
+    },
+    {
+      "id": "small_pop",
+      "t": 0.82
+    },
+    {
+      "id": "proud",
+      "t": 1.35
+    },
+    {
+      "id": "inhale",
+      "t": 1.9
+    },
+    {
+      "id": "blow",
+      "t": 2.6
+    },
+    {
+      "id": "lift",
+      "t": 3.65
+    },
+    {
+      "id": "height_notice",
+      "t": 5.15
+    },
+    {
+      "id": "paddle",
+      "t": 5.85
+    },
+    {
+      "id": "strain",
+      "t": 6.35
+    },
+    {
+      "id": "big_pop",
+      "t": 6.7
+    },
+    {
+      "id": "fall",
+      "t": 6.85
+    },
+    {
+      "id": "land",
+      "t": 7.65
+    },
+    {
+      "id": "lid",
+      "t": 8.05
+    },
+    {
+      "id": "dazed",
+      "t": 8.25
+    },
+    {
+      "id": "hiccup",
+      "t": 10.1
+    },
+    {
+      "id": "flinch",
+      "t": 10.3
+    },
+    {
+      "id": "relief",
+      "t": 11.0
+    },
+    {
+      "id": "crown",
+      "t": 11.8
+    },
+    {
+      "id": "close",
+      "t": 13.15
+    }
+  ]
+}
