@@ -1,0 +1,69 @@
+name: Remotion Rain Letter reviewed phases
+run-name: Rain Letter / ${{ github.sha }}
+on:
+  push:
+    branches: ['feat/huashu-fox-stork', 'feat/remotion-rain-letter']
+    paths: ['.github/workflows/remotion-rain-letter.yml', 'remotion/rain-letter/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: rain-letter-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  render:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    defaults:
+      run:
+        working-directory: remotion/rain-letter
+    env:
+      PYTHONUNBUFFERED: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Locked official dependencies
+        run: |
+          set -euo pipefail
+          npm ci --registry=https://registry.npmjs.org --legacy-peer-deps --no-audit --fund=false
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg libnss3 libatk-bridge2.0-0 libx11-xcb1 libxcomposite1 libxdamage1 libxrandr2 libgbm1 libasound2 libpangocairo-1.0-0 libcups2 libxkbcommon0
+          python -m pip install --only-binary=:all: numpy==2.2.6 scipy==1.15.3 Pillow==11.2.1
+      - name: Types and host motion contracts
+        run: |
+          set -euo pipefail
+          npm run typecheck
+          npm test
+          python tests/test_packaging.py
+          if test -f src/test-motion.ts; then node node_modules/tsx/dist/cli.mjs src/test-motion.ts; fi
+      - name: Original timeline-aligned music
+        run: |
+          set -euo pipefail
+          python audio/synthesize.py
+          python audio/test_audio.py
+          mkdir -p public/audio
+          cp audio/master.wav public/audio/master.wav
+      - name: Actual stills and approved-phase renders
+        run: node scripts/render.mjs
+      - name: Final evidence checksums and strict 14 MB cap
+        id: cap
+        if: always()
+        continue-on-error: true
+        run: python scripts/package_review.py check-size
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.cap.outcome == 'success'
+        with:
+          name: rain-letter-${{ github.sha }}-${{ github.run_attempt }}
+          path: remotion/rain-letter/artifacts/rain-letter/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error

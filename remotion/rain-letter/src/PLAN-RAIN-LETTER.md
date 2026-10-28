@@ -1,0 +1,5 @@
+# Rain Letter visual implementation
+30 seconds, 1800 frames / 60 fps / 1920x1080. Original illustrated SVG film; broad everyday-object magical transformation principles, no artist assets or copied scenes. RainLetter named export. Host supplies score.
+Six camera edits at 0/5/10/15/20/25 seconds. All objects remain in one world coordinate system. Establishing and return match. Typography intentionally absent; letter ink is graphical handwriting marks.
+Cues: 3.6 drop on letter, 5.3–7.8 water path, 10.4–12.2 same four-facet stamp unfolds umbrella, 16.8 drop on seal, 17.2–19.2 triangle flap hinges about fixed edge, 20–25 rain reduces and warm light rises, 25.5–27 umbrella folds back, 27.5 solar watermark, last2s hold.
+Visual caveats requiring render review: this is procedural illustrated 2D, not hand-drawn cel animation. No 3D claims. Room camera is planar artwork zoom/reframe, while shape transformations are explicit geometry. Need inspect junctions, camera cuts, clip edges, drip trajectory and illuminated envelope at actual resolution. Math/source checks do not establish visual quality.

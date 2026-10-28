@@ -1,0 +1,18 @@
+{
+  "title": "给晴天的一封信 / A Letter to Sunshine",
+  "duration_seconds": 30,
+  "fps": 60,
+  "cues": [
+    {"time": 0, "end": 5, "name": "rain_window", "sound": "soft stereo rain, D minor add9 piano/harmonics"},
+    {"time": 3.6, "name": "drop_touches_paper", "sound": "single downward-bending water resonator"},
+    {"time": 5.3, "end": 7.8, "name": "ink_river", "sound": "low flowing filtered-noise swell"},
+    {"time": 8.8, "name": "stamp_lifts", "sound": "paper flick and one soft wood note"},
+    {"time": 10.4, "end": 12.2, "name": "umbrella_folds", "sound": "three paper folds at 10.4, 10.95, 11.65; final wood note 12.15"},
+    {"time": 16.8, "name": "drop_touches_envelope", "sound": "single water resonator"},
+    {"time": 17.2, "end": 19.2, "name": "sunny_window_unfolds", "sound": "three soft paper openings and high piano response"},
+    {"time": 20, "end": 25, "name": "daylight_spreads", "sound": "rain recedes; warmer F major harmonics; vapor breath 22.1"},
+    {"time": 26.4, "end": 27, "name": "umbrella_returns_to_stamp", "sound": "single soft paper closing"},
+    {"time": 27.5, "name": "sun_watermark", "sound": "last restrained wood note"},
+    {"time": 28, "end": 30, "name": "quiet_tail", "sound": "existing resonances fade; no new notes"}
+  ]
+}

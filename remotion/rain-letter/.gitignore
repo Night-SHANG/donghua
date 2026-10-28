@@ -1,0 +1,7 @@
+node_modules/
+.tmp/
+artifacts/
+__pycache__/
+audio/master.wav
+public/audio/*.wav
+audio/qa.json
