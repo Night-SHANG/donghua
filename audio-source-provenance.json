@@ -1,0 +1,86 @@
+{
+  "source": "https://github.com/ZLHad/OpenVideoHarness",
+  "source_revision": "main fetched 2026-10-28; no commit identity claimed",
+  "files": [
+    {
+      "path": "tools/confirm.py",
+      "sha256": "ce8123bfd37cf19b035312f9315753507498fcfc71fd3565d87a9bcf9375f3ac"
+    },
+    {
+      "path": "tools/activity.py",
+      "sha256": "285723806e8a1df52ce5e3355cc70fa72fa04a8400aec08c35971858cfd6907d"
+    },
+    {
+      "path": "tools/audio/time_refs.py",
+      "sha256": "fec546c0df5ad7998710ab3e8f72a53736ece0e70e2abbde8fc222281c766e0c"
+    },
+    {
+      "path": "tools/audio/time_map.py",
+      "sha256": "37d1642079d61d204f9828f740969abe907de7c2c54fb4daf4745234779d7d1c"
+    },
+    {
+      "path": "tools/audio/sfx.py",
+      "sha256": "13803e15f60f2c4f796bda59930a1496671457d990e860212c907d4e7719f928"
+    },
+    {
+      "path": "tools/audio/qa.py",
+      "sha256": "daf667d11ddb0af6464e070849fe47851f28eab0749d61f537794dfe05230db5"
+    },
+    {
+      "path": "tools/audio/music_clock.py",
+      "sha256": "d22a5dd5f77dc011033c856945d77834756bd98922025e53d869ecf5214f8f61"
+    },
+    {
+      "path": "tools/audio/music.py",
+      "sha256": "2d34e98b2faf331b2663eb0c3ec2b9096b3ae32763c8d3c3142b49d837fe7b09"
+    },
+    {
+      "path": "tools/audio/motifs.py",
+      "sha256": "d1553e4c7ae5ad01103593ac49820e0ca8654c3858d893debe6b03df33e93cd3"
+    },
+    {
+      "path": "tools/audio/mixstate.py",
+      "sha256": "1685550df65d080cd315dac6b4321bc4f28fbf139579505135dbf016aabe5bef"
+    },
+    {
+      "path": "tools/audio/mix.py",
+      "sha256": "6776581f6e4583cc6842487ee0c810f7a76c7c9798310373a9dd2d328af1d89e"
+    },
+    {
+      "path": "tools/audio/instruments.py",
+      "sha256": "e0fd8e10d9a9bdc1792630aa9d3af4701734a3ce2004c9763f573769f8c0813f"
+    },
+    {
+      "path": "film/tools/foley.py",
+      "sha256": "f91139fb2d8d49c46ce8e903fa3a50db7e78e45c7d394b8c84e0a179b0294296"
+    },
+    {
+      "path": "scripts/verify-audio.py",
+      "sha256": "80f17c6e34020fe32ceb7dcbeb24a7fdde597ec2bce9d14fa550282b0f173f2c"
+    },
+    {
+      "path": "scripts/build-audio.sh",
+      "sha256": "71bb7ae625b5492cdc700b0e8842239a47bbf35ca4eef4be122c93134f475ee0"
+    },
+    {
+      "path": "requirements-audio.txt",
+      "sha256": "1668a3152e33680d94637b13421c15e68bd97cd8701f7f555c691f5bc5c0b9f3"
+    },
+    {
+      "path": "LICENSE-harness",
+      "sha256": "95d68046d412a958f1abbecb631a4cf94483ce8beb32379841d8e7af7762b158"
+    },
+    {
+      "path": "film/audio/score.json",
+      "sha256": "f5acaca74d395f5ec14ef6c5a6432504e78f482744821e5616e1c815f35b11b6"
+    },
+    {
+      "path": "film/audio/events.json",
+      "sha256": "d12bd778547ec742ac724c771156f69e3df9022f4a16bfe3d92c90c78ce6a882"
+    },
+    {
+      "path": "film/audio/music.beats.json",
+      "sha256": "dd98f17d1cde87841658748d5832780d6f3f86fe91ad22594729b5dc03ee1b6d"
+    }
+  ]
+}

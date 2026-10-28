@@ -1,0 +1,80 @@
+name: Render original 12-second animation
+on:
+  push:
+    paths: ['.github/workflows/render.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  frames:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 100
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [0, 1, 2, 3, 4, 5]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Render 48 original 1080p frames with sandbox retained
+        env:
+          RENDER_FULL: '1'
+          PART: ${{ matrix.part }}
+        run: |
+          export FRAME_START=$((PART * 48)) FRAME_END=$(((PART + 1) * 48))
+          npm run smoke
+      - name: Encode segment and save QA stills
+        env:
+          PART: ${{ matrix.part }}
+        run: |
+          mkdir -p deliver
+          ffmpeg -hide_banner -loglevel error -y -framerate 24 -start_number "$((PART * 48))" -i out/frames/f%05d.png -frames:v 48 -vf 'scale=out_color_matrix=bt709:out_range=tv,format=yuv420p,setparams=range=tv:colorspace=bt709:color_primaries=bt709:color_trc=bt709' -c:v libx264 -preset slow -crf 17 -movflags +faststart "deliver/part-${PART}.mp4"
+          if [ "$PART" -lt 5 ]; then cp "out/frames/$(printf 'f%05d.png' "$(((PART+1)*48))")" "deliver/boundary-${PART}.png"; fi
+          cp out/render-manifest.json "deliver/manifest-${PART}.json"
+          for f in "$((PART * 48))" "$((PART * 48 + 24))" "$((PART * 48 + 47))"; do cp "out/frames/$(printf 'f%05d.png' "$f")" deliver/; done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: part-${{ matrix.part }}
+          path: deliver/
+          retention-days: 3
+  assemble:
+    needs: frames
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --only-binary=:all: -r requirements-audio.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: part-*
+          path: parts
+          merge-multiple: true
+      - name: Rebuild original sound and verify
+        run: bash scripts/build-audio.sh
+      - name: Assemble newly rendered picture and rebuilt sound
+        run: |
+          mkdir -p final
+          python scripts/verify-boundaries.py > final/boundary-verification.json
+          for i in 0 1 2 3 4 5; do echo "file '$PWD/parts/part-$i.mp4'"; done > parts.txt
+          ffmpeg -hide_banner -loglevel error -y -f concat -safe 0 -i parts.txt -i film/audio/mix-aac.m4a -map 0:v -map 1:a -c copy -movflags +faststart final/clawd-and-leaf-rerender-1080p.mp4
+          python scripts/verify-video.py final/clawd-and-leaf-rerender-1080p.mp4 > final/video-verification.json
+          ffmpeg -hide_banner -loglevel error -y -i final/clawd-and-leaf-rerender-1080p.mp4 -vf 'select=eq(n\,12)+eq(n\,72)+eq(n\,120)+eq(n\,197)+eq(n\,252)+eq(n\,283),scale=640:360,tile=3x2' -frames:v 1 final/contact-sheet.jpg
+          cp parts/manifest-*.json final/
+          cp parts/f*.png parts/boundary-*.png final/
+          cp LICENSE-* AUDIO-REPRODUCTION.md final/
+          sha256sum final/*.mp4 > final/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: original-animation-1080p-12s
+          path: final/
+          retention-days: 7

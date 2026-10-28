@@ -48,15 +48,16 @@ try {
   await writeFile('out/smoke-pass.json',JSON.stringify({mode,metadata,probe},null,2));
   if(process.env.RENDER_FULL==='1') {
     await mkdir('out/frames',{recursive:true});
-    for(let frame=0;frame<288;frame++) {
+    const first=Number(process.env.FRAME_START || 0),end=Number(process.env.FRAME_END || 288);
+    assert.ok(Number.isInteger(first)&&Number.isInteger(end)&&first>=0&&end<=288&&first<end);
+    for(let frame=first;frame<Math.min(end+1,288);frame++) {
       const start=Date.now();
       const url=await page.evaluate(async t=>{await film.frame(t);return document.getElementById('out').toDataURL('image/png');},frame/24);
       await writeFile(`out/frames/f${String(frame).padStart(5,'0')}.png`,Buffer.from(url.split(',')[1],'base64'));
       console.log('RENDER',frame+1,'/288',Date.now()-start,'ms');
     }
-    const sheet=await page.evaluate(()=>renderSheet([0.5,3,5,8.2,10.5,11.8],3,640));
-    await writeFile('out/contact-sheet.jpg',Buffer.from(sheet.url.split(',')[1],'base64'));
-    await writeFile('out/render-manifest.json',JSON.stringify({frames:288,fps:24,duration:12,width:1920,height:1080,mode,metadata,commit:process.env.GITHUB_SHA},null,2));
+
+    await writeFile('out/render-manifest.json',JSON.stringify({first,end,frames:end-first,fps:24,duration:(end-first)/24,width:1920,height:1080,mode,metadata,commit:process.env.GITHUB_SHA},null,2));
   }
 
 } finally {if(browser)await browser.close();server.close();}
