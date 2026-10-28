@@ -1,0 +1,16 @@
+name: Runner encoder preflight
+on:
+  push:
+    paths: ['.github/workflows/preflight.yml']
+permissions:
+  contents: read
+jobs:
+  tools:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 3
+    steps:
+      - name: Verify encoder availability
+        run: |
+          command -v ffmpeg
+          command -v ffprobe
+          ffmpeg -version | head -1
