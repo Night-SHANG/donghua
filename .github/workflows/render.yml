@@ -6,7 +6,33 @@ on:
 permissions:
   contents: read
 jobs:
+  preflight:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install standard distribution encoder
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg
+          command -v ffmpeg
+          command -v ffprobe
+      - name: Pinned audio dependencies and full soundtrack preflight
+        run: |
+          pip install --only-binary=:all: -r requirements-audio.txt
+          bash scripts/build-audio.sh
+      - name: Encode and mux one 1080p frame before rendering
+        run: |
+          ffmpeg -hide_banner -loglevel error -y -f lavfi -i color=c=orange:s=1920x1080:r=24 -i film/audio/mix-aac.m4a -frames:v 1 -t 0.041667 -c:v libx264 -pix_fmt yuv420p -c:a copy /tmp/encoder-preflight.mp4
+          ffmpeg -hide_banner -loglevel error -xerror -i /tmp/encoder-preflight.mp4 -f null -
+          ffprobe -v error -show_streams -of json /tmp/encoder-preflight.mp4
   frames:
+    needs: preflight
     runs-on: ubuntu-22.04
     timeout-minutes: 100
     strategy:
@@ -20,6 +46,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Install and verify encoder before expensive frames
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg
+          command -v ffmpeg
+          command -v ffprobe
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Render 48 original 1080p frames with sandbox retained
         env:
@@ -53,6 +85,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install encoder
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg
       - run: |
           pip install --only-binary=:all: -r requirements-audio.txt
       - uses: actions/download-artifact@v4
