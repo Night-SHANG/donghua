@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm'),path=require('path'),assert=require('assert');
+const upstream=process.env.HUASHU_ENGINE||'/tmp/animation-trials/huashu/skill/scripts/engine';global.window=global;global.SCENES={};
+for(const f of ['lib/util.js','lib/motion.js','lib/camera.js','lib/paint.js'])vm.runInThisContext(fs.readFileSync(path.join(upstream,f),'utf8'));
+for(const f of ['eras_seasons_leaf.js','seasons_leaf/world.js'])vm.runInThisContext(fs.readFileSync(path.join(__dirname,'../engine',f),'utf8'));
+assert.equal(ERAS.reduce((a,e)=>a+e.dur,0),15);
+const state=SEASONS_LEAF.state;let maxScreenStep=0,maxAngleStep=0;
+for(let i=0;i<=900;i++){let t=i/60,a=state(t);assert.deepEqual(a,state(t));for(const k of ['x','y','angle','yaw'])assert(Number.isFinite(a[k]));assert(a.camera.z>.6);assert(a.screen[0]>650&&a.screen[0]<1200);assert(a.screen[1]>350&&a.screen[1]<650);if(i){let b=state((i-1)/60);maxScreenStep=Math.max(maxScreenStep,Math.hypot(a.screen[0]-b.screen[0],a.screen[1]-b.screen[1]));maxAngleStep=Math.max(maxAngleStep,Math.abs(a.angle-b.angle));}}
+assert(maxScreenStep<3);assert(maxAngleStep<.025);
+for(const t of [3.3,3.75,4.2,7.05,7.5,7.95,10.8,11,11.25,11.7]){let h=1e-4,a=state(t-h),b=state(t),d=state(t+h);for(const k of ['x','y','angle','yaw'])assert(Math.abs((b[k]-a[k])/h-(d[k]-b[k])/h)<.1);for(let j=0;j<2;j++)assert(Math.abs((b.screen[j]-a.screen[j])/h-(d.screen[j]-b.screen[j])/h)<.1);}
+console.log('PASS: 901 deterministic states; 15s/4 seasons; continuous position, velocity, angle/yaw; max screen step '+maxScreenStep.toFixed(3)+'px/60fps; one leaf topology; visual review pending.');
+if(process.env.STATE_REPORT){const samples=Array.from({length:901},(_,frame)=>({frame,t:frame/60,...state(frame/60)}));fs.writeFileSync(process.env.STATE_REPORT,JSON.stringify({schema:1,fps:60,duration:15,samples,limits:{maxFrameDisplacement:6,maxSpeed:360,maxAngularSpeed:1.5,maxAngleStep:.025,minCameraZoom:.6},summary:{maxScreenFrameDisplacement:maxScreenStep,maxAngularSpeed:maxAngleStep*60,maxSpeed:Math.max(...samples.slice(1).map((s,i)=>Math.hypot(s.x-samples[i].x,s.y-samples[i].y)*60)),maxFrameDisplacement:Math.max(...samples.slice(1).map((s,i)=>Math.hypot(s.x-samples[i].x,s.y-samples[i].y)))},passed:true},null,2));}

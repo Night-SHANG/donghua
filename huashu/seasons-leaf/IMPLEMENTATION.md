@@ -1,0 +1,8 @@
+# Implementation and verification
+Film `seasons_leaf`; native additive `eras_seasons_leaf.js` and `seasons_leaf/world.js` only. Four ERAS share a single global draw timeline. Native CAM.anchor and CAM.with bind one leaf to continuous world motion. Seasonal scene layers use independently scaled parallax, deterministic cached botanical strokes, hills, shoreline/water highlights, weather, and passing foreground trunks. PAINT cache/grain and fixed RNG eliminate per-frame texture reseeding.
+
+The main leaf is one continuous Bezier silhouette with attached vein geometry and a fixed highlight; no PNG pose replacement, no texture strip deformation, no split body masks. Translation and angular trajectories are analytic sinusoids; winter pull uses quintic smoothstep so first and second derivatives remain continuous at its onset. The leaf continues moving across cuts. A foreground tree trunk covers the new-season clip edge across each 0.9-second transition.
+
+Static tests: 901 deterministic states, all seasonal and wipe boundary velocities, frame displacement <3 px at60fps, angle increment <0.025 rad. Optional STATE_REPORT emits all901 states and summary. Visual rendering has NOT yet occurred; actual scenery, occluder traversal and leaf readability require CI frames and motion review.
+
+No image files or external API requests. Read official lib/camera.js and lib/paint.js fully, official scenes/28_monet.js fully; native concepts used rather than copying the official presenter or character images. Code is new task-specific procedural scenery. Palette changes accompany structurally different foliage, weather and terrain, not simple full-screen tint swaps.
