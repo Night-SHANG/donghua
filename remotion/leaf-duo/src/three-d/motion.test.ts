@@ -1,0 +1,11 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import * as THREE from 'three';
+import {CUTS,motion,type Season} from './motion';
+const seasons:Season[]=['spring','summer','autumn','winter'];
+test('3D film is exactly 900 frames, three actual cuts',()=>assert.deepEqual([...CUTS],[0,204,420,660,900]));
+test('all 900 frames are finite, deterministic and comfortably within perspective view',()=>{seasons.forEach((season,k)=>{for(let f=0;f<CUTS[k+1]-CUTS[k];f++){const s=motion(season,f/60);assert.deepEqual(s,motion(season,f/60));assert.ok([...s.p,...s.r,...s.camera,...s.target].every(Number.isFinite));const camera=new THREE.PerspectiveCamera(38,1920/1080,.1,70);camera.position.set(...s.camera);camera.lookAt(s.target[0]+s.p[0]*.12,s.target[1]+(s.p[1]-1.5)*.12,s.target[2]);camera.updateMatrixWorld();const p=new THREE.Vector3(...s.p).project(camera);assert.ok(Math.abs(p.x)<.82&&Math.abs(p.y)<.82&&p.z<1,`${season} f${f} center outside safe view ${p.toArray()}`)}})});
+test('intra-shot motion has no position teleport',()=>{seasons.forEach((season,k)=>{for(let f=1;f<CUTS[k+1]-CUTS[k];f++){const a=motion(season,(f-1)/60).p,b=motion(season,f/60).p;assert.ok(Math.hypot(...b.map((v,i)=>v-a[i]))<.12,`${season} f${f}`)}})});
+test('winter ends in actual still contact rather than endless drift',()=>{const a=motion('winter',3.35),b=motion('winter',3.98);assert.deepEqual(a.p,b.p);a.r.forEach((v,i)=>assert.ok(Math.abs(v-b.r[i])<1e-12,`settled rotation ${i}`));assert.equal(a.p[1],.57)});
+test('summer does not cut through the water',()=>{for(let f=0;f<216;f++)assert.ok(motion('summer',f/60).p[1]>.75)});
+test('four seasons have different depth choreography, not one lateral translation',()=>{for(const season of seasons){const duration=({spring:3.4,summer:3.6,autumn:4,winter:4})[season];const states=Array.from({length:90},(_,i)=>motion(season,i/90*duration).p);assert.ok(Math.max(...states.map(p=>p[2]))-Math.min(...states.map(p=>p[2]))>.15)}});

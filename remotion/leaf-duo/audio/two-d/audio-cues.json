@@ -1,0 +1,281 @@
+{
+  "duration": 15,
+  "sampleRate": 48000,
+  "seed": 2810282,
+  "shots": [
+    {
+      "start": 0,
+      "end": 3.6,
+      "name": "spring"
+    },
+    {
+      "start": 3.6,
+      "end": 7.2,
+      "name": "summer"
+    },
+    {
+      "start": 7.2,
+      "end": 11.2,
+      "name": "autumn"
+    },
+    {
+      "start": 11.2,
+      "end": 15,
+      "name": "winter"
+    }
+  ],
+  "cues": [
+    {
+      "time": 0.8,
+      "kind": "water_drop",
+      "description": "雨滴压弯叶面：克制水滴",
+      "duration": 0.46
+    },
+    {
+      "time": 1.5,
+      "start": 1.24,
+      "duration": 0.65,
+      "kind": "gust",
+      "description": "叶片回弹，花瓣围绕"
+    },
+    {
+      "time": 3.6,
+      "kind": "water_drop",
+      "description": "圆形涟漪iris接池塘",
+      "duration": 0.46
+    },
+    {
+      "time": 5.5,
+      "start": 5.2,
+      "duration": 1.12,
+      "kind": "gust",
+      "description": "蜻蜓掠风，螺旋上升"
+    },
+    {
+      "time": 7.2,
+      "kind": "harmonic_change",
+      "description": "秋：降B暖和弦，不加硬切声"
+    },
+    {
+      "time": 9.4,
+      "start": 9.4,
+      "duration": 0.95,
+      "kind": "paper_rustle",
+      "description": "翻页托起叶子：纸面轻擦"
+    },
+    {
+      "time": 11.2,
+      "start": 10.92,
+      "duration": 0.85,
+      "kind": "gust",
+      "description": "白色翻页擦镜进入雪园"
+    },
+    {
+      "time": 12.6,
+      "start": 12.0,
+      "duration": 1.4,
+      "kind": "gust",
+      "description": "冬：微弱上升气流"
+    },
+    {
+      "time": 14.2,
+      "start": 14.2,
+      "duration": 0.23,
+      "kind": "paper_rustle",
+      "description": "结霜叶片轻触初芽"
+    }
+  ],
+  "notes": [
+    {
+      "time": 0.15,
+      "midi": 65,
+      "kind": "piano",
+      "gain": 0.075,
+      "pan": 0.029887626494719845
+    },
+    {
+      "time": 0.72,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.055,
+      "pan": 0.13187693439429463
+    },
+    {
+      "time": 1.5,
+      "midi": 72,
+      "kind": "piano",
+      "gain": 0.09,
+      "pan": 0.1994989973208109
+    },
+    {
+      "time": 1.76,
+      "midi": 77,
+      "kind": "piano",
+      "gain": 0.065,
+      "pan": 0.1964308634275237
+    },
+    {
+      "time": 2.65,
+      "midi": 74,
+      "kind": "piano",
+      "gain": 0.07,
+      "pan": 0.09440610825797653
+    },
+    {
+      "time": 3.28,
+      "midi": 72,
+      "kind": "piano",
+      "gain": 0.055,
+      "pan": -0.02759317345424537
+    },
+    {
+      "time": 3.65,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.075,
+      "pan": -0.09735732973113988
+    },
+    {
+      "time": 4.5,
+      "midi": 65,
+      "kind": "piano",
+      "gain": 0.06,
+      "pan": -0.1955060235330194
+    },
+    {
+      "time": 5.52,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.078,
+      "pan": -0.13824535431942542
+    },
+    {
+      "time": 5.85,
+      "midi": 72,
+      "kind": "piano",
+      "gain": 0.066,
+      "pan": -0.08395280356797194
+    },
+    {
+      "time": 6.34,
+      "midi": 76,
+      "kind": "piano",
+      "gain": 0.065,
+      "pan": 0.011356826461415611
+    },
+    {
+      "time": 7.24,
+      "midi": 70,
+      "kind": "piano",
+      "gain": 0.085,
+      "pan": 0.1634721156462346
+    },
+    {
+      "time": 8.08,
+      "midi": 65,
+      "kind": "piano",
+      "gain": 0.065,
+      "pan": 0.194913279540887
+    },
+    {
+      "time": 8.65,
+      "midi": 62,
+      "kind": "piano",
+      "gain": 0.07,
+      "pan": 0.1399114857205336
+    },
+    {
+      "time": 9.4,
+      "midi": 65,
+      "kind": "piano",
+      "gain": 0.08,
+      "pan": 0.004955085090671553
+    },
+    {
+      "time": 9.72,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.065,
+      "pan": -0.05819045811329816
+    },
+    {
+      "time": 10.18,
+      "midi": 74,
+      "kind": "piano",
+      "gain": 0.055,
+      "pan": -0.13709007132328097
+    },
+    {
+      "time": 11.3,
+      "midi": 72,
+      "kind": "piano",
+      "gain": 0.065,
+      "pan": -0.1908038499804178
+    },
+    {
+      "time": 12.2,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.06,
+      "pan": -0.07164585644736575
+    },
+    {
+      "time": 13.0,
+      "midi": 67,
+      "kind": "piano",
+      "gain": 0.05,
+      "pan": 0.08403340736532819
+    },
+    {
+      "time": 14.2,
+      "midi": 65,
+      "kind": "piano",
+      "gain": 0.048,
+      "pan": 0.19960533054327234
+    },
+    {
+      "time": 1.58,
+      "midi": 81,
+      "kind": "wood",
+      "gain": 0.028,
+      "pan": 0.14999364697481102
+    },
+    {
+      "time": 3.6,
+      "midi": 77,
+      "kind": "wood",
+      "gain": 0.035,
+      "pan": -0.06637806649422787
+    },
+    {
+      "time": 5.65,
+      "midi": 81,
+      "kind": "wood",
+      "gain": 0.028,
+      "pan": -0.0887573370946514
+    },
+    {
+      "time": 7.32,
+      "midi": 77,
+      "kind": "wood",
+      "gain": 0.032,
+      "pan": 0.12911810818483524
+    },
+    {
+      "time": 9.53,
+      "midi": 81,
+      "kind": "wood",
+      "gain": 0.028,
+      "pan": -0.015754197391047987
+    },
+    {
+      "time": 14.2,
+      "midi": 77,
+      "kind": "wood",
+      "gain": 0.018,
+      "pan": 0.14970399790745426
+    }
+  ],
+  "score": "New original F-major paper-garden miniature, piano, woody resonators and soft pads. Rain pressure and rebound, pond arc, floating-book page lift, frost-to-bud landing. No samples. Reused synthesis primitives, newly composed notes and cues.",
+  "end": "Natural instrumental decay with final 0.8-second cos² tail; exact zero endpoints."
+}

@@ -1,0 +1,337 @@
+{
+  "duration": 15,
+  "sampleRate": 48000,
+  "seed": 2810283,
+  "shots": [
+    {
+      "start": 0,
+      "end": 3.4,
+      "name": "spring"
+    },
+    {
+      "start": 3.4,
+      "end": 7.0,
+      "name": "summer"
+    },
+    {
+      "start": 7.0,
+      "end": 11.0,
+      "name": "autumn"
+    },
+    {
+      "start": 11.0,
+      "end": 15,
+      "name": "winter"
+    }
+  ],
+  "cues": [
+    {
+      "time": 0.15,
+      "kind": "water_drop",
+      "description": "温室凝露滴落",
+      "duration": 0.46
+    },
+    {
+      "time": 1.1,
+      "start": 0.82,
+      "duration": 1.6,
+      "kind": "gust",
+      "description": "玻璃温室螺旋钻圆窗"
+    },
+    {
+      "time": 3.4,
+      "kind": "water_drop",
+      "description": "月门换荷塘：轻水音",
+      "duration": 0.46
+    },
+    {
+      "time": 5.6,
+      "start": 5.6,
+      "duration": 0.65,
+      "kind": "paper_rustle",
+      "description": "叶片低空掠水细碎水雾"
+    },
+    {
+      "time": 7.0,
+      "start": 7.0,
+      "duration": 0.7,
+      "kind": "paper_rustle",
+      "description": "秋石庭干叶被卷起"
+    },
+    {
+      "time": 8.3,
+      "start": 7.45,
+      "duration": 1.9,
+      "kind": "gust",
+      "description": "绕石灯旋风逐渐上升"
+    },
+    {
+      "time": 9.1,
+      "start": 8.9,
+      "duration": 0.7,
+      "kind": "gust",
+      "description": "上升收束后留停顿"
+    },
+    {
+      "time": 11.0,
+      "kind": "harmonic_change",
+      "description": "冬夜灯笼：玻璃泛音和A大调暖归宿"
+    },
+    {
+      "time": 12.8,
+      "start": 12.5,
+      "duration": 0.9,
+      "kind": "gust",
+      "description": "灯笼热气轻托叶片"
+    },
+    {
+      "time": 14.3,
+      "start": 14.3,
+      "duration": 0.25,
+      "kind": "paper_rustle",
+      "description": "叶片落石台，微弱接触"
+    }
+  ],
+  "notes": [
+    {
+      "time": 0.1,
+      "midi": 64,
+      "kind": "piano",
+      "gain": 0.065,
+      "pan": 0.012978344164087661
+    },
+    {
+      "time": 0.65,
+      "midi": 59,
+      "kind": "piano",
+      "gain": 0.05,
+      "pan": 0.07867423274568515
+    },
+    {
+      "time": 2.65,
+      "midi": 68,
+      "kind": "piano",
+      "gain": 0.06,
+      "pan": 0.06136397036768475
+    },
+    {
+      "time": 3.45,
+      "midi": 61,
+      "kind": "piano",
+      "gain": 0.07,
+      "pan": -0.03946039665209582
+    },
+    {
+      "time": 4.6,
+      "midi": 64,
+      "kind": "piano",
+      "gain": 0.055,
+      "pan": -0.12917983047235038
+    },
+    {
+      "time": 6.4,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.06,
+      "pan": 0.015151396630564173
+    },
+    {
+      "time": 7.05,
+      "midi": 62,
+      "kind": "piano",
+      "gain": 0.075,
+      "pan": 0.09019984284086928
+    },
+    {
+      "time": 8.8,
+      "midi": 66,
+      "kind": "piano",
+      "gain": 0.06,
+      "pan": 0.07603923507592902
+    },
+    {
+      "time": 10.2,
+      "midi": 64,
+      "kind": "piano",
+      "gain": 0.045,
+      "pan": -0.09098370938716051
+    },
+    {
+      "time": 11.12,
+      "midi": 61,
+      "kind": "piano",
+      "gain": 0.075,
+      "pan": -0.12899498335852522
+    },
+    {
+      "time": 12.1,
+      "midi": 64,
+      "kind": "piano",
+      "gain": 0.055,
+      "pan": -0.05845417038949819
+    },
+    {
+      "time": 13.7,
+      "midi": 59,
+      "kind": "piano",
+      "gain": 0.048,
+      "pan": 0.11777411650010004
+    },
+    {
+      "time": 14.3,
+      "midi": 57,
+      "kind": "piano",
+      "gain": 0.045,
+      "pan": 0.12828035535569973
+    },
+    {
+      "time": 1.1,
+      "midi": 57,
+      "kind": "harp",
+      "gain": 0.045,
+      "pan": -0.25
+    },
+    {
+      "time": 1.36,
+      "midi": 61,
+      "kind": "harp",
+      "gain": 0.05,
+      "pan": -0.1
+    },
+    {
+      "time": 1.65,
+      "midi": 64,
+      "kind": "harp",
+      "gain": 0.055,
+      "pan": 0.05
+    },
+    {
+      "time": 2.02,
+      "midi": 71,
+      "kind": "harp",
+      "gain": 0.04,
+      "pan": 0.2
+    },
+    {
+      "time": 3.65,
+      "midi": 69,
+      "kind": "harp",
+      "gain": 0.04,
+      "pan": 0.2
+    },
+    {
+      "time": 4.05,
+      "midi": 64,
+      "kind": "harp",
+      "gain": 0.043,
+      "pan": 0
+    },
+    {
+      "time": 5.6,
+      "midi": 61,
+      "kind": "harp",
+      "gain": 0.045,
+      "pan": -0.15
+    },
+    {
+      "time": 5.82,
+      "midi": 64,
+      "kind": "harp",
+      "gain": 0.05,
+      "pan": 0
+    },
+    {
+      "time": 6.15,
+      "midi": 69,
+      "kind": "harp",
+      "gain": 0.045,
+      "pan": 0.15
+    },
+    {
+      "time": 7.3,
+      "midi": 57,
+      "kind": "harp",
+      "gain": 0.06,
+      "pan": -0.3
+    },
+    {
+      "time": 7.65,
+      "midi": 62,
+      "kind": "harp",
+      "gain": 0.06,
+      "pan": -0.15
+    },
+    {
+      "time": 8.0,
+      "midi": 66,
+      "kind": "harp",
+      "gain": 0.06,
+      "pan": 0
+    },
+    {
+      "time": 8.3,
+      "midi": 69,
+      "kind": "harp",
+      "gain": 0.06,
+      "pan": 0.15
+    },
+    {
+      "time": 8.56,
+      "midi": 73,
+      "kind": "harp",
+      "gain": 0.055,
+      "pan": 0.3
+    },
+    {
+      "time": 8.8,
+      "midi": 76,
+      "kind": "harp",
+      "gain": 0.045,
+      "pan": 0.1
+    },
+    {
+      "time": 9.1,
+      "midi": 78,
+      "kind": "harp",
+      "gain": 0.038,
+      "pan": -0.1
+    },
+    {
+      "time": 11.5,
+      "midi": 69,
+      "kind": "harp",
+      "gain": 0.035,
+      "pan": 0.1
+    },
+    {
+      "time": 12.8,
+      "midi": 64,
+      "kind": "harp",
+      "gain": 0.045,
+      "pan": -0.1
+    },
+    {
+      "time": 13.12,
+      "midi": 68,
+      "kind": "harp",
+      "gain": 0.037,
+      "pan": 0.1
+    },
+    {
+      "time": 14.3,
+      "midi": 69,
+      "kind": "harp",
+      "gain": 0.025,
+      "pan": 0
+    },
+    {
+      "time": 11.02,
+      "midi": 81,
+      "kind": "glass",
+      "gain": 0.012,
+      "pan": 0.2
+    }
+  ],
+  "score": "New original A-major cinematic greenhouse-to-lantern score. Harp spiral gestures, piano anchors, glass harmonics and warm low pads. New notes, arrangements and shot cues; only synthesis primitives reused. No samples.",
+  "end": "Natural instrumental decay with final 0.8-second cos² tail; exact zero endpoints."
+}

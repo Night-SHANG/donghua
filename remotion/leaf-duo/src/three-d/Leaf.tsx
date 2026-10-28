@@ -1,0 +1,11 @@
+import React,{useMemo,useEffect} from 'react';
+import * as THREE from 'three';
+import {Season} from './motion';
+export const leafPoint=(u:number,v:number,flex:number)=>new THREE.Vector3(v*.44*Math.pow(Math.sin(Math.PI*u),.8)*(1+.035*Math.sin(u*95)),(u-.5)*1.55,.18*Math.sin(u*Math.PI)+.13*v*v+flex*Math.sin(u*Math.PI*1.4)*v);
+export function Leaf({season,time,scale=1,onAfterRender}:{season:Season,time:number,scale?:number,onAfterRender?:THREE.Object3D['onAfterRender']}){
+ const flex=.055*Math.sin(time*7.4)+.02*Math.sin(time*15);
+ const geometry=useMemo(()=>{const g=new THREE.BufferGeometry();const p:number[]=[],c:number[]=[],ix:number[]=[];const colors={spring:['#c9df78','#548b3d'],summer:['#85b956','#225b3d'],autumn:['#f1b450','#ad4825'],winter:['#bda88d','#746757']}[season];for(let i=0;i<=28;i++)for(let j=0;j<=12;j++){let u=i/28,v=j/6-1;const pt=leafPoint(u,v,flex);p.push(pt.x,pt.y,pt.z);const col=new THREE.Color(colors[0]).lerp(new THREE.Color(colors[1]),Math.abs(v)*.6+u*.25);if(season==='winter'&&Math.abs(v)>.73)col.lerp(new THREE.Color('#e5ecdf'),.65);c.push(col.r,col.g,col.b);if(i<28&&j<12){let n=i*13+j;ix.push(n,n+1,n+13,n+1,n+14,n+13)}}g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setAttribute('color',new THREE.Float32BufferAttribute(c,3));g.setIndex(ix);g.computeVertexNormals();return g},[season,flex]);
+ const veins=useMemo(()=>{const paths:THREE.Vector3[][]=[];paths.push(Array.from({length:21},(_,i)=>{const p=leafPoint(i/20,0,flex);p.z+=.008;return p}));for(let i=1;i<7;i++)for(const side of [-1,1])paths.push(Array.from({length:9},(_,j)=>{const p=leafPoint(i/8+j/8*.21,side*j/8*.88,flex);p.z+=.012;return p}));return paths.map(p=>new THREE.TubeGeometry(new THREE.CatmullRomCurve3(p),18,.006,3,false))},[flex]);
+ useEffect(()=>()=>{geometry.dispose();veins.forEach(g=>g.dispose())},[geometry,veins]);
+ return <group scale={scale}><mesh geometry={geometry} castShadow onAfterRender={onAfterRender}><meshStandardMaterial vertexColors side={THREE.DoubleSide} roughness={.64} metalness={.02}/></mesh>{veins.map((g,i)=><mesh key={i} geometry={g}><meshStandardMaterial color={season==='winter'?'#d3cbb7':'#e0c87a'} roughness={.8}/></mesh>)}<mesh position={[0,-.88,.01]} rotation={[.13,0,0]}><cylinderGeometry args={[.012,.017,.3,6]}/><meshStandardMaterial color="#7e7137"/></mesh></group>
+}

@@ -1,0 +1,3 @@
+Remotion licensing checked 2026-10-28: https://www.remotion.dev/docs/license/pricing . Individuals and companies up to 3 people qualify for free creation and automated rendering; larger organizations need an appropriate Company License. Eligibility must not be assumed for later organizational reuse. This project uses no paid render service, license purchase, secrets or credentials.
+
+Direct dependencies are exact official npm versions. Local npm installation ended with SIGKILL and incomplete dependencies; Studio launch failed because its CLI was not installed. The CI performs a clean install, typecheck, actual stills/WebGL capture, full render, decode/audio/size checks and saves its resolved lockfile. Static checks are not proof of visual quality.

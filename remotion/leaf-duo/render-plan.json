@@ -1,0 +1,74 @@
+{
+  "fps": 60,
+  "duration": 15,
+  "frames": 900,
+  "width": 1920,
+  "height": 1080,
+  "reviewWidth": 1280,
+  "reviewHeight": 720,
+  "artifactCap": 14000000,
+  "variants": {
+    "two-d": {
+      "composition": "Leaf2D",
+      "title": "Painted 2D leaf",
+      "keyframes": [
+        72,
+        180,
+        306,
+        426,
+        558,
+        660,
+        792,
+        864
+      ],
+      "windows": [
+        [
+          195,
+          237
+        ],
+        [
+          411,
+          453
+        ],
+        [
+          651,
+          693
+        ]
+      ],
+      "timing": "0.6s iris/leaf-wipe/page-wipe transitions centered at 3.6/7.2/11.2 seconds",
+      "stateTest": "src/two-d/test-motion.ts"
+    },
+    "three-d": {
+      "composition": "Leaf3D",
+      "title": "Spatial 3D leaf",
+      "keyframes": [
+        90,
+        300,
+        540,
+        780
+      ],
+      "windows": [
+        [
+          195,
+          213
+        ],
+        [
+          411,
+          429
+        ],
+        [
+          651,
+          669
+        ]
+      ],
+      "timing": "Separate 3D scenes with intentional cuts at frames204/420/660",
+      "stateTest": "src/three-d/motion.test.ts",
+      "webglFrames": [
+        90,
+        300,
+        540,
+        780
+      ]
+    }
+  }
+}

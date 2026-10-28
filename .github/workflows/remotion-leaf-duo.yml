@@ -1,0 +1,76 @@
+name: New Remotion Leaf Duo 2D and 3D
+run-name: Remotion Leaf Duo / ${{ github.sha }}
+on:
+  push:
+    branches: ['feat/remotion-leaf-duo','render/remotion-leaf-duo*','feat/huashu-fox-stork']
+    paths: ['.github/workflows/remotion-leaf-duo.yml','remotion/leaf-duo/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: remotion-leaf-duo-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  render:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        variant: [two-d, three-d]
+    defaults:
+      run:
+        working-directory: remotion/leaf-duo
+    env:
+      PYTHONUNBUFFERED: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Official fixed packages; retain resolved lock as evidence
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/${{ matrix.variant }}
+          if test -f package-lock.json; then npm ci --registry=https://registry.npmjs.org --legacy-peer-deps --no-audit --fund=false; else npm install --registry=https://registry.npmjs.org --legacy-peer-deps --no-audit --fund=false; fi
+          cp package-lock.json artifacts/${{ matrix.variant }}/package-lock.json
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg libnss3 libatk-bridge2.0-0 libx11-xcb1 libxcomposite1 libxdamage1 libxrandr2 libgbm1 libasound2 libpangocairo-1.0-0 libcups2 libxkbcommon0
+          python -m pip install --only-binary=:all: numpy==2.2.6 scipy==1.15.3 Pillow==11.2.1
+      - name: Types, orchestration contracts and both new motion designs
+        run: |
+          set -euo pipefail
+          npm run typecheck
+          npm test
+          node node_modules/tsx/dist/cli.mjs src/two-d/test-motion.ts
+          node node_modules/tsx/dist/cli.mjs --test src/three-d/motion.test.ts
+      - name: Build original per-film music
+        run: |
+          set -euo pipefail
+          python audio/${{ matrix.variant }}/synthesize.py
+          python audio/${{ matrix.variant }}/test_audio.py
+          mkdir -p public/audio
+          cp audio/${{ matrix.variant }}/master.wav public/audio/${{ matrix.variant }}.wav
+      - name: Actual keyframes then complete1080p60 render and720p review
+        run: node scripts/render.mjs ${{ matrix.variant }}
+      - name: Cap all output including failed-run evidence
+        id: cap
+        if: always()
+        continue-on-error: true
+        run: python scripts/package_review.py check-size ${{ matrix.variant }}
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.cap.outcome == 'success'
+        with:
+          name: remotion-leaf-${{ matrix.variant }}-${{ github.sha }}-${{ github.run_attempt }}
+          path: remotion/leaf-duo/artifacts/${{ matrix.variant }}/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error

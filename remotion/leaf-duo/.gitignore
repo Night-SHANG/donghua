@@ -1,0 +1,10 @@
+node_modules/
+.cache/
+.tmp/
+out/
+artifacts/
+public/audio/*.wav
+audio/**/*.wav
+audio/**/*.m4a
+audio/**/__pycache__/
+*.log
