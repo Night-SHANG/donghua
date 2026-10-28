@@ -50,7 +50,7 @@ window.CAST=(()=>{
   if(!back){
    const faceX=profile?3:quarter?3:0,faceY=d.faceY;
    // Light facial field keeps dark ink readable on indigo; same painted medium.
-   if(who==='kokou'){boilSeed(id+'facefield');const fw=profile?11:16;paint(P([[faceX-fw,faceY-12],[faceX+fw,faceY-12],[faceX+fw,faceY+12],[faceX-fw,faceY+12]]),{fill:'#F1DEB7',fillOp:255,tex:.12,border:.12,ink:null,bleed:.03,curv:.6});}
+   if(who==='kokou'){boilSeed(id+'facefield');const fw=profile?11:16;paint(P([[faceX-fw,faceY-12],[faceX+fw,faceY-12],[faceX+fw,faceY+12],[faceX-fw,faceY+12]]),{wash:'#F1DEB7',washOp:255,ink:null,curv:.6});}
    const q=local([faceX,faceY]);push();translate(q[0]*u,q[1]*u);scale(sx*(profile?.6:quarter?.9:1),sy);
    const emotion=feel(act.emotion,0);boilSeed(id+'face');push();translate(0,6*d.faceU*u);eyes(d.faceU*u,{...emotion,seed:17},sw,profile?[1]:[-1,1]);mouth(d.faceU*u,emotion.mouth||'flat',sw);pop();pop();
   }
