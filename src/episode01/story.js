@@ -6,9 +6,12 @@
  const mix=(a,b,q)=>a.map((v,i)=>lerp(v,b[i],q));
  const eventPulse=(t,at,len)=>t<at||t>at+len?0:Math.sin(Math.PI*seg(t,at,at+len));
  function camera(t){
-   let keys=[[0,[960,565,1.0]],[4.7,[960,565,1.05]],[5.15,[910,585,1.2]],
-    [9.85,[910,585,1.2]],[10.2,[1110,570,1.32]],[14.6,[1040,555,1.17]],
-    [16.15,[960,530,1.02]],[23.8,[960,550,1.04]],[24.25,[900,585,1.32]],[31.3,[900,580,1.4]]];
+   let keys=[[0,[920,675,1.5]],[4.7,[920,675,1.55]],[5.15,[735,675,2.2]],
+    [8.45,[735,675,2.2]],[9.0,[1160,710,2.45]],[9.85,[1160,710,2.45]],
+    [10.2,[1050,620,1.85]],[12.8,[1050,620,1.85]],[13.55,[1050,500,1.85]],
+    [14.55,[1050,650,1.85]],[15.6,[1000,600,1.5]],[16.15,[1000,530,1.35]],
+    [17.4,[1000,530,1.35]],[18.25,[1000,675,1.65]],[23.8,[900,675,1.65]],
+    [24.25,[880,660,2.15]],[31.3,[880,660,2.15]]];
    let i=0;while(i+1<keys.length&&t>=keys[i+1][0])i++;
    if(i===keys.length-1)return keys[i][1];
    // Moves after a readable shot hold, with short motivated joins at shot boundaries.
@@ -52,8 +55,11 @@
    if(t>=23&&t<25){k.deform.emotion='proud';k.faceOverrides={eyes:'closed',mouth:'smile'};}
    if(t>=25&&t<27.5){k.deform.emotion='nervous';k.faceOverrides={eyes:'normal',mouth:'smile',lookX:.8};}
    const paperUp=E(t,27.5,27.8);if(t>=27.5){k.deform.emotion='surprised';k.deform.armL=mix([-38,-10],[-38,-45],paperUp);k.deform.armR=mix([38,-10],[38,-45],paperUp);k.bowRot=.22*(1-E(t,30,30.7));}
-   if(t>=30&&t<30.8)k.deform.armR=mix([38,-45],[8,-40],Math.sin(seg(t,30,30.8)*Math.PI));
+   if(t>=27.8){const release=E(t,27.8,28.15);k.deform.armL=mix([-38,-45],[-37,-28],release);k.deform.armR=mix([38,-45],[37,-28],release);}
+   if(t>=30&&t<30.8)k.deform.armR=mix([37,-28],[8,-40],Math.sin(seg(t,30,30.8)*Math.PI));
+   if(t>=30.85&&t<31.25)k.deform.armL=mix([-37,-28],[-8,-65],Math.sin(seg(t,30.85,31.25)*Math.PI));
    if(t>=27.68)k.hideFace=true;
+   if(t>=27.8&&t<28.3)k.deform.lean=-.065*eventPulse(t,27.8,.5);
    return {k,l,chairX,paperUp};
  }
  function room(cam){
@@ -88,19 +94,34 @@
      paint(rectPts(444,y-h/2,232,h),{wash:C.paper,fill:'#CFC8B1',fillOp:35,ink:C.ink,sw:.65});
      inkLine([[458,y],[650,y]],.7,'#9A9B8E','charcoal',0);return;
    }
-   const k=s.k,puff=eventPulse(t,27.5,.75),shake=eventPulse(t,2.0,.3)*3+eventPulse(t,3.0,.3)*5+eventPulse(t,12.2,.35)*8+eventPulse(t,14.4,.4)*13+eventPulse(t,24.85,.35)*7;
-   const x=k.x,y=lerp(k.y-114,k.y-235,s.paperUp)+Math.sin(t*37)*shake;
-   const w=232+26*puff,h=154;boilSeed('newspaper');
-   const outline=[[x-w/2,y-h/2],[x,y-h/2-8-28*puff],[x+w/2,y-h/2],[x+w/2,y+h/2],[x,y+h/2-7],[x-w/2,y+h/2]];
-   paint(outline,{wash:C.paper,washOp:255,bleed:.08,ink:C.ink,sw:.7});
-   inkLine([[x,y-h/2-8-28*puff],[x,y+h/2-7]],.6,'#A9A38F','inkfine',0);
-   // Abstract print columns; no language, text or explanatory labels.
-   for(const side of [-1,1])for(let row=0;row<7;row++){const yy=y-h/2+20+row*16,xx=x+side*12;inkLine([[xx,yy],[xx+side*(row===0?83:72),yy+(side<0?-3:3)]],row===0?1.2:.45,'#9A9B8E','charcoal',0);}
+   const k=s.k,wrap=E(t,27.65,27.8),billow=E(t,27.5,27.65)*(1-wrap);
+   const shake=eventPulse(t,2,.3)*3+eventPulse(t,3,.3)*5+eventPulse(t,12.2,.35)*8+eventPulse(t,14.4,.4)*13+eventPulse(t,24.85,.35)*7;
+   const x=k.x+8*wrap,y=lerp(k.y-114,k.y-230,wrap)+Math.sin(t*37)*shake;
+   boilSeed('newspaper');
+   // The centre balloons upward before either held lower corner moves. At impact the broad
+   // sheet collapses around the head into a jagged, curved shell — not a raised rectangle.
+   const flat=[[-116,-77],[0,-85-82*billow],[116,-77],[116,0],[116,77],[0,70],[-116,77],[-116,0]];
+   const stuck=[[-76,-53],[-14,-70],[69,-51],[81,8],[62,64],[-4,74],[-71,53],[-82,-4]];
+   const outline=flat.map((p,i)=>mix(p,stuck[i],wrap).map((v,j)=>v+(j?y:x)));
+   paint(outline,{wash:C.paper,washOp:255,bleed:.08,ink:C.ink,sw:.8,curv:wrap*.2});
+   if(wrap>.01){
+     // Folded corners plus broken print strokes reveal contact with a rounded face underneath.
+     for(const pts of [ [[-76,-53],[-51,-30],[-72,-12]], [[69,-51],[43,-22],[79,8]], [[62,64],[36,37],[14,69]], [[-71,53],[-43,28],[-10,72]] ])
+       inkLine(pts.map(([a,b])=>[x+a,y+b]),.7*wrap,'#AAA38D','inkfine',.25);
+     inkLine([[x-10,y-58],[x-20,y-20],[x+4,y+10],[x-5,y+58]],.65*wrap,'#B4AD98','inkfine',.35);
+   }
+   if(wrap<.98){inkLine([[x,y-85-82*billow],[x,y+70]],.6,'#A9A38F','inkfine',.2);}
+   // Print bends and compresses with the wrapping sheet; it never remains a rigid grid.
+   for(const side of [-1,1])for(let row=0;row<6;row++){
+     const yy=y-55+row*19,xx=x+side*12,end=x+side*lerp(91,52,wrap);
+     inkLine([[xx,yy],[lerp(xx,end,.5),yy-8*wrap*Math.sin(row)],[end,yy+side*3+wrap*(row-2)*2]],row===0?.95:.45,'#9A9B8E','charcoal',.35);
+   }
+
  }
  function breath(t,s){
    for(const [a,len,strength] of [[24.75,.65,.35],[27.5,.75,1]]){
      const q=seg(t,a,a+len);if(t<a||q>=1)continue;boilSeed('breath'+a);
-     const x=s.l.x-80-380*q,y=s.l.y-150;for(let i=0;i<3;i++)inkLine([[x+60,y+i*20],[x,y-8+i*20],[x-65,y+i*18]],.8*strength*(1-q),'#D5D5C1','inkfine',.5);
+     const travel=E(t,a,a+.3),x=s.l.x-48-480*travel,y=lerp(s.l.y-115,705,travel);for(let i=0;i<3;i++)inkLine([[x+60,y+i*20],[x,y-8+i*20],[x-65,y+i*18]],.8*strength*(1-q),'#D5D5C1','inkfine',.5);
    }
  }
  function render(t){
@@ -108,7 +129,11 @@
    shadow(560,880,130,65,'kshadow');shadow(s.chairX,889,180,58,'chairshadow');shadow(s.l.x,885,95-(880-s.l.y)*.05,40,'lshadow');
    woodenChair();sofa(s.chairX,t,false);if(t<18)sofa(s.chairX,t,true);box(t);
    CAST.draw('kokou',s.k.x,s.k.y,s.k.u,s.k);
-   CAST.draw('liuliu',s.l.x,s.l.y,s.l.u,s.l);
+   if(t>=20.8){
+     // The sleeping three-quarter face points toward the reader; mirror locally, not the scene.
+     push();translate(s.l.x,s.l.y);scale(-1,1);
+     CAST.draw('liuliu',0,0,s.l.u,{...s.l,view:'quarter',deform:{...s.l.deform,lean:-s.l.deform.lean}});pop();
+   }else CAST.draw('liuliu',s.l.x,s.l.y,s.l.u,s.l);
    if(t>=18)sofa(s.chairX,t,true);ball(t);paper(t,s);breath(t,s);
    camEnd();
    if(t<.4){boilSeed('open');iris(600,580,lerp(15,2200,E(t,0,.4)),PAL.paper);}
