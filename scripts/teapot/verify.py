@@ -1,6 +1,8 @@
 import json,subprocess,sys
 from pathlib import Path
 p=Path(sys.argv[1]); probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(p)]));v=next(s for s in probe['streams'] if s['codec_type']=='video');a=next(s for s in probe['streams'] if s['codec_type']=='audio')
+p.with_suffix('.probe.json').write_text(json.dumps(probe,indent=2))
+print(json.dumps({'video_duration':v.get('duration'),'audio_duration':a.get('duration'),'video_frames':v.get('nb_frames')}),flush=True)
 assert (v['width'],v['height'],v['r_frame_rate'],int(v['nb_frames']))==(1920,1080,'24/1',336)
 assert abs(float(v['duration'])-14)<.002 and abs(float(a['duration'])-14)<.025
 assert a['sample_rate']=='48000' and a['channels']==2
