@@ -1,0 +1,319 @@
+{
+  "duration": 15,
+  "sampleRate": 48000,
+  "seed": 281015,
+  "shots": [
+    {
+      "start": 0,
+      "end": 3.75,
+      "name": "spring"
+    },
+    {
+      "start": 3.75,
+      "end": 7.5,
+      "name": "summer"
+    },
+    {
+      "start": 7.5,
+      "end": 11.25,
+      "name": "autumn"
+    },
+    {
+      "start": 11.25,
+      "end": 15,
+      "name": "winter"
+    }
+  ],
+  "cues": [
+    {
+      "time": 3.75,
+      "kind": "continuous_wind_swell",
+      "description": "春夏遮挡转场的柔风",
+      "duration": 1.45,
+      "start": 3.2
+    },
+    {
+      "time": 7.5,
+      "kind": "continuous_wind_swell",
+      "description": "夏秋转场的叶片轻响",
+      "duration": 1.45,
+      "start": 6.95
+    },
+    {
+      "time": 11.25,
+      "kind": "continuous_wind_swell",
+      "description": "秋冬转场的轻雪气流",
+      "duration": 1.45,
+      "start": 10.7
+    },
+    {
+      "time": 14.2,
+      "kind": "tail",
+      "description": "旋律自然衰减，持续风声收尾",
+      "duration": 0.8
+    }
+  ],
+  "notes": [
+    {
+      "time": 0.12,
+      "midi": 64,
+      "kind": "piano",
+      "gain": 0.1035,
+      "pan": 0.0
+    },
+    {
+      "time": 0.618,
+      "midi": 68,
+      "kind": "piano",
+      "gain": 0.1111050153308865,
+      "pan": 0.09370668231451991
+    },
+    {
+      "time": 1.068,
+      "midi": 71,
+      "kind": "piano",
+      "gain": 0.1139872923064405,
+      "pan": 0.16956255335777326
+    },
+    {
+      "time": 1.56,
+      "midi": 68,
+      "kind": "piano",
+      "gain": 0.11035692789150878,
+      "pan": 0.21311732202601835
+    },
+    {
+      "time": 2.058,
+      "midi": 66,
+      "kind": "piano",
+      "gain": 0.10246838976567636,
+      "pan": 0.21607394977027605
+    },
+    {
+      "time": 2.508,
+      "midi": 64,
+      "kind": "piano",
+      "gain": 0.09522048482852495,
+      "pan": 0.17786920884030982
+    },
+    {
+      "time": 3.0,
+      "midi": 63,
+      "kind": "piano",
+      "gain": 0.09311418476165911,
+      "pan": 0.10578097529750262
+    },
+    {
+      "time": 3.4979999999999998,
+      "midi": 66,
+      "kind": "piano",
+      "gain": 0.09745750850795022,
+      "pan": 0.013541817834580893
+    },
+    {
+      "time": 3.948,
+      "midi": 68,
+      "kind": "piano",
+      "gain": 0.10555323840855571,
+      "pan": -0.08127701087978496
+    },
+    {
+      "time": 4.44,
+      "midi": 71,
+      "kind": "piano",
+      "gain": 0.11237390082240079,
+      "pan": -0.1606128393846459
+    },
+    {
+      "time": 4.938,
+      "midi": 73,
+      "kind": "piano",
+      "gain": 0.11368384301387341,
+      "pan": -0.20935245625569351
+    },
+    {
+      "time": 5.388,
+      "midi": 71,
+      "kind": "piano",
+      "gain": 0.10866958677658384,
+      "pan": -0.21821112660840078
+    },
+    {
+      "time": 5.88,
+      "midi": 68,
+      "kind": "piano",
+      "gain": 0.10044500094905184,
+      "pan": -0.18550130320841168
+    },
+    {
+      "time": 6.378,
+      "midi": 66,
+      "kind": "piano",
+      "gain": 0.09411757910682052,
+      "pan": -0.11745409860616174
+    },
+    {
+      "time": 6.828,
+      "midi": 64,
+      "kind": "piano",
+      "gain": 0.09361667004466619,
+      "pan": -0.02703227892344101
+    },
+    {
+      "time": 7.319999999999999,
+      "midi": 63,
+      "kind": "piano",
+      "gain": 0.09925333986008403,
+      "pan": 0.06853909997294313
+    },
+    {
+      "time": 7.818,
+      "midi": 61,
+      "kind": "piano",
+      "gain": 0.10752719893183241,
+      "pan": 0.15105400831568047
+    },
+    {
+      "time": 8.267999999999999,
+      "midi": 64,
+      "kind": "piano",
+      "gain": 0.11330015484528275,
+      "pan": 0.20479363054636499
+    },
+    {
+      "time": 8.76,
+      "midi": 66,
+      "kind": "piano",
+      "gain": 0.11298718388518145,
+      "pan": 0.21952074739167635
+    },
+    {
+      "time": 9.258,
+      "midi": 68,
+      "kind": "piano",
+      "gain": 0.1067826419986326,
+      "pan": 0.19242989208145236
+    },
+    {
+      "time": 9.707999999999998,
+      "midi": 71,
+      "kind": "piano",
+      "gain": 0.09853956914281607,
+      "pan": 0.12868178243618758
+    },
+    {
+      "time": 10.2,
+      "midi": 68,
+      "kind": "piano",
+      "gain": 0.0933769393957798,
+      "pan": 0.04042022128904826
+    },
+    {
+      "time": 10.697999999999999,
+      "midi": 66,
+      "kind": "piano",
+      "gain": 0.09450076201061312,
+      "pan": -0.055541257558216775
+    },
+    {
+      "time": 11.147999999999998,
+      "midi": 64,
+      "kind": "piano",
+      "gain": 0.10121313962133606,
+      "pan": -0.14092231159529828
+    },
+    {
+      "time": 11.639999999999999,
+      "midi": 68,
+      "kind": "piano",
+      "gain": 0.1093456646944504,
+      "pan": -0.19945813404307955
+    },
+    {
+      "time": 12.138,
+      "midi": 71,
+      "kind": "piano",
+      "gain": 0.11384801367143375,
+      "pan": -0.21999784544115478
+    },
+    {
+      "time": 12.588,
+      "midi": 76,
+      "kind": "piano",
+      "gain": 0.11192421372678327,
+      "pan": -0.19862869909230696
+    },
+    {
+      "time": 0.08,
+      "midi": 52,
+      "kind": "piano",
+      "gain": 0.062,
+      "pan": -0.13
+    },
+    {
+      "time": 2.48,
+      "midi": 59,
+      "kind": "piano",
+      "gain": 0.062,
+      "pan": -0.13
+    },
+    {
+      "time": 4.88,
+      "midi": 49,
+      "kind": "piano",
+      "gain": 0.062,
+      "pan": -0.13
+    },
+    {
+      "time": 7.28,
+      "midi": 45,
+      "kind": "piano",
+      "gain": 0.062,
+      "pan": -0.13
+    },
+    {
+      "time": 9.68,
+      "midi": 52,
+      "kind": "piano",
+      "gain": 0.062,
+      "pan": -0.13
+    },
+    {
+      "time": 12.08,
+      "midi": 52,
+      "kind": "piano",
+      "gain": 0.062,
+      "pan": -0.13
+    },
+    {
+      "time": 1.56,
+      "midi": 83,
+      "kind": "glass",
+      "gain": 0.014,
+      "pan": 0.24
+    },
+    {
+      "time": 5.38,
+      "midi": 85,
+      "kind": "glass",
+      "gain": 0.016,
+      "pan": 0.24
+    },
+    {
+      "time": 9.22,
+      "midi": 80,
+      "kind": "glass",
+      "gain": 0.017,
+      "pan": 0.24
+    },
+    {
+      "time": 12.72,
+      "midi": 88,
+      "kind": "glass",
+      "gain": 0.018,
+      "pan": 0.24
+    }
+  ],
+  "score": "Original continuous E-major pentatonic phrase, overlapping modal piano, soft glass and synthesized wind; no samples.",
+  "end": "Natural instrumental decay with final 0.8-second cos² tail; exact zero endpoints."
+}

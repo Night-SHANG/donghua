@@ -1,0 +1,5 @@
+# Native spatial implementation
+Fully read official scenes/53_pixar.js. Reuses its documented native architecture (offscreen WebGLRenderer/preserveDrawingBuffer→Canvas drawImage), bundled Three revision 160, perspective camera, shared StandardMaterial, ACES and shadows. Does not copy film assets or appliance geometry.
+Original 861-vertex deforming leaf with 368 parameter-derived vein endpoints, original forest meshes/instances, seasonal crown/blossom/snow scale and color changes, global camera orbit/travel/retreat. 3D internal raster 1280×720; huashu output canvas1920×1080. No claim of native 1080p WebGL detail. No 2D fallback.
+SEASONS_LEAF_3D.state(t) pure deterministic scene contract. diagnostics() reads actual WebGL version/context, PerspectiveCamera, draw calls and triangles after draw. Browser preflight must prove geometry pixels exist before full render.
+901 state test proves finite continuous formulas and season evolution, not absence of foreground occlusion, depth clipping or artistic adequacy. Actual frames required; anticipate testing hero visibility/woodland density, material lighting and winter branches.
