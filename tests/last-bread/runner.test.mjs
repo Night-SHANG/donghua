@@ -54,3 +54,6 @@ test('views PNG path has no AAC or video encoder dependency',()=>{
  assert.equal(typeof runner.stagePreflight,'function');const before=process.env.PATH;
  try{process.env.PATH='/nonexistent';assert.deepEqual(runner.stagePreflight('breadViews',film,'/nonexistent-output'),{skipped:true,reason:'PNG views do not encode audio or video'});}finally{process.env.PATH=before;}
 });
+test('even frame timing counts report the statistical median rather than the upper middle',()=>{
+ assert.equal(runner.timingSummary([10,40,20,30],100).medianMs,25);
+});

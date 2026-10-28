@@ -35,7 +35,7 @@ export function planFrames(options,film) {
 export function timingSummary(ms,startupMs,encodeMs=0,chunks=6) {
  if(!ms.length||ms.some(x=>!Number.isFinite(x)||x<0)||!Number.isInteger(chunks)||chunks<1)throw new Error('Invalid timing input');
  const s=[...ms].sort((a,b)=>a-b),p95=s[Math.ceil(s.length*.95)-1];
- return {medianMs:s[Math.floor(s.length/2)],p95Ms:p95,maxMs:s.at(-1),startupMs,encodeMs,
+ return {medianMs:(s[Math.floor((s.length-1)/2)]+s[Math.floor(s.length/2)])/2,p95Ms:p95,maxMs:s.at(-1),startupMs,encodeMs,
  projectedChunks:chunks,projectionFrames:1440,headroom:1.3,projectedChunkUpperMs:Math.ceil((Math.ceil(1440/chunks)*p95+startupMs+encodeMs)*1.3),projectionOnly:true};
 }
 export function entryMetadata(loop) {
