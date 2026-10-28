@@ -1,8 +1,43 @@
 {
-  "schema":1,"phase":"preview","approvedPreviewCommit":null,
-  "composition":"RainLetter","fps":60,"durationInFrames":1800,"width":1920,"height":1080,
-  "keyframes":[120,240,420,570,690,810,1020,1140,1320,1590,1740],
-  "clips":[{"id":"umbrella","start":612,"endExclusive":750},{"id":"paper-window","start":1020,"endExclusive":1170}],
-  "finalDenseWindows":[{"id":"return-stamp","start":1500,"endExclusive":1680}],
-  "artifactByteCap":14000000
+  "schema": 1,
+  "phase": "final",
+  "approvedPreviewCommit": "4590b70877fcd86de4dd6a068685e229acdd627e",
+  "composition": "RainLetter",
+  "fps": 60,
+  "durationInFrames": 1800,
+  "width": 1920,
+  "height": 1080,
+  "keyframes": [
+    120,
+    240,
+    420,
+    570,
+    690,
+    810,
+    1020,
+    1140,
+    1320,
+    1590,
+    1740
+  ],
+  "clips": [
+    {
+      "id": "umbrella",
+      "start": 612,
+      "endExclusive": 750
+    },
+    {
+      "id": "paper-window",
+      "start": 1020,
+      "endExclusive": 1170
+    }
+  ],
+  "finalDenseWindows": [
+    {
+      "id": "return-stamp",
+      "start": 1500,
+      "endExclusive": 1680
+    }
+  ],
+  "artifactByteCap": 14000000
 }
