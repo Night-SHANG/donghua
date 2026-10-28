@@ -48,11 +48,11 @@ window.CAST=(()=>{
   if(!back&&who==='kokou'){boilSeed(id+'bow');drawPoly([[-8,-44],[0,-41],[8,-44],[8,-35],[0,-38],[-8,-35]],'#CC9A4D');}
   if(!back&&o.pose!=='push'&&o.pose!=='proud')arm(1);
   if(!back){
-   const faceX=profile?10:quarter?5:0,faceY=d.faceY;
+   const faceX=profile?3:quarter?3:0,faceY=d.faceY;
    // Light facial field keeps dark ink readable on indigo; same painted medium.
-   if(who==='kokou'){boilSeed(id+'facefield');paint(P([[faceX-16,faceY-12],[faceX+16,faceY-12],[faceX+17,faceY+12],[faceX-16,faceY+12]]),{wash:'#F1DEB7',fill:'#F1DEB7',fillOp:35,ink:null,bleed:.08,curv:.6});}
+   if(who==='kokou'){boilSeed(id+'facefield');const fw=profile?11:16;paint(P([[faceX-fw,faceY-12],[faceX+fw,faceY-12],[faceX+fw,faceY+12],[faceX-fw,faceY+12]]),{fill:'#F1DEB7',fillOp:255,tex:.12,border:.12,ink:null,bleed:.03,curv:.6});}
    const q=local([faceX,faceY]);push();translate(q[0]*u,q[1]*u);scale(sx*(profile?.6:quarter?.9:1),sy);
-   const emotion=feel(act.emotion,0);boilSeed(id+'face');push();translate(0,6*d.faceU*u);eyes(d.faceU*u,{...emotion,seed:17},sw,profile?[1]:[-1,1]);mouth(d.faceU*u,emotion.mouth,sw);pop();pop();
+   const emotion=feel(act.emotion,0);boilSeed(id+'face');push();translate(0,6*d.faceU*u);eyes(d.faceU*u,{...emotion,seed:17},sw,profile?[1]:[-1,1]);mouth(d.faceU*u,emotion.mouth||'flat',sw);pop();pop();
   }
   // In strong effort the hands are intentionally brought in front of the torso.
   if(o.pose==='push'||o.pose==='proud'){arm(-1,true);arm(1,true);}

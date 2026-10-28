@@ -9,9 +9,9 @@ LOOPS.duo_master=t=>{
 };
 function turnSheet(who){
  sheetGround(465);sheetGround(1005);
- ['front','quarter','profile','back'].forEach((view,i)=>CAST.draw(who,255+i*470,465,3.45,{view,pose:'neutral',id:who+'-'+view}));
+ ['front','quarter','profile','back'].forEach((view,i)=>CAST.draw(who,235+i*470,465,3.05,{view,pose:'neutral',id:who+'-'+view}));
  const poses=who==='kokou'?['anticipate','push','squash','proud']:['sneak','dash','stretch','smug'];
- poses.forEach((pose,i)=>CAST.draw(who,255+i*470,1005,3.2,{pose,id:who+'-'+pose}));
+ poses.forEach((pose,i)=>CAST.draw(who,235+i*470,1005,2.7,{pose,id:who+'-'+pose}));
 }
 LOOPS.kokou_sheet=t=>turnSheet('kokou');LOOPS.liuliu_sheet=t=>turnSheet('liuliu');
 for(const n of ['duo_master','kokou_sheet','liuliu_sheet'])LOOPS[n].len=1;
