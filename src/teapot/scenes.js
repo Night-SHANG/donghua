@@ -51,13 +51,18 @@
     inkLine([[-1600,1035],[3200,1035]],.7,'#967A64','charcoal',0);
     boilSeed('under-table');paint(rectPts(-1600,1120,4800,1000),{wash:'#C6C1AB',ink:null});
     for(let i=0;i<3;i++){boilSeed('woodgrain'+i);const y=895+i*42;inkLine([[-450,y],[120,y+3],[460,y-2]],.45,'#B29274','charcoal',.3);}
-    // Cropped plant frames the left edge; one pot and five broad leaves, never visual clutter.
-    boilSeed('pot');paint([[75,648],[220,648],[204,766],[95,766]],
-      {wash:'#C69279',fill:'#AB806A',fillOp:65,ink:'#967D69',sw:.65,curv:.1});
-    for(let i=0;i<5;i++) {
-      boilSeed('plant'+i);const x=105+i*29,y=600-Math.sin(i*.8)*95,a=-.85+i*.38;
-      inkLine([[150,650],[x,y]],.8,'#7A947E','ink',.4);
-      paint(ellPts(x,y,27,74,18,2,a),{wash:i%2?'#A8BA9C':'#91AD99',fill:'#789A85',fillOp:65,bleed:.15,ink:null});
+    // Upright background plant: symmetric pot, a single vertical stem and four attached leaves.
+    boilSeed('pot');paint([[80,648],[220,648],[202,766],[98,766]],
+      {wash:'#BEA38D',fill:'#A68E79',fillOp:48,ink:'#998873',sw:.6,curv:0});
+    boilSeed('pot-soil');paint(ellPts(150,650,59,5,18,0),
+      {wash:'#A2957D',fill:'#8F8D76',fillOp:40,ink:null});
+    boilSeed('plant-stem');inkLine([[150,650],[150,492]],.85,'#899984','ink',0);
+    for(const [i,y,side] of [[0,612,-1],[1,580,1],[2,548,-1],[3,518,1]]) {
+      boilSeed('plant-leaf'+i);
+      // Each pointed leaf begins and ends on its stem node; no floating ellipse or diagonal stalk.
+      paint([[150,y],[150+side*15,y-18],[150+side*43,y-24],
+        [150+side*33,y-5],[150+side*13,y+2]],
+        {wash:i%2?'#B1BCA2':'#A4B49E',fill:'#91A58F',fillOp:48,bleed:.1,ink:null,curv:.35});
     }
     camEnd();
   }
