@@ -1,6 +1,6 @@
 {
-  "stage": "preview",
-  "revision": "ep01-r2-camera-paper",
+  "stage": "full",
+  "revision": "ep01-full-r2-fixed",
   "times": [
     1,
     9.3,
