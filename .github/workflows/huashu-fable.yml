@@ -1,0 +1,149 @@
+name: Native huashu Fox and Stork
+run-name: Native huashu / ${{ github.ref_name }} / ${{ github.sha }}
+on:
+  push:
+    branches: ['feat/huashu-fox-stork', 'render/huashu-fox-stork', 'render/huashu-fox-stork-*']
+    paths:
+      - '.github/workflows/huashu-fable.yml'
+      - '.github/actions/setup-huashu/**'
+      - 'huashu/tools/ci.py'
+      - 'tests/test_huashu_ci.py'
+      - 'requirements-huashu-ci.txt'
+      - 'huashu/fox-stork/**'
+  workflow_dispatch:
+# Never cancel a reviewed or diagnostic render just because another commit arrives.
+concurrency:
+  group: native-huashu-${{ github.ref }}
+  cancel-in-progress: false
+permissions:
+  contents: read
+env:
+  PYTHONUNBUFFERED: '1'
+  PYTHONUTF8: '1'
+jobs:
+  plan:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    outputs:
+      mode: ${{ steps.plan.outputs.mode }}
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Test orchestration and validate exact frame ranges
+        run: python -m unittest discover -s tests -p test_huashu_ci.py -v
+      - name: Select smoke-only or previously reviewed final production
+        id: plan
+        run: python huashu/tools/ci.py matrix
+  smoke:
+    if: needs.plan.outputs.mode == 'smoke'
+    needs: plan
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: ./.github/actions/setup-huashu
+      - name: Native stills and representative five seconds only
+        run: python huashu/tools/ci.py smoke --out huashu-smoke
+      - name: Enforce upload cap even when a preceding render failed
+        id: artifact_size
+        if: always()
+        continue-on-error: true
+        run: python huashu/tools/ci.py check-size --out huashu-smoke
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.artifact_size.outcome == 'success'
+        with:
+          name: huashu-smoke-${{ github.sha }}-${{ github.run_attempt }}
+          path: huashu-smoke/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+  native-qa:
+    if: needs.plan.outputs.mode == 'final'
+    needs: plan
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: ./.github/actions/setup-huashu
+      - name: Native runtime, transitions, sampled determinism and framing
+        run: python huashu/tools/ci.py qa --out huashu-qa
+      - name: Enforce upload cap even when a preceding render failed
+        id: artifact_size
+        if: always()
+        continue-on-error: true
+        run: python huashu/tools/ci.py check-size --out huashu-qa
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.artifact_size.outcome == 'success'
+        with:
+          name: huashu-qa-${{ github.sha }}-${{ github.run_attempt }}
+          path: huashu-qa/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+  chunks:
+    if: needs.plan.outputs.mode == 'final'
+    needs: [plan, native-qa]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: ./.github/actions/setup-huashu
+        with:
+          build-audio: 'false'
+      - name: Exact global frame interval through unchanged native render.py
+        env:
+          PART: ${{ matrix.part }}
+        run: python huashu/tools/ci.py chunk --part "$PART" --out "huashu-part-$PART"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: huashu-part-${{ matrix.part }}-${{ github.sha }}-${{ github.run_attempt }}
+          path: huashu-part-${{ matrix.part }}/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+  assemble:
+    needs: [plan, native-qa, chunks]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: ./.github/actions/setup-huashu
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: huashu-part-*-${{ github.sha }}-${{ github.run_attempt }}
+          path: huashu-parts
+          merge-multiple: false
+      - name: Verify provenance, assemble exact frames, mux audio and measure film
+        run: python huashu/tools/ci.py assemble --out huashu-final
+      - name: Enforce upload cap even when a preceding render failed
+        id: artifact_size
+        if: always()
+        continue-on-error: true
+        run: python huashu/tools/ci.py check-size --out huashu-final
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.artifact_size.outcome == 'success'
+        with:
+          name: huashu-final-review-${{ github.sha }}-${{ github.run_attempt }}
+          path: huashu-final/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error

@@ -1,0 +1,419 @@
+{
+  "version": "1.0",
+  "status": "production_targets_pending_real_sprite_calibration",
+  "title": "狐狸和鹳",
+  "canvas": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "duration_s": 65,
+    "frames": 1950
+  },
+  "native": {
+    "engine": "huashu-art-motion",
+    "source_commit": "8a0d7d72ca65fcce6f8ba82c4a6c8dfe35b8422c",
+    "architecture": "ERAS+SCENES+shared world",
+    "grammar_principle": "storytime pose-hold-reaction",
+    "PUNCH": 0,
+    "remotion": false
+  },
+  "style": {
+    "name": "original cut-paper gouache storybook",
+    "palette": [
+      "#F3E8D0",
+      "#D88942",
+      "#A64D32",
+      "#657252",
+      "#342E27",
+      "#D6B36A"
+    ],
+    "direction_source": "assets/source/three-directions.png",
+    "chosen_direction": 1,
+    "native_material_apis": [
+      "PAINT.cut(pts, seed, step, amp)",
+      "PAINT.roughen(layer, [x0,y0,x1,y1], options)",
+      "CL.paperTile(key, base, options)",
+      "PAINT.cached(key,w,h,draw)"
+    ],
+    "texture_space": "object_local_seeded_cached",
+    "roughen_exclusions": [
+      "eyes",
+      "mouth",
+      "beak tip",
+      "contact silhouette"
+    ],
+    "screen_text": []
+  },
+  "characters": {
+    "fox": {
+      "design": "original orange fox, cream muzzle and tail tip, dark brown paws, no clothing",
+      "facing": "right",
+      "target_world_height": 600,
+      "neutral_foot_world": [
+        485,
+        930
+      ],
+      "required_semantic_roles": [
+        "neutral",
+        "host",
+        "lap",
+        "smug",
+        "sniff",
+        "blocked",
+        "lick_exterior",
+        "defeated"
+      ],
+      "prohibited": [
+        "blue/orange old mascot",
+        "author likeness",
+        "generic geometric person",
+        "props baked in sprite"
+      ]
+    },
+    "stork": {
+      "design": "original ivory stork, black wing tips, terracotta long narrow beak and thin legs, no clothing",
+      "facing": "left",
+      "target_world_height": 740,
+      "neutral_foot_world": [
+        1435,
+        930
+      ],
+      "required_semantic_roles": [
+        "neutral",
+        "polite",
+        "peck_vertical",
+        "peck_angled",
+        "deadpan",
+        "invite",
+        "dip_jar",
+        "satisfied"
+      ],
+      "prohibited": [
+        "shortened broad beak",
+        "props baked in sprite"
+      ]
+    }
+  },
+  "sprite_delivery": {
+    "root": "assets/characters",
+    "format": "PNG RGBA",
+    "recommended_cell_size": [
+      1024,
+      1024
+    ],
+    "pose_count_per_character": 8,
+    "alpha": "real transparent background; no checkerboard pixels",
+    "uniform_identity": true,
+    "frame_switch": "hard pose switch with motivated anticipation/recovery; no crossfade double faces",
+    "transform": "scale=target_world_height/neutral_ref_h; feet anchor stays planted; do not use each frame crop height",
+    "metadata_required": [
+      "file",
+      "sha256",
+      "canvas_px",
+      "crop_rect_in_source",
+      "ref_h",
+      "anchors.feet",
+      "anchors.eye",
+      "anchors.mouth or anchors.beak_tip",
+      "anchors.beak_root for stork",
+      "anchors.paw or anchors.wing",
+      "semantic_role",
+      "facing"
+    ],
+    "measurement_rule": "all pixel anchor values must be measured from delivered PNG; unknown stays null until measured; no invented measurements",
+    "semantic_role_mapping": "actual delivered names mapped explicitly to required roles; add pose if contact cannot be achieved",
+    "source_preservation": "retain original generation output and prompt/provenance; export derived frames to versioned path"
+  },
+  "world": {
+    "units": "1920x1080 scene pixels",
+    "origins": {
+      "homeA": [
+        0,
+        0
+      ],
+      "homeB": [
+        2800,
+        0
+      ]
+    },
+    "screen_axis": "fox left, stork right throughout",
+    "floor_y": 930,
+    "table": {
+      "x_range": [
+        420,
+        1500
+      ],
+      "surface_y": 710,
+      "apron_y_range": [
+        730,
+        806
+      ]
+    },
+    "vessel_x": [
+      730,
+      1190
+    ],
+    "geometry_status": "targets; single synchronized adjustment allowed after actual sprite measurements, never per-shot cheating"
+  },
+  "props": {
+    "plate": {
+      "outer_width": 300,
+      "inner_width": 260,
+      "liquid_y": 697,
+      "inner_floor_y": 701,
+      "liquid_depth": 4,
+      "material": "opaque glazed cream ceramic",
+      "food": "thin soup",
+      "layers": [
+        "rear rim",
+        "interior soup",
+        "contacting tongue or beak tip",
+        "front rim"
+      ]
+    },
+    "jar": {
+      "base_y": 710,
+      "mouth_y": 420,
+      "height": 290,
+      "inner_mouth_width": 46,
+      "outer_mouth_width": 66,
+      "neck_length": 120,
+      "food_y": 650,
+      "material": "opaque pale-sage glazed ceramic",
+      "food": "fish soup",
+      "layers": [
+        "rear mouth and interior opening",
+        "inserted upper beak",
+        "front mouth and opaque body",
+        "external contacting tongue/paw as appropriate"
+      ]
+    },
+    "compatibility": {
+      "stork_beak_width_at_rim_max": 26,
+      "fox_muzzle_effective_width_min": 95,
+      "fox_nose_insertion_max": 14,
+      "mouth_to_food_remaining_min": 200
+    }
+  },
+  "contact_validation": {
+    "contact_anchor_error_world_px_max": 4,
+    "locked_foot_drift_world_px_max": 2,
+    "vessel_table_gap_world_px_max": 1,
+    "must_not": [
+      "beak through ceramic wall",
+      "fox muzzle inside narrow neck",
+      "food reaching fox on exterior lick",
+      "successful stork swallow in dinner one",
+      "per-shot vessel widening",
+      "entire actor nonuniform stretch to make contact",
+      "reset soup between cuts"
+    ],
+    "calibration": "measure real anchors; maintain fixed neutral ref_h; calibrate pose and shared staging together; regenerate incompatible pose rather than slide feet"
+  },
+  "shots": [
+    {
+      "id": "s01_serve",
+      "start": 0,
+      "end": 5,
+      "duration": 5,
+      "scene": "scenes/s01_serve.js",
+      "home": "A",
+      "contact_and_occlusion_spec": "镜头表.md#逐镜接触、锚点、遮挡与声音落点"
+    },
+    {
+      "id": "s02_fox_lap",
+      "start": 5,
+      "end": 10,
+      "duration": 5,
+      "scene": "scenes/s02_fox_lap.js",
+      "home": "A",
+      "contact_and_occlusion_spec": "镜头表.md#逐镜接触、锚点、遮挡与声音落点"
+    },
+    {
+      "id": "s03_stork_peck",
+      "start": 10,
+      "end": 15,
+      "duration": 5,
+      "scene": "scenes/s03_stork_peck.js",
+      "home": "A",
+      "contact_and_occlusion_spec": "镜头表.md#逐镜接触、锚点、遮挡与声音落点"
+    },
+    {
+      "id": "s04_polite_reaction",
+      "start": 15,
+      "end": 19,
+      "duration": 4,
+      "scene": "scenes/s04_polite_reaction.js",
+      "home": "A",
+      "contact_and_occlusion_spec": "镜头表.md#逐镜接触、锚点、遮挡与声音落点"
+    },
+    {
+      "id": "s05_angled_fail",
+      "start": 19,
+      "end": 24,
+      "duration": 5,
+      "scene": "scenes/s05_angled_fail.js",
+      "home": "A",
+      "contact_and_occlusion_spec": "镜头表.md#逐镜接触、锚点、遮挡与声音落点"
+    },
+    {
+      "id": "s06_fox_finish",
+      "start": 24,
+      "end": 28,
+      "duration": 4,
+      "scene": "scenes/s06_fox_finish.js",
+      "home": "A",
+      "contact_and_occlusion_spec": "镜头表.md#逐镜接触、锚点、遮挡与声音落点"
+    },
+    {
+      "id": "s07_return_invite",
+      "start": 28,
+      "end": 33,
+      "duration": 5,
+      "scene": "scenes/s07_return_invite.js",
+      "home": "travel",
+      "contact_and_occlusion_spec": "镜头表.md#逐镜接触、锚点、遮挡与声音落点"
+    },
+    {
+      "id": "s08_jars",
+      "start": 33,
+      "end": 38,
+      "duration": 5,
+      "scene": "scenes/s08_jars.js",
+      "home": "B",
+      "contact_and_occlusion_spec": "镜头表.md#逐镜接触、锚点、遮挡与声音落点"
+    },
+    {
+      "id": "s09_stork_drink",
+      "start": 38,
+      "end": 43,
+      "duration": 5,
+      "scene": "scenes/s09_stork_drink.js",
+      "home": "B",
+      "contact_and_occlusion_spec": "镜头表.md#逐镜接触、锚点、遮挡与声音落点"
+    },
+    {
+      "id": "s10_fox_blocked",
+      "start": 43,
+      "end": 48,
+      "duration": 5,
+      "scene": "scenes/s10_fox_blocked.js",
+      "home": "B",
+      "contact_and_occlusion_spec": "镜头表.md#逐镜接触、锚点、遮挡与声音落点"
+    },
+    {
+      "id": "s11_fox_lick",
+      "start": 48,
+      "end": 53,
+      "duration": 5,
+      "scene": "scenes/s11_fox_lick.js",
+      "home": "B",
+      "contact_and_occlusion_spec": "镜头表.md#逐镜接触、锚点、遮挡与声音落点"
+    },
+    {
+      "id": "s12_deadpan",
+      "start": 53,
+      "end": 57,
+      "duration": 4,
+      "scene": "scenes/s12_deadpan.js",
+      "home": "B",
+      "contact_and_occlusion_spec": "镜头表.md#逐镜接触、锚点、遮挡与声音落点"
+    },
+    {
+      "id": "s13_fox_realizes",
+      "start": 57,
+      "end": 61,
+      "duration": 4,
+      "scene": "scenes/s13_fox_realizes.js",
+      "home": "B",
+      "contact_and_occlusion_spec": "镜头表.md#逐镜接触、锚点、遮挡与声音落点"
+    },
+    {
+      "id": "s14_final",
+      "start": 61,
+      "end": 65,
+      "duration": 4,
+      "scene": "scenes/s14_final.js",
+      "home": "B",
+      "contact_and_occlusion_spec": "镜头表.md#逐镜接触、锚点、遮挡与声音落点"
+    }
+  ],
+  "key_events_s": {
+    "plate_slide": 1.2,
+    "plate_set": 2.0,
+    "fox_laps": [
+      6.2,
+      6.65,
+      7.1
+    ],
+    "stork_tip_hits_plate": 12.1,
+    "stork_tip_lift": 13.2,
+    "angled_beak_rim_contact": 21.0,
+    "soup_drop": 21.35,
+    "fox_last_lap": 24.8,
+    "stork_invite": 28.8,
+    "fox_accepts": 29.9,
+    "walk_span": [
+      31.2,
+      32.8
+    ],
+    "jars_set": [
+      34.2,
+      34.55
+    ],
+    "stork_beak_enters": 39.35,
+    "stork_gets_food": 40.2,
+    "stork_lifts": 41.5,
+    "fox_sniff": 44.0,
+    "fox_muzzle_blocked": 45.1,
+    "fox_recoil": 45.65,
+    "fox_licks_exterior": 49.4,
+    "fox_empty_tongue_returns": 50.3,
+    "stork_deadpan": 54.1,
+    "fox_ears_down": 58.7,
+    "last_stork_sip": 62.1,
+    "fox_belly_growl": 63.0,
+    "final_hold": [
+      63.5,
+      65
+    ]
+  },
+  "audio": {
+    "duration_s": 65,
+    "speech": false,
+    "source": "original local synthesis; no third-party samples",
+    "event_source": "key_events_s and 镜头表.md",
+    "quiet_after_contacts_s": 0.6,
+    "final_hold_s": 1.5
+  },
+  "rights": {
+    "story_url": "https://www.read.gov/aesop/016.html",
+    "rights_url": "https://www.read.gov/aesop/about.html",
+    "verified_scope": "1919 underlying book considered public domain in the United States",
+    "not_copied": [
+      "modern site animations",
+      "recordings",
+      "illustrations",
+      "modern translations",
+      "modern film character designs"
+    ],
+    "caveat": "No global public-domain guarantee; newly made assets retain separate provenance."
+  },
+  "approval": "User explicitly delegated creative decisions and requested direct execution; ordinary creative decisions do not wait for approval.",
+  "verification_status": {
+    "storyboard_lint": {
+      "status": "passed_green",
+      "exit_code": 0,
+      "shots": 14,
+      "duration_s": 65,
+      "text_led_shots": 0,
+      "evidence": "planning/storyboard-lint.txt",
+      "scope": "storyboard lexical/heuristic checks, not visual proof"
+    },
+    "sprites": "in_progress",
+    "contact_render": "not_yet_run",
+    "full_native_render": "not_yet_run",
+    "audio": "in_progress",
+    "visual_review": "not_yet_run"
+  }
+}

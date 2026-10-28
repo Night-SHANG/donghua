@@ -1,0 +1,1439 @@
+{
+  "title": "Fox and Stork — a miniature in F",
+  "duration": 65,
+  "sample_rate": 48000,
+  "channels": 2,
+  "seed": 20261028,
+  "beat_grid": {
+    "bpm": 96,
+    "quarter_seconds": 0.625,
+    "note": "Phrases restart at narrative beats; Foley uses locked absolute visual action times."
+  },
+  "provenance": "Original composition and procedural instrument/Foley synthesis. No external samples, no narration or dialogue, no media APIs.",
+  "source": "synthesize.py",
+  "mix_file": "master.wav",
+  "compressed_mix_file": "music.m4a",
+  "important": "music.m4a contains the full music + Foley mix; do not layer it on top of master.wav.",
+  "stems": [
+    "music-only.wav",
+    "foley-only.wav"
+  ],
+  "shots": [
+    {
+      "start": 0,
+      "end": 5,
+      "id": "serve"
+    },
+    {
+      "start": 5,
+      "end": 10,
+      "id": "fox_lap"
+    },
+    {
+      "start": 10,
+      "end": 15,
+      "id": "stork_peck"
+    },
+    {
+      "start": 15,
+      "end": 19,
+      "id": "polite_reaction"
+    },
+    {
+      "start": 19,
+      "end": 24,
+      "id": "angled_fail"
+    },
+    {
+      "start": 24,
+      "end": 28,
+      "id": "fox_finish"
+    },
+    {
+      "start": 28,
+      "end": 33,
+      "id": "invitation"
+    },
+    {
+      "start": 33,
+      "end": 38,
+      "id": "jars"
+    },
+    {
+      "start": 38,
+      "end": 43,
+      "id": "stork_drink"
+    },
+    {
+      "start": 43,
+      "end": 48,
+      "id": "fox_blocked"
+    },
+    {
+      "start": 48,
+      "end": 53,
+      "id": "fox_lick"
+    },
+    {
+      "start": 53,
+      "end": 57,
+      "id": "deadpan"
+    },
+    {
+      "start": 57,
+      "end": 61,
+      "id": "fox_realizes"
+    },
+    {
+      "start": 61,
+      "end": 65,
+      "id": "final"
+    }
+  ],
+  "quiet_holds": [
+    {
+      "start": 12.18,
+      "end": 12.7,
+      "note": "No new music onset; tiny natural contact tails may decay at the boundary."
+    },
+    {
+      "start": 17.0,
+      "end": 17.8,
+      "note": "No new music onset; tiny natural contact tails may decay at the boundary."
+    },
+    {
+      "start": 45.2,
+      "end": 45.8,
+      "note": "No new music onset; tiny natural contact tails may decay at the boundary."
+    },
+    {
+      "start": 50.3,
+      "end": 51.0,
+      "note": "No new music onset; tiny natural contact tails may decay at the boundary."
+    },
+    {
+      "start": 60.1,
+      "end": 61.0,
+      "note": "No new music onset; tiny natural contact tails may decay at the boundary."
+    },
+    {
+      "start": 63.5,
+      "end": 65.0,
+      "note": "No new music onset; tiny natural contact tails may decay at the boundary."
+    }
+  ],
+  "music_notes": [
+    {
+      "time": 0.2,
+      "pitch": "F3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.03,
+      "pan": -0.3
+    },
+    {
+      "time": 0.226,
+      "pitch": "A3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.03,
+      "pan": -0.13999999999999999
+    },
+    {
+      "time": 0.25,
+      "pitch": "A4",
+      "instrument": "pizz",
+      "duration": 0.72,
+      "gain": 0.1,
+      "pan": -0.14
+    },
+    {
+      "time": 0.252,
+      "pitch": "D4",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.03,
+      "pan": 0.020000000000000018
+    },
+    {
+      "time": 0.875,
+      "pitch": "C5",
+      "instrument": "pizz",
+      "duration": 0.54,
+      "gain": 0.1,
+      "pan": -0.14
+    },
+    {
+      "time": 1.5,
+      "pitch": "D5",
+      "instrument": "pizz",
+      "duration": 0.76,
+      "gain": 0.1,
+      "pan": -0.14
+    },
+    {
+      "time": 2.4375,
+      "pitch": "C5",
+      "instrument": "pizz",
+      "duration": 0.63,
+      "gain": 0.1,
+      "pan": -0.14
+    },
+    {
+      "time": 2.75,
+      "pitch": "C3",
+      "instrument": "bass",
+      "duration": 1.0,
+      "gain": 0.06,
+      "pan": -0.16
+    },
+    {
+      "time": 3.375,
+      "pitch": "A4",
+      "instrument": "pizz",
+      "duration": 0.9,
+      "gain": 0.1,
+      "pan": -0.14
+    },
+    {
+      "time": 3.43,
+      "pitch": "G3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.023,
+      "pan": -0.3
+    },
+    {
+      "time": 3.456,
+      "pitch": "Bb3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.023,
+      "pan": -0.13999999999999999
+    },
+    {
+      "time": 3.482,
+      "pitch": "E4",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.023,
+      "pan": 0.020000000000000018
+    },
+    {
+      "time": 5.08,
+      "pitch": "F3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.033,
+      "pan": -0.3
+    },
+    {
+      "time": 5.106,
+      "pitch": "A3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.033,
+      "pan": -0.13999999999999999
+    },
+    {
+      "time": 5.132,
+      "pitch": "C4",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.033,
+      "pan": 0.020000000000000018
+    },
+    {
+      "time": 5.15,
+      "pitch": "A4",
+      "instrument": "pizz",
+      "duration": 0.6,
+      "gain": 0.082,
+      "pan": -0.14
+    },
+    {
+      "time": 5.775,
+      "pitch": "C5",
+      "instrument": "pizz",
+      "duration": 0.54,
+      "gain": 0.082,
+      "pan": -0.14
+    },
+    {
+      "time": 6.4,
+      "pitch": "D5",
+      "instrument": "pizz",
+      "duration": 0.72,
+      "gain": 0.082,
+      "pan": -0.14
+    },
+    {
+      "time": 7.3375,
+      "pitch": "A4",
+      "instrument": "pizz",
+      "duration": 0.7,
+      "gain": 0.082,
+      "pan": -0.14
+    },
+    {
+      "time": 7.6,
+      "pitch": "C3",
+      "instrument": "bass",
+      "duration": 0.9,
+      "gain": 0.043,
+      "pan": -0.16
+    },
+    {
+      "time": 8.2,
+      "pitch": "A3",
+      "instrument": "pizz",
+      "duration": 0.48,
+      "gain": 0.033,
+      "pan": -0.14
+    },
+    {
+      "time": 8.275,
+      "pitch": "G4",
+      "instrument": "pizz",
+      "duration": 0.61,
+      "gain": 0.082,
+      "pan": -0.14
+    },
+    {
+      "time": 8.85,
+      "pitch": "A3",
+      "instrument": "harp",
+      "duration": 0.9,
+      "gain": 0.029,
+      "pan": 0.15
+    },
+    {
+      "time": 8.9,
+      "pitch": "F4",
+      "instrument": "pizz",
+      "duration": 0.8,
+      "gain": 0.082,
+      "pan": -0.14
+    },
+    {
+      "time": 10.04,
+      "pitch": "D3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.023,
+      "pan": -0.3
+    },
+    {
+      "time": 10.065999999999999,
+      "pitch": "A3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.023,
+      "pan": -0.13999999999999999
+    },
+    {
+      "time": 10.091999999999999,
+      "pitch": "F4",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.023,
+      "pan": 0.020000000000000018
+    },
+    {
+      "time": 10.4,
+      "pitch": "A4",
+      "instrument": "reed",
+      "duration": 0.71,
+      "gain": 0.055,
+      "pan": 0.19
+    },
+    {
+      "time": 11.1,
+      "pitch": "C5",
+      "instrument": "reed",
+      "duration": 0.65,
+      "gain": 0.051,
+      "pan": 0.19
+    },
+    {
+      "time": 13.13,
+      "pitch": "B4",
+      "instrument": "reed",
+      "duration": 0.5,
+      "gain": 0.038,
+      "pan": 0.19
+    },
+    {
+      "time": 14.0,
+      "pitch": "A4",
+      "instrument": "harp",
+      "duration": 0.62,
+      "gain": 0.035,
+      "pan": 0.03
+    },
+    {
+      "time": 15.12,
+      "pitch": "G3",
+      "instrument": "bass",
+      "duration": 0.8,
+      "gain": 0.032,
+      "pan": -0.16
+    },
+    {
+      "time": 15.65,
+      "pitch": "G4",
+      "instrument": "reed",
+      "duration": 0.61,
+      "gain": 0.042,
+      "pan": 0.15
+    },
+    {
+      "time": 16.4,
+      "pitch": "F4",
+      "instrument": "reed",
+      "duration": 0.61,
+      "gain": 0.034,
+      "pan": 0.15
+    },
+    {
+      "time": 19.12,
+      "pitch": "G3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.021,
+      "pan": -0.3
+    },
+    {
+      "time": 19.146,
+      "pitch": "Bb3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.021,
+      "pan": -0.13999999999999999
+    },
+    {
+      "time": 19.172,
+      "pitch": "D4",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.021,
+      "pan": 0.020000000000000018
+    },
+    {
+      "time": 19.62,
+      "pitch": "Bb4",
+      "instrument": "pizz",
+      "duration": 0.5,
+      "gain": 0.053,
+      "pan": -0.16
+    },
+    {
+      "time": 20.25,
+      "pitch": "A4",
+      "instrument": "pizz",
+      "duration": 0.46,
+      "gain": 0.049,
+      "pan": -0.16
+    },
+    {
+      "time": 22.53,
+      "pitch": "G4",
+      "instrument": "reed",
+      "duration": 0.62,
+      "gain": 0.033,
+      "pan": 0.14
+    },
+    {
+      "time": 23.22,
+      "pitch": "E4",
+      "instrument": "harp",
+      "duration": 0.62,
+      "gain": 0.028,
+      "pan": -0.16
+    },
+    {
+      "time": 24.05,
+      "pitch": "C3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.022,
+      "pan": -0.3
+    },
+    {
+      "time": 24.076,
+      "pitch": "G3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.022,
+      "pan": -0.13999999999999999
+    },
+    {
+      "time": 24.102,
+      "pitch": "Bb3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.022,
+      "pan": 0.020000000000000018
+    },
+    {
+      "time": 24.32,
+      "pitch": "G4",
+      "instrument": "pizz",
+      "duration": 0.5,
+      "gain": 0.054,
+      "pan": -0.16
+    },
+    {
+      "time": 25.62,
+      "pitch": "E4",
+      "instrument": "pizz",
+      "duration": 0.52,
+      "gain": 0.04,
+      "pan": -0.16
+    },
+    {
+      "time": 26.8,
+      "pitch": "D4",
+      "instrument": "harp",
+      "duration": 0.55,
+      "gain": 0.042,
+      "pan": 0.16
+    },
+    {
+      "time": 27.38,
+      "pitch": "G4",
+      "instrument": "harp",
+      "duration": 0.5,
+      "gain": 0.046,
+      "pan": 0.16
+    },
+    {
+      "time": 28.05,
+      "pitch": "F3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.027,
+      "pan": -0.3
+    },
+    {
+      "time": 28.076,
+      "pitch": "A3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.027,
+      "pan": -0.13999999999999999
+    },
+    {
+      "time": 28.102,
+      "pitch": "D4",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.027,
+      "pan": 0.020000000000000018
+    },
+    {
+      "time": 28.25,
+      "pitch": "A4",
+      "instrument": "flute",
+      "duration": 0.66,
+      "gain": 0.052,
+      "pan": 0.18
+    },
+    {
+      "time": 28.875,
+      "pitch": "C5",
+      "instrument": "flute",
+      "duration": 0.64,
+      "gain": 0.052,
+      "pan": 0.18
+    },
+    {
+      "time": 29.5,
+      "pitch": "D5",
+      "instrument": "flute",
+      "duration": 0.84,
+      "gain": 0.052,
+      "pan": 0.18
+    },
+    {
+      "time": 30.4375,
+      "pitch": "C5",
+      "instrument": "flute",
+      "duration": 0.78,
+      "gain": 0.052,
+      "pan": 0.18
+    },
+    {
+      "time": 30.6,
+      "pitch": "F3",
+      "instrument": "pizz",
+      "duration": 0.43,
+      "gain": 0.045,
+      "pan": -0.18
+    },
+    {
+      "time": 31.225,
+      "pitch": "A3",
+      "instrument": "pizz",
+      "duration": 0.43,
+      "gain": 0.045,
+      "pan": -0.18
+    },
+    {
+      "time": 31.375,
+      "pitch": "A4",
+      "instrument": "flute",
+      "duration": 0.8,
+      "gain": 0.052,
+      "pan": 0.18
+    },
+    {
+      "time": 31.85,
+      "pitch": "C4",
+      "instrument": "pizz",
+      "duration": 0.43,
+      "gain": 0.045,
+      "pan": -0.18
+    },
+    {
+      "time": 32.475,
+      "pitch": "F4",
+      "instrument": "pizz",
+      "duration": 0.43,
+      "gain": 0.045,
+      "pan": -0.18
+    },
+    {
+      "time": 33.1,
+      "pitch": "Bb2",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.028,
+      "pan": -0.3
+    },
+    {
+      "time": 33.126000000000005,
+      "pitch": "F3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.028,
+      "pan": -0.13999999999999999
+    },
+    {
+      "time": 33.152,
+      "pitch": "D4",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.028,
+      "pan": 0.020000000000000018
+    },
+    {
+      "time": 33.38,
+      "pitch": "D5",
+      "instrument": "flute",
+      "duration": 0.72,
+      "gain": 0.05,
+      "pan": 0.18
+    },
+    {
+      "time": 34.005,
+      "pitch": "C5",
+      "instrument": "flute",
+      "duration": 0.64,
+      "gain": 0.05,
+      "pan": 0.18
+    },
+    {
+      "time": 34.9425,
+      "pitch": "A4",
+      "instrument": "flute",
+      "duration": 0.83,
+      "gain": 0.05,
+      "pan": 0.18
+    },
+    {
+      "time": 35.6,
+      "pitch": "F3",
+      "instrument": "bass",
+      "duration": 1.0,
+      "gain": 0.036,
+      "pan": -0.16
+    },
+    {
+      "time": 35.88,
+      "pitch": "F4",
+      "instrument": "flute",
+      "duration": 0.91,
+      "gain": 0.05,
+      "pan": 0.18
+    },
+    {
+      "time": 37.13,
+      "pitch": "G4",
+      "instrument": "flute",
+      "duration": 0.8,
+      "gain": 0.05,
+      "pan": 0.18
+    },
+    {
+      "time": 38.06,
+      "pitch": "F3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.026,
+      "pan": -0.3
+    },
+    {
+      "time": 38.086000000000006,
+      "pitch": "A3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.026,
+      "pan": -0.13999999999999999
+    },
+    {
+      "time": 38.112,
+      "pitch": "C4",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.026,
+      "pan": 0.020000000000000018
+    },
+    {
+      "time": 38.3,
+      "pitch": "A4",
+      "instrument": "flute",
+      "duration": 0.88,
+      "gain": 0.047,
+      "pan": 0.18
+    },
+    {
+      "time": 39.2375,
+      "pitch": "C5",
+      "instrument": "flute",
+      "duration": 0.98,
+      "gain": 0.047,
+      "pan": 0.18
+    },
+    {
+      "time": 40.4875,
+      "pitch": "F5",
+      "instrument": "flute",
+      "duration": 0.8,
+      "gain": 0.047,
+      "pan": 0.18
+    },
+    {
+      "time": 40.7,
+      "pitch": "D3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.035,
+      "pan": -0.16
+    },
+    {
+      "time": 41.425,
+      "pitch": "E5",
+      "instrument": "flute",
+      "duration": 0.73,
+      "gain": 0.047,
+      "pan": 0.18
+    },
+    {
+      "time": 42.05,
+      "pitch": "D5",
+      "instrument": "flute",
+      "duration": 0.96,
+      "gain": 0.047,
+      "pan": 0.18
+    },
+    {
+      "time": 43.08,
+      "pitch": "G3",
+      "instrument": "bass",
+      "duration": 0.62,
+      "gain": 0.033,
+      "pan": -0.16
+    },
+    {
+      "time": 43.39,
+      "pitch": "A4",
+      "instrument": "pizz",
+      "duration": 0.48,
+      "gain": 0.053,
+      "pan": -0.16
+    },
+    {
+      "time": 44.04,
+      "pitch": "Bb4",
+      "instrument": "pizz",
+      "duration": 0.44,
+      "gain": 0.047,
+      "pan": -0.16
+    },
+    {
+      "time": 46.18,
+      "pitch": "A4",
+      "instrument": "reed",
+      "duration": 0.66,
+      "gain": 0.031,
+      "pan": 0.15
+    },
+    {
+      "time": 47.1,
+      "pitch": "F4",
+      "instrument": "harp",
+      "duration": 0.69,
+      "gain": 0.025,
+      "pan": -0.16
+    },
+    {
+      "time": 48.12,
+      "pitch": "D3",
+      "instrument": "bass",
+      "duration": 0.67,
+      "gain": 0.029,
+      "pan": -0.16
+    },
+    {
+      "time": 48.5,
+      "pitch": "A4",
+      "instrument": "pizz",
+      "duration": 0.48,
+      "gain": 0.039,
+      "pan": -0.16
+    },
+    {
+      "time": 49.12,
+      "pitch": "G4",
+      "instrument": "pizz",
+      "duration": 0.45,
+      "gain": 0.035,
+      "pan": -0.16
+    },
+    {
+      "time": 53.11,
+      "pitch": "F3",
+      "instrument": "bass",
+      "duration": 0.58,
+      "gain": 0.026,
+      "pan": -0.16
+    },
+    {
+      "time": 54.08,
+      "pitch": "E4",
+      "instrument": "reed",
+      "duration": 0.66,
+      "gain": 0.03,
+      "pan": 0.13
+    },
+    {
+      "time": 57.04,
+      "pitch": "Bb2",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.018,
+      "pan": -0.3
+    },
+    {
+      "time": 57.066,
+      "pitch": "F3",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.018,
+      "pan": -0.13999999999999999
+    },
+    {
+      "time": 57.092,
+      "pitch": "D4",
+      "instrument": "harp",
+      "duration": 1.1,
+      "gain": 0.018,
+      "pan": 0.020000000000000018
+    },
+    {
+      "time": 57.15,
+      "pitch": "C5",
+      "instrument": "reed",
+      "duration": 0.81,
+      "gain": 0.036,
+      "pan": 0.18
+    },
+    {
+      "time": 58.7,
+      "pitch": "A4",
+      "instrument": "reed",
+      "duration": 0.64,
+      "gain": 0.036,
+      "pan": 0.18
+    },
+    {
+      "time": 58.7,
+      "pitch": "D3",
+      "instrument": "harp",
+      "duration": 0.88,
+      "gain": 0.028,
+      "pan": -0.16
+    },
+    {
+      "time": 59.35,
+      "pitch": "F4",
+      "instrument": "reed",
+      "duration": 0.7,
+      "gain": 0.032,
+      "pan": 0.18
+    },
+    {
+      "time": 59.62,
+      "pitch": "C3",
+      "instrument": "harp",
+      "duration": 0.65,
+      "gain": 0.018,
+      "pan": -0.3
+    },
+    {
+      "time": 59.646,
+      "pitch": "E3",
+      "instrument": "harp",
+      "duration": 0.65,
+      "gain": 0.018,
+      "pan": -0.13999999999999999
+    },
+    {
+      "time": 59.672,
+      "pitch": "Bb3",
+      "instrument": "harp",
+      "duration": 0.65,
+      "gain": 0.018,
+      "pan": 0.020000000000000018
+    },
+    {
+      "time": 61.07,
+      "pitch": "F3",
+      "instrument": "harp",
+      "duration": 1.3,
+      "gain": 0.023,
+      "pan": -0.3
+    },
+    {
+      "time": 61.096000000000004,
+      "pitch": "A3",
+      "instrument": "harp",
+      "duration": 1.3,
+      "gain": 0.023,
+      "pan": -0.13999999999999999
+    },
+    {
+      "time": 61.122,
+      "pitch": "C4",
+      "instrument": "harp",
+      "duration": 1.3,
+      "gain": 0.023,
+      "pan": 0.020000000000000018
+    },
+    {
+      "time": 61.18,
+      "pitch": "A4",
+      "instrument": "flute",
+      "duration": 0.85,
+      "gain": 0.038,
+      "pan": 0.15
+    },
+    {
+      "time": 62.01,
+      "pitch": "F4",
+      "instrument": "harp",
+      "duration": 1.08,
+      "gain": 0.045,
+      "pan": 0.03
+    },
+    {
+      "time": 62.58,
+      "pitch": "F3",
+      "instrument": "bass",
+      "duration": 0.75,
+      "gain": 0.028,
+      "pan": -0.16
+    }
+  ],
+  "foley": [
+    {
+      "time": 1.2,
+      "end": 1.86,
+      "kind": "plate_slide",
+      "description": "浅盘沿木桌轻滑",
+      "gain": 0.026,
+      "pan": -0.12
+    },
+    {
+      "time": 2.0,
+      "end": 2.47,
+      "kind": "plate_place",
+      "description": "浅盘落定：闷底、短陶瓷尾",
+      "gain": 0.087,
+      "pan": -0.1
+    },
+    {
+      "time": 6.2,
+      "end": 6.42,
+      "kind": "lap",
+      "description": "狐狸轻舔浅汤",
+      "gain": 0.06,
+      "pan": -0.16
+    },
+    {
+      "time": 6.65,
+      "end": 6.87,
+      "kind": "lap",
+      "description": "狐狸轻舔浅汤",
+      "gain": 0.052,
+      "pan": -0.16
+    },
+    {
+      "time": 7.1,
+      "end": 7.32,
+      "kind": "lap",
+      "description": "狐狸轻舔浅汤",
+      "gain": 0.054,
+      "pan": -0.16
+    },
+    {
+      "time": 8.2,
+      "end": 8.4,
+      "kind": "cloth",
+      "description": "得意抬头的微小毛发摩擦",
+      "gain": 0.011,
+      "pan": -0.15
+    },
+    {
+      "time": 12.1,
+      "end": 12.28,
+      "kind": "beak_tap",
+      "description": "鹳喙触浅盘：短干 tik 后留白",
+      "gain": 0.065,
+      "pan": 0.17
+    },
+    {
+      "time": 13.2,
+      "end": 13.35,
+      "kind": "drop",
+      "description": "湿喙尖带起一小滴",
+      "gain": 0.019,
+      "pan": 0.16
+    },
+    {
+      "time": 21.0,
+      "end": 21.18,
+      "kind": "beak_tap",
+      "description": "侧向喙轻触盘沿",
+      "gain": 0.048,
+      "pan": 0.16
+    },
+    {
+      "time": 21.35,
+      "end": 21.5,
+      "kind": "drop",
+      "description": "一点汤滴回浅盘",
+      "gain": 0.036,
+      "pan": 0.1
+    },
+    {
+      "time": 24.8,
+      "end": 25.02,
+      "kind": "lap",
+      "description": "狐狸舔完最后一口",
+      "gain": 0.051,
+      "pan": -0.14
+    },
+    {
+      "time": 25.5,
+      "end": 26.16,
+      "kind": "plate_slide",
+      "description": "空盘的一点干摩擦",
+      "gain": 0.013,
+      "pan": -0.1
+    },
+    {
+      "time": 28.8,
+      "end": 29.12,
+      "kind": "cloth",
+      "description": "鹳翼礼貌发出回请姿态",
+      "gain": 0.019,
+      "pan": 0.16
+    },
+    {
+      "time": 31.2,
+      "end": 31.36,
+      "kind": "step",
+      "description": "过场轻步，非节拍鼓",
+      "gain": 0.02,
+      "pan": -0.2
+    },
+    {
+      "time": 31.58,
+      "end": 31.74,
+      "kind": "step",
+      "description": "过场轻步，非节拍鼓",
+      "gain": 0.02,
+      "pan": 0.15
+    },
+    {
+      "time": 31.96,
+      "end": 32.12,
+      "kind": "step",
+      "description": "过场轻步，非节拍鼓",
+      "gain": 0.02,
+      "pan": -0.15
+    },
+    {
+      "time": 32.34,
+      "end": 32.5,
+      "kind": "step",
+      "description": "过场轻步，非节拍鼓",
+      "gain": 0.02,
+      "pan": 0.14
+    },
+    {
+      "time": 32.72,
+      "end": 32.88,
+      "kind": "step",
+      "description": "过场轻步，非节拍鼓",
+      "gain": 0.02,
+      "pan": -0.08
+    },
+    {
+      "time": 34.2,
+      "end": 34.7,
+      "kind": "vessel_set",
+      "description": "第一只长颈瓶落桌",
+      "gain": 0.082,
+      "pan": 0.18
+    },
+    {
+      "time": 34.55,
+      "end": 35.05,
+      "kind": "vessel_set",
+      "description": "第二只长颈瓶落桌",
+      "gain": 0.073,
+      "pan": -0.16
+    },
+    {
+      "time": 36.2,
+      "end": 36.5,
+      "kind": "sniff",
+      "description": "狐狸闻香的轻鼻息",
+      "gain": 0.026,
+      "pan": -0.16
+    },
+    {
+      "time": 39.35,
+      "end": 39.53,
+      "kind": "cloth",
+      "description": "细喙擦入瓶口：轻干擦，不提前出现取食水声",
+      "gain": 0.016,
+      "pan": 0.19
+    },
+    {
+      "time": 40.2,
+      "end": 40.7,
+      "kind": "sip",
+      "description": "鹳顺畅取食，细水声",
+      "gain": 0.044,
+      "pan": 0.19
+    },
+    {
+      "time": 41.8,
+      "end": 41.98,
+      "kind": "swallow",
+      "description": "41.5抬头后很轻的吞咽",
+      "gain": 0.023,
+      "pan": 0.17
+    },
+    {
+      "time": 44.0,
+      "end": 44.3,
+      "kind": "sniff",
+      "description": "狐狸试探瓶口香气",
+      "gain": 0.032,
+      "pan": -0.17
+    },
+    {
+      "time": 45.1,
+      "end": 45.35,
+      "kind": "muzzle_bump",
+      "description": "口鼻止于窄瓶口，软碰不是受伤",
+      "gain": 0.055,
+      "pan": -0.17
+    },
+    {
+      "time": 49.4,
+      "end": 49.58,
+      "kind": "dry_lick",
+      "description": "瓶外一次短干舔：没有汤",
+      "gain": 0.041,
+      "pan": -0.17
+    },
+    {
+      "time": 55.5,
+      "end": 55.68,
+      "kind": "swallow",
+      "description": "鹳平静的一小口吞咽",
+      "gain": 0.022,
+      "pan": 0.17
+    },
+    {
+      "time": 57.5,
+      "end": 57.74,
+      "kind": "sniff",
+      "description": "狐狸吸气欲抗议，但不发声",
+      "gain": 0.02,
+      "pan": -0.17
+    },
+    {
+      "time": 58.7,
+      "end": 58.94,
+      "kind": "cloth",
+      "description": "耳朵垂下，只留极小柔软摩擦",
+      "gain": 0.011,
+      "pan": -0.18
+    },
+    {
+      "time": 60.1,
+      "end": 60.36,
+      "kind": "cloth",
+      "description": "礼貌的一手，轻毛发摩擦",
+      "gain": 0.012,
+      "pan": -0.16
+    },
+    {
+      "time": 62.1,
+      "end": 62.44,
+      "kind": "sip",
+      "description": "鹳最后轻抿一口",
+      "gain": 0.026,
+      "pan": 0.18
+    },
+    {
+      "time": 63.0,
+      "end": 63.46,
+      "kind": "tummy",
+      "description": "狐狸小肚咕，温和低声、不滑稽炸响",
+      "gain": 0.039,
+      "pan": -0.15
+    }
+  ],
+  "mix": {
+    "linear_gain": 4.970195310807676,
+    "limiter": "None. Peak-safe linear normalization preserves pauses.",
+    "integrated_lufs": -20.008874622759944,
+    "sample_peak_dbfs": -5.137565688090261,
+    "true_peak_dbtp_4x": -5.120432804883434
+  },
+  "aac_decoded": {
+    "samples": 3120128,
+    "integrated_lufs": -20.053518387502198,
+    "sample_peak_dbfs": -5.1361408207749735,
+    "true_peak_dbtp_4x": -5.116888984972313
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "hold_measurements": [
+    {
+      "start": 12.18,
+      "end": 12.7,
+      "rms_dbfs": -62.75988659627214,
+      "peak_dbfs": -42.35030628869439
+    },
+    {
+      "start": 17.0,
+      "end": 17.8,
+      "rms_dbfs": -138.86897844781691,
+      "peak_dbfs": -111.82721077394339
+    },
+    {
+      "start": 45.2,
+      "end": 45.8,
+      "rms_dbfs": -58.4710125607894,
+      "peak_dbfs": -37.49251711347463
+    },
+    {
+      "start": 50.3,
+      "end": 51.0,
+      "rms_dbfs": -240.0,
+      "peak_dbfs": -240.0
+    },
+    {
+      "start": 60.1,
+      "end": 61.0,
+      "rms_dbfs": -47.72128099475868,
+      "peak_dbfs": -26.482723688980947
+    },
+    {
+      "start": 63.5,
+      "end": 65.0,
+      "rms_dbfs": -113.40731551325922,
+      "peak_dbfs": -83.14616178068788
+    }
+  ],
+  "boundary_max_adjacent_sample_delta": [
+    {
+      "time": 5,
+      "max_delta": 2.2447988170793596e-18
+    },
+    {
+      "time": 10,
+      "max_delta": 2.8449038121265496e-09
+    },
+    {
+      "time": 15,
+      "max_delta": 3.987519059980658e-18
+    },
+    {
+      "time": 19,
+      "max_delta": 2.200110652062135e-18
+    },
+    {
+      "time": 24,
+      "max_delta": 3.9999054234570483e-07
+    },
+    {
+      "time": 28,
+      "max_delta": 1.0839303631988051e-05
+    },
+    {
+      "time": 33,
+      "max_delta": 2.86045869076458e-07
+    },
+    {
+      "time": 38,
+      "max_delta": 4.981864916308134e-05
+    },
+    {
+      "time": 43,
+      "max_delta": 4.694007479860273e-05
+    },
+    {
+      "time": 48,
+      "max_delta": 1.7856929183138524e-07
+    },
+    {
+      "time": 53,
+      "max_delta": 1.6294896286951036e-18
+    },
+    {
+      "time": 57,
+      "max_delta": 3.7581904332572304e-19
+    },
+    {
+      "time": 61,
+      "max_delta": 9.788065675859512e-20
+    }
+  ],
+  "shot_rms_dbfs": [
+    {
+      "id": "serve",
+      "start": 0,
+      "end": 5,
+      "rms_dbfs": -24.389936222023188
+    },
+    {
+      "id": "fox_lap",
+      "start": 5,
+      "end": 10,
+      "rms_dbfs": -25.029097961502814
+    },
+    {
+      "id": "stork_peck",
+      "start": 10,
+      "end": 15,
+      "rms_dbfs": -22.916074293344902
+    },
+    {
+      "id": "polite_reaction",
+      "start": 15,
+      "end": 19,
+      "rms_dbfs": -27.144996912518348
+    },
+    {
+      "id": "angled_fail",
+      "start": 19,
+      "end": 24,
+      "rms_dbfs": -29.08383532184921
+    },
+    {
+      "id": "fox_finish",
+      "start": 24,
+      "end": 28,
+      "rms_dbfs": -29.063357899281872
+    },
+    {
+      "id": "invitation",
+      "start": 28,
+      "end": 33,
+      "rms_dbfs": -20.067072012460734
+    },
+    {
+      "id": "jars",
+      "start": 33,
+      "end": 38,
+      "rms_dbfs": -20.429292570253264
+    },
+    {
+      "id": "stork_drink",
+      "start": 38,
+      "end": 43,
+      "rms_dbfs": -20.325929344356496
+    },
+    {
+      "id": "fox_blocked",
+      "start": 43,
+      "end": 48,
+      "rms_dbfs": -29.476381313493963
+    },
+    {
+      "id": "fox_lick",
+      "start": 48,
+      "end": 53,
+      "rms_dbfs": -36.132817846496515
+    },
+    {
+      "id": "deadpan",
+      "start": 53,
+      "end": 57,
+      "rms_dbfs": -30.36752772838822
+    },
+    {
+      "id": "fox_realizes",
+      "start": 57,
+      "end": 61,
+      "rms_dbfs": -24.31295554336971
+    },
+    {
+      "id": "final",
+      "start": 61,
+      "end": 65,
+      "rms_dbfs": -26.418047727785194
+    }
+  ],
+  "files": {
+    "master.wav": {
+      "bytes": 18720102,
+      "sha256": "0b2fb07bdf97ec3920a66104ea2ee99705c422d199b0a73d9930ea624049c26d"
+    },
+    "music.m4a": {
+      "bytes": 650723,
+      "sha256": "e6232b19f0a2f016c32341584b67614727a1735c77fc8b670cfe8fde9482d9e4"
+    },
+    "music-only.wav": {
+      "bytes": 18720102,
+      "sha256": "8911551c5cde9acc41bbb7a5539aef4c796ad2d793997b7d938129c988be714e"
+    },
+    "foley-only.wav": {
+      "bytes": 18720102,
+      "sha256": "e6d43dd7474eb1a517cb06d19dcc96b0978c2ac528849ca29b0c2421967c4404"
+    }
+  }
+}

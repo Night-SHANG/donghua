@@ -1,0 +1,54 @@
+{
+  "mode": "smoke",
+  "film": "fox_stork",
+  "duration": 65,
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "chunkSeconds": 5,
+  "crf": 18,
+  "stills": [
+    1.6,
+    7.3,
+    12.1,
+    12.6,
+    17.2,
+    21.6,
+    26.2,
+    30.6,
+    35.5,
+    39.35,
+    40.2,
+    40.6,
+    45.1,
+    45.6,
+    49.4,
+    50.3,
+    55,
+    59,
+    63,
+    63.5
+  ],
+  "representativeStart": 43,
+  "smokeIds": [
+    "s03_stork_peck",
+    "s09_stork_drink",
+    "s10_fox_blocked"
+  ],
+  "qaFps": 5,
+  "audio": "audio/master.wav",
+  "audioBuild": [
+    [
+      "python",
+      "audio/synthesize.py"
+    ],
+    [
+      "python",
+      "audio/test_audio.py"
+    ]
+  ],
+  "audioRequired": true,
+  "storyboard": "镜头表.md",
+  "reviewWidth": 1280,
+  "artifactLimitBytes": 14000000
+}

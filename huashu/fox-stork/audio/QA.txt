@@ -1,0 +1,57 @@
+FOX / STORK — AUDIO QA (actual measured outputs)
+65.000 s exactly; 3,120,000 frames; 48,000 Hz; stereo; master PCM 24-bit.
+Full mix: master.wav (lossless), music.m4a (AAC 96 kbit/s target).
+Do not layer those two files: both contain music and Foley.
+Optional separated stems: music-only.wav and foley-only.wav; same normalization gain, sample aligned.
+Finite samples: True; clipped samples >=1.0: 0
+Master measured: {'linear_gain': 4.970195310807676, 'limiter': 'None. Peak-safe linear normalization preserves pauses.', 'integrated_lufs': -20.008874622759944, 'sample_peak_dbfs': -5.137565688090261, 'true_peak_dbtp_4x': -5.120432804883434}
+AAC decoded measured: {'samples': 3120128, 'integrated_lufs': -20.053518387502198, 'sample_peak_dbfs': -5.1361408207749735, 'true_peak_dbtp_4x': -5.116888984972313}
+AAC bytes: 650723
+Last 100ms maximum amplitude: 0.0
+Environment: {'python': '3.12.14', 'numpy': '2.3.5', 'scipy': '1.17.0'}
+Quiet holds: 12.18–12.70, 17.00–17.80, 45.20–45.80, 50.30–51.00, 60.10–61.00, 63.50–65.00; no new music onsets.
+Measured hold RMS / peaks and adjacent-sample deltas at every shot boundary: audio-cues.json.
+Reaction gesture 45.65 is intentionally silent; final tail reaches zero by 63.56.
+AAC container duration is65.000s; raw AAC decode includes128padding samples (65.002667s). Mux from WAV or trim to65s.
+No speech, voice impressions, external samples, paid APIs, or copied musical phrases.
+Texture: original damped string modes / warm plucked bass / breath-led reed + flute / short small-room reflection.
+Timing based on locked 65s 14-shot planner handoff (2026-10-28). Full cue and note lists: audio-cues.json.
+This is technical QA, not a claim that real-time human listening or final audiovisual sync has been completed.
+Rebuild with python synthesize.py; run python test_audio.py. Needs Python, numpy, scipy and ffmpeg/ffprobe.
+
+FFmpeg independent meters:
+master.wav
+Summary:
+
+  Integrated loudness:
+    I:         -20.0 LUFS
+    Threshold: -30.8 LUFS
+
+  Loudness range:
+    LRA:        11.0 LU
+    Threshold: -41.5 LUFS
+    LRA low:   -28.6 LUFS
+    LRA high:  -17.6 LUFS
+
+  True peak:
+    Peak:       -5.1 dBFS
+[out#0/null @ 0x55b3064e8280] video:0KiB audio:12188KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+size=N/A time=00:01:05.00 bitrate=N/A speed= 200x
+
+music.m4a
+Summary:
+
+  Integrated loudness:
+    I:         -20.1 LUFS
+    Threshold: -30.8 LUFS
+
+  Loudness range:
+    LRA:        11.0 LU
+    Threshold: -41.5 LUFS
+    LRA low:   -28.6 LUFS
+    LRA high:  -17.6 LUFS
+
+  True peak:
+    Peak:       -5.1 dBFS
+[out#0/null @ 0x55b126ff8480] video:0KiB audio:12188KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+size=N/A time=00:01:05.00 bitrate=N/A speed= 208x
