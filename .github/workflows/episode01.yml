@@ -1,0 +1,83 @@
+name: Paint house comedy episode 01
+on:
+  push:
+    branches: ['design/house-comedy-cast']
+    paths: ['film/house-comedy/episode-01/render-request.json']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: episode01-${{ github.ref }}-${{ github.sha }}
+  cancel-in-progress: false
+jobs:
+  plan:
+    runs-on: ubuntu-22.04
+    outputs:
+      stage: ${{ steps.plan.outputs.stage }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - id: plan
+        run: |
+          node -e 'const r=require("./film/house-comedy/episode-01/render-request.json");if(!["preview","full"].includes(r.stage))process.exit(1);console.log("stage="+r.stage)' >> "$GITHUB_OUTPUT"
+  preview:
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [0,1,2]
+    needs: plan
+    if: needs.plan.outputs.stage == 'preview'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node scripts/episode01/render.mjs
+        env:
+          RENDER_STAGE: preview
+          PREVIEW_PART: ${{ matrix.part }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: episode01-preview-${{ matrix.part }}
+          path: out/episode01/
+          retention-days: 3
+  frames:
+    needs: plan
+    if: needs.plan.outputs.stage == 'full'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg
+          command -v ffmpeg
+          npm ci --ignore-scripts --no-audit --no-fund
+      - name: Paint48 actual frames with default browser sandbox
+        env:
+          PART: ${{ matrix.part }}
+          RENDER_STAGE: full
+        run: |
+          export FRAME_START=$((PART * 48)) FRAME_END=$(((PART+1)*48))
+          node scripts/episode01/render.mjs
+          mkdir -p deliver
+          ffmpeg -v error -y -framerate 24 -start_number "$FRAME_START" -i out/episode01/frames/f%05d.png -frames:v 48 -vf 'scale=out_color_matrix=bt709:out_range=tv,format=yuv420p,setparams=range=tv:colorspace=bt709:color_primaries=bt709:color_trc=bt709' -c:v libx264 -crf 17 -preset slow "deliver/part-${PART}.mp4"
+          cp out/episode01/manifest.json "deliver/manifest-${PART}.json"
+          for frame in "$FRAME_START" "$((FRAME_START+24))" "$((FRAME_END-1))"; do cp "out/episode01/frames/$(printf 'f%05d.png' "$frame")" deliver/; done
+          if [ "$PART" -lt 15 ]; then cp "out/episode01/frames/$(printf 'f%05d.png' "$FRAME_END")" "deliver/boundary-${PART}.png"; fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: episode01-part-${{ matrix.part }}
+          path: deliver/
+          retention-days: 3

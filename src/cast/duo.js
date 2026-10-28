@@ -45,14 +45,14 @@ window.CAST=(()=>{
   if(who==='kokou')drawPoly([[-6,-90],[-18,-98],[-4,-100],[7,-93]],p.base);
   else inkLine(P([[-2,-63],[0,-71],[7,-72],[9,-68]]),sw*1.5,ink,'ink',.5);
   if(!back&&who==='liuliu'){boilSeed(id+'belly');paint(P([[-10,-36],[9,-36],[13,-24],[0,-21],[-12,-25]]),{wash:p.light,ink:null,bleed:.1,curv:.55});}
-  if(!back&&who==='kokou'){boilSeed(id+'bow');drawPoly([[-8,-44],[0,-41],[8,-44],[8,-35],[0,-38],[-8,-35]],'#CC9A4D');}
+  if(!back&&who==='kokou'){boilSeed(id+'bow');const bp=[[-8,-44],[0,-41],[8,-44],[8,-35],[0,-38],[-8,-35]];const a=o.bowRot||0;drawPoly(bp.map(([x,y])=>[x*Math.cos(a)-(y+39)*Math.sin(a),-39+x*Math.sin(a)+(y+39)*Math.cos(a)]),'#CC9A4D');}
   if(!back&&o.pose!=='push'&&o.pose!=='proud')arm(1);
-  if(!back){
+  if(!back&&!o.hideFace){
    const faceX=profile?3:quarter?3:0,faceY=d.faceY;
    // Light facial field keeps dark ink readable on indigo; same painted medium.
    if(who==='kokou'){boilSeed(id+'facefield');const fw=profile?11:16;paint(P([[faceX-fw,faceY-12],[faceX+fw,faceY-12],[faceX+fw,faceY+12],[faceX-fw,faceY+12]]),{wash:'#F1DEB7',washOp:255,ink:null,curv:.6});}
    const q=local([faceX,faceY]);push();translate(q[0]*u,q[1]*u);scale(sx*(profile?.6:quarter?.9:1),sy);
-   const emotion=feel(act.emotion,0);boilSeed(id+'face');push();translate(0,6*d.faceU*u);eyes(d.faceU*u,{...emotion,seed:17},sw,profile?[1]:[-1,1]);mouth(d.faceU*u,emotion.mouth||'flat',sw);pop();pop();
+   const emotion={...feel(act.emotion,o.time||0),...(o.faceOverrides||{})};boilSeed(id+'face');push();translate(0,6*d.faceU*u);eyes(d.faceU*u,{...emotion,seed:17},sw,profile?[1]:[-1,1]);mouth(d.faceU*u,emotion.mouth||'flat',sw);pop();pop();
   }
   // In strong effort the hands are intentionally brought in front of the torso.
   if(o.pose==='push'||o.pose==='proud'){arm(-1,true);arm(1,true);}
