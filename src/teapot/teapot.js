@@ -12,8 +12,13 @@ window.TEAPOT = (() => {
     }
     // Handle is an open C, entirely outside the body's silhouette: no hidden contour bleed.
     boilSeed(id+'handle');
-    inkLine(P([[-5.15,-8.35],[-7.4,-8.5],[-8.2,-6.7],[-7.5,-4.4],[-5.65,-4.0]]),sw*8,C.shade,'marker',.7);
-    inkLine(P([[-5.25,-8.35],[-7.4,-8.5],[-8.2,-6.7],[-7.5,-4.4],[-5.65,-4.0]]),sw*.8,C.ink,'ink',.7);
+    // One open C-shaped painted band: the concavity leaves the real background visible.
+    // Unlike a fat marker stroke this has bounded enamel edges, not a pigment halo.
+    paint(P([[-4.7,-8.8],[-6.85,-9.05],[-8.1,-8.6],[-8.75,-7.45],
+      [-8.8,-6.1],[-8.15,-4.45],[-6.8,-3.65],[-5.34,-3.7],
+      [-5.72,-4.6],[-6.65,-4.65],[-7.35,-5.15],[-7.75,-6.35],
+      [-7.7,-7.25],[-7.25,-7.9],[-6.55,-8.1],[-5.3,-7.9]]),
+      {wash:C.mint,fill:C.shade,fillOp:72,bleed:.12,tex:.7,ink:C.ink,sw,curv:.3});
     boilSeed(id+'spout');
     paint(P([[4.6,-7.8],[6.25,-8.6],[7.3,-10.8],[8.9,-10.3],[8.3,-7.6],[6.0,-5.6],[4.7,-5.8]]),{wash:C.mint,fill:C.shade,fillOp:70,ink:null,curv:.3});
     // Only exposed spout edges; body covers base without leaving internal ink seams.

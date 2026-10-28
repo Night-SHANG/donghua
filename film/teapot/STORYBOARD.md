@@ -1,4 +1,4 @@
-# 一口气 / One Puff Too Many
+# 泡泡吹过头 / Bubble Too Big
 
 Original new short. 14 s, 1920x1080, 24 fps, 120 BPM. User delegated creative decisions on 2026-10-28; no intermediate creative approval gates. Last Bread is abandoned, not continued here.
 

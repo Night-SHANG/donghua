@@ -20,7 +20,8 @@ try{
  if(mode==='preview'){
   await load(base+'&loop=teapot_model');await frame(0,resolve(out,'model.png'));
   await load(base);manifest.film=await page.evaluate(()=>({width:film.width,height:film.height,duration:film.duration,fps:film.fps}));assert.equal(manifest.film.duration,14);
-  for(const t of [.6,1.5,2.3,3.6,4.6,5.6,6.5,6.9,7.7,8.5,9.7,10.4,11.5,12.8,13.5])await frame(t,resolve(out,`t${t.toFixed(2)}.png`));
+  const request=JSON.parse(await readFile(resolve(root,'film/teapot/render-request.json'),'utf8'));
+  for(const t of (request.quick?[1.5,5.6,7.4,7.7,12.8]:[.6,1.5,2.3,3.6,4.6,5.6,6.5,6.9,7.7,8.5,9.7,10.4,11.5,12.8,13.5]))await frame(t,resolve(out,`t${t.toFixed(2)}.png`));
   const a=await frame(5.6,resolve(out,'determinism-repeat.png'));const b=manifest.frames.find(f=>f.t===5.6);assert.equal(a.sha256,b.sha256,'Non-deterministic repeated frame');
  }else{
   await load(base);manifest.film=await page.evaluate(()=>({width:film.width,height:film.height,duration:film.duration,fps:film.fps}));assert.deepEqual(manifest.film,{width:1920,height:1080,duration:14,fps:24});

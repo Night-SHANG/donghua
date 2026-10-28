@@ -10,7 +10,8 @@
     if(t>=6.82)rot=lerp(-.11,0,ease(fall));
     const landing=t>=7.65?.065*Math.exp(-(t-7.65)*9)*Math.sin((t-7.65)*26):0;
     const hiccup=t>=10.1&&t<10.45?Math.sin(seg(t,10.1,10.45)*Math.PI):0;
-    const lidFall=t>=7.65&&t<8.05?1-seg(t,7.65,8.05)**2:0;
+    // Lid lags continuously during the fall, then catches up at the ceramic cue.
+    const lidFall=t<7.65?ease(seg(t,6.85,7.65)):(t<8.05?1-seg(t,7.65,8.05)**2:0);
     const lidRattle=t>=8.05?.07*Math.exp(-(t-8.05)*9)*Math.sin((t-8.05)*40):0;
     const paddle=Math.sin(seg(t,5.85,6.45)*Math.PI)*.7;
     return {x:800+55*lift,y:825-Math.max(0,h)-8*hiccup,u:29,rot:rot+lidRattle*.2,sq:landing,
@@ -30,19 +31,39 @@
     // Far washes move at 35% of the foreground camera displacement.
     camBegin(960+(c.x-960)*.35,540+(c.y-540)*.35,1+(c.z-1)*.35);
     boilSeed('wall');paint(rectPts(-1200,-1000,4400,2400),{wash:'#EEE7D8',fill:K.wall,fillOp:45,bleed:.15,ink:null});
-    boilSeed('garden');paint(ellPts(1580,300,520,300,30,18),{fill:'#9CAD88',fillOp:70,bleed:.35,ink:null});
-    for(let i=0;i<5;i++) {boilSeed('leaf'+i);const x=1300+i*115,y=210+hash(i+42)*250;paint(ellPts(x,y,85,42,16,5,-.6+i*.2),{fill:i%2?'#B3BF94':'#879F8A',fillOp:75,bleed:.28,ink:null});}
-    boilSeed('wallstripe');inkLine([[-300,580],[650,580],[2100,580]],.5,'#C7C7B5','charcoal',0);camEnd();
+    // A large quiet window gives the scene a place, while the hero keeps the strongest ink.
+    boilSeed('window-light');paint([[-200,-450],[1800,-450],[1800,650],[-200,650]],
+      {wash:'#DCE4DE',fill:'#A9C7CD',fillOp:80,bleed:.18,tex:.7,ink:null});
+    boilSeed('distant-garden');paint([[-300,500],[150,350],[600,430],[1050,330],[1500,430],[1950,300],[1950,650],[-300,650]],
+      {fill:'#A8B9A0',fillOp:82,bleed:.3,ink:null,curv:.3});
+    for(const x of [210,1740]) {boilSeed('window-post'+x);paint(rectPts(x,-450,35,1120),
+      {wash:'#DDD0B3',fill:'#BCA98D',fillOp:65,ink:null});}
+    boilSeed('window-sill');paint(rectPts(-250,650,2140,38),
+      {wash:'#D8C4A6',fill:'#BDA78A',fillOp:65,ink:null});
+    inkLine([[-250,650],[1890,650]],.65,'#ADAA92','charcoal',0);
+    camEnd();
     camBegin(c.x,c.y,c.z);
-    boilSeed('patio');paint([[-1600,840],[3200,840],[3200,2100],[-1600,2100]],{wash:K.floor,fill:'#BC8D75',fillOp:42,bleed:.12,ink:null});
-    for(let i=0;i<3;i++){boilSeed('tile'+i);inkLine([[-1000,940+i*230],[3000,940+i*230]],.5,'#B8907A','charcoal',0);}
-    // Tiny ground details are anchored to the world, not re-randomised each frame.
-    for(let i=0;i<9;i++){boilSeed('crumb'+i);const x=230+hash(i+10)*1450,y=875+hash(i+51)*100;inkLine([[x,y],[x+8,y+2]],.55,'#A78773','charcoal',0);}
+    // The hero stands on a warm tea table, not an empty strip of ground.
+    boilSeed('tabletop');paint([[-1600,760],[3200,760],[3200,1035],[-1600,1035]],
+      {wash:'#D7B38F',fill:'#C39977',fillOp:65,bleed:.13,tex:.7,ink:null});
+    boilSeed('table-edge');paint(rectPts(-1600,1035,4800,85),
+      {wash:'#B88D6D',fill:'#A4775D',fillOp:65,ink:null});
+    inkLine([[-1600,1035],[3200,1035]],.7,'#967A64','charcoal',0);
+    boilSeed('under-table');paint(rectPts(-1600,1120,4800,1000),{wash:'#C6C1AB',ink:null});
+    for(let i=0;i<3;i++){boilSeed('woodgrain'+i);const y=895+i*42;inkLine([[-450,y],[120,y+3],[460,y-2]],.45,'#B29274','charcoal',.3);}
+    // Cropped plant frames the left edge; one pot and five broad leaves, never visual clutter.
+    boilSeed('pot');paint([[75,648],[220,648],[204,766],[95,766]],
+      {wash:'#C69279',fill:'#AB806A',fillOp:65,ink:'#967D69',sw:.65,curv:.1});
+    for(let i=0;i<5;i++) {
+      boilSeed('plant'+i);const x=105+i*29,y=600-Math.sin(i*.8)*95,a=-.85+i*.38;
+      inkLine([[150,650],[x,y]],.8,'#7A947E','ink',.4);
+      paint(ellPts(x,y,27,74,18,2,a),{wash:i%2?'#A8BA9C':'#91AD99',fill:'#789A85',fillOp:65,bleed:.15,ink:null});
+    }
     camEnd();
   }
   function world(t) {
     const p=pose(t),c=camera(t);garden(c);camBegin(c.x,c.y,c.z);
-    boilSeed('shadow');const high=clamp((825-p.y)/230);paint(ellPts(820,831,lerp(150,75,high),lerp(19,11,high),28,2),{fill:'#77695D',fillOp:lerp(75,32,high),bleed:.4,ink:null});
+    boilSeed('shadow');const high=clamp((825-p.y)/230);paint(ellPts(820,831,lerp(150,75,high),lerp(19,11,high),28,2),{fill:'#77695D',fillOp:lerp(115,48,high),bleed:.4,ink:null});
     TEAPOT.draw(p.x,p.y,p.u,p);
     const tip=TEAPOT.tip(p);
     if(t<.82){const q=seg(t,.45,.82);TEAPOT.bubble(tip[0]+30+q*36,tip[1]-28-q*45,26,t,'first');}
@@ -53,8 +74,8 @@
     if(t>=10.1){
       const q=ease(seg(t,10.1,11.8)), start=TEAPOT.tip(pose(10.1));
       const bx=lerp(start[0]+23,855,q),by=lerp(start[1]-22,825-29*12.9,q)-55*Math.sin(q*Math.PI);
-      TEAPOT.bubble(bx,by+2*Math.sin(t*3),23,t,'crown');
-      if(t>11.85&&t<12.5){const k=Math.sin(seg(t,11.85,12.5)*Math.PI);boilSeed('delight');for(const s of [-1,1])inkLine([[bx+s*35,by-4],[bx+s*(35+15*k),by-8]],.9*k,PAL.cream,'ink',0);}
+      TEAPOT.bubble(bx,by+2*Math.sin(t*3)-10,34,t,'crown');
+      if(t>11.85&&t<12.5){const k=Math.sin(seg(t,11.85,12.5)*Math.PI);boilSeed('delight');for(const s of [-1,1])inkLine([[bx+s*45,by-14],[bx+s*(45+15*k),by-18]],.9*k,PAL.cream,'ink',0);}
     }
     camEnd();
     if(t<.45){const xy=toScreen(TEAPOT.tip(p)[0]+30,TEAPOT.tip(p)[1]-28,{cx:c.x,cy:c.y,zoom:c.z,rot:0});boilSeed('opening');iris(xy[0],xy[1],lerp(12,2300,ease(seg(t,0,.45))),PAL.paper);}
