@@ -1,0 +1,181 @@
+import importlib.util
+import json
+import copy
+from pathlib import Path
+import shutil
+import subprocess
+import tempfile
+import unittest
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parents[2]
+assert (ROOT / 'huashu/tools/render_wind.py').exists(), 'Missing independent true-3D renderer orchestration'
+spec = importlib.util.spec_from_file_location('wind', ROOT / 'huashu/tools/render_wind.py')
+m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+
+
+class Contracts(unittest.TestCase):
+    def test_900_frames_and_scene_continuity(self):
+        self.assertEqual(m.DURATION * m.FPS, m.FRAME_COUNT)
+        self.assertEqual(m.FRAME_COUNT, 900)
+        self.assertEqual([s['range'][1] for s in m.SCENES[:-1]], [s['range'][0] for s in m.SCENES[1:]])
+        self.assertEqual(m.SCENES[0]['range'][0], 0); self.assertEqual(m.SCENES[-1]['range'][1], 15)
+        for s in m.SCENES: self.assertTrue(s['range'][0] <= s['still'] < s['range'][1])
+
+    def test_dense_windows_have_no_missing_frames(self):
+        expected = [(207, 225, 19), (423, 441, 19), (651, 669, 19)]
+        for w, (start, end, n) in zip(m.WINDOWS, expected):
+            frames = m.frame_range(w)
+            self.assertEqual(frames, list(range(start, end + 1)))
+            self.assertEqual(len(frames), n)
+            self.assertIn(round(w['transition'] * 60), frames)
+        self.assertEqual(sum(len(m.frame_range(w)) for w in m.WINDOWS), 57)
+        with self.assertRaises(ValueError): m.frame_range({'start': -1, 'end': 0})
+        with self.assertRaises(ValueError): m.frame_range({'start': 14, 'end': 15})
+
+    def test_full_trajectory_sample_map(self):
+        self.assertEqual(len(m.TRAJECTORY_FRAMES), 61)
+        self.assertEqual(m.TRAJECTORY_FRAMES[:-1], list(range(0, 900, 15)))
+        self.assertEqual(m.TRAJECTORY_FRAMES[-1], 899)
+
+    def test_cut_registration_and_within_shot_wind_motion(self):
+        import math
+        samples=[]
+        scenes=[('spring',0,216),('summer',216,432),('autumn',432,660),('winter',660,900)]
+        for f in range(901):
+            shot,start,end=next((x for x in scenes if x[1]<=f<x[2]),scenes[-1]);u=(f-start)/(end-start)
+            samples.append({'frame':f,'t':f/60,'shot':[x[0] for x in scenes].index(shot),'sceneId':shot,'localTime':(f-start)/60,
+              'position':[u*2,2+math.sin(u*math.pi),-start/20], 'rotation':[u*7,0,0],
+              'camera':[3,5,8-start/20],'target':[0,2,-start/20], 'screen':[700+300*u,500-180*math.sin(u*math.pi)],
+              'leafColor':[.7-.2*f/900,.8-.5*f/900,.1], 'curl':.045+.18*f/900,'frost':.45*f/900})
+        data={'schema':1,'fps':60,'duration':15,'passed':True,'cutFrames':[216,432,660],
+            'limits':{'maxPositionStep':.4,'maxRotationStep':.4,'maxCameraStep':.4},'samples':samples}
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d)/'state.json';p.write_text(json.dumps(data));report=m.validate_motion_report(p)
+            self.assertEqual(report['cutFrames'],[216,432,660])
+            self.assertGreater(report['shots'][0]['rotationSpan'],3.14)
+            self.assertGreater(report['shots'][0]['screenYRange'],170)
+            for kind in ['cut_missing','cut_extra','shot_wrong','camera_jump_inside','spin_snap','stationary_screen','no_vertical','constant_shape','constant_frost','nan']:
+                bad=copy.deepcopy(data)
+                if kind=='cut_missing': bad['cutFrames'].pop()
+                if kind=='cut_extra': bad['cutFrames'].append(99)
+                if kind=='shot_wrong': bad['samples'][100]['sceneId']='summer'
+                if kind=='camera_jump_inside': bad['samples'][100]['camera'][0]+=4
+                if kind=='spin_snap': bad['samples'][100]['rotation'][0]+=2
+                if kind=='stationary_screen':
+                    for a in bad['samples'][:216]: a['screen']=[960,540]
+                if kind=='no_vertical':
+                    for a in bad['samples'][:216]: a['screen'][1]=540
+                if kind=='constant_shape':
+                    for a in bad['samples']: a['curl']=.1
+                if kind=='constant_frost':
+                    for a in bad['samples']: a['frost']=.45
+                if kind=='nan': bad['samples'][100]['screen'][0]=float('nan')
+                p.write_text(json.dumps(bad))
+                with self.subTest(kind=kind),self.assertRaises(RuntimeError): m.validate_motion_report(p)
+
+    def test_webgl_report_rejects_2d_blank_or_lost_context(self):
+        report = {'threeRevision': '160', 'webgl': [{'type':'webgl2','version':'WebGL 2.0','renderer':'ANGLE SwiftShader',
+            'contextLost':False,'width':1280,'height':720,'preserveDrawingBuffer':True,'drawCalls':200}],
+            'compositeCalls':1, 'diagnostics':{'cameraType':'PerspectiveCamera','triangles':1000},
+            'canvasSize':[1920,1080], 'pixelStddev':[20,30,40]}
+        m.validate_webgl_capture(report)
+        for field, value in [('threeRevision','159'),('webgl',[]),('compositeCalls',0),('pixelStddev',[0,0,0])]:
+            bad = copy.deepcopy(report); bad[field] = value
+            with self.subTest(field=field), self.assertRaises(RuntimeError): m.validate_webgl_capture(bad)
+        for field, value in [('contextLost',True),('drawCalls',0),('preserveDrawingBuffer',False),('width',640)]:
+            bad=copy.deepcopy(report);bad['webgl'][0][field]=value
+            with self.subTest(field=field), self.assertRaises(RuntimeError): m.validate_webgl_capture(bad)
+        bad=copy.deepcopy(report);bad['diagnostics']['cameraType']='OrthographicCamera'
+        with self.assertRaises(RuntimeError): m.validate_webgl_capture(bad)
+
+    def test_four_unique_scene_and_camera_identities(self):
+        captures=[{'diagnostics':{'sceneId':sid,'sceneUUID':'scene-'+sid,'cameraUUID':'camera-'+sid}} for sid in ['spring','summer','autumn','winter']]
+        m.validate_scene_sequence(captures,['spring','summer','autumn','winter'])
+        for field in ['sceneUUID','cameraUUID','sceneId']:
+            bad=copy.deepcopy(captures);bad[1]['diagnostics'][field]=bad[0]['diagnostics'][field]
+            with self.subTest(field=field),self.assertRaises(RuntimeError): m.validate_scene_sequence(bad,['spring','summer','autumn','winter'])
+
+    def test_runtime_adapter_keeps_native_file_and_records_flags(self):
+        import sys
+        sys.path.insert(0, str(ROOT / 'huashu/tools'))
+        import webgl_wind_runtime as runtime
+        args=runtime.merge_launch_args(['--disable-web-security','--use-angle=gl'])
+        self.assertIn('--disable-web-security',args)
+        self.assertNotIn('--use-angle=gl',args)
+        self.assertIn('--use-gl=angle',args)
+        self.assertIn('--use-angle=swiftshader',args)
+        self.assertIn('--enable-unsafe-swiftshader',args)
+        self.assertEqual(args, runtime.merge_launch_args(args))
+
+    def test_adapter_runs_unchanged_script_and_only_amends_browser_launch(self):
+        import sys
+        from types import SimpleNamespace
+        from playwright.sync_api import BrowserType
+        sys.path.insert(0, str(ROOT / 'huashu/tools'))
+        import webgl_wind_runtime as runtime
+        with tempfile.TemporaryDirectory() as d:
+            script=Path(d)/'native.py'
+            script.write_text("from playwright.sync_api import BrowserType\nfrom types import SimpleNamespace\nBrowserType.launch(SimpleNamespace(name='chromium'), args=['--ignore-gpu-blocklist'], headless=True)\n")
+            before=m.sha(script);calls=[];old_argv=sys.argv
+            with patch.object(BrowserType,'launch',side_effect=lambda *a,**kw:calls.append(kw)):
+                runtime.run_native(script, ['--film','wind_montage'])
+            self.assertEqual(m.sha(script),before)
+            self.assertIs(sys.argv,old_argv)
+            self.assertEqual(calls,[{'args':['--ignore-gpu-blocklist',*runtime.FLAGS], 'headless':True}])
+
+    def test_pin_rejects_dirty_or_wrong_source(self):
+        with patch.object(m, 'output', side_effect=[m.UPSTREAM_SHA, '']): self.assertEqual(m.verify_upstream(Path('/fake')), m.UPSTREAM_SHA)
+        for values in ([m.UPSTREAM_SHA, 'M render.py'], ['wrong', '']):
+            with patch.object(m, 'output', side_effect=values), self.assertRaises(RuntimeError): m.verify_upstream(Path('/fake'))
+
+    def test_symlink_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d); (root / 'outside').symlink_to('/etc/passwd')
+            with self.assertRaises(RuntimeError): m.manifest(root)
+
+    def test_cap_includes_all_files(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            with self.assertRaises(RuntimeError): m.check_size(root)
+            (root / 'x').write_bytes(b'abc'); self.assertEqual(m.check_size(root), 3)
+            with patch.object(m, 'CAP', 3), self.assertRaises(RuntimeError): m.check_size(root)
+
+    def test_additive_overlay_keeps_native_renderer_and_rejects_collision(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d); upstream = root / 'upstream'; project = root / 'project'; work = root / 'work'
+            (upstream / 'scripts/engine').mkdir(parents=True); (project / 'engine').mkdir(parents=True)
+            (upstream / 'scripts/engine/render.py').write_text('native renderer')
+            (project / 'engine/eras_wind_montage.js').write_text('new film')
+            with patch.object(m, 'verify_upstream'): m.overlay_engine(upstream, project, work)
+            self.assertEqual((work / 'scripts/engine/render.py').read_text(), 'native renderer')
+            (project / 'engine/render.py').write_text('modified')
+            with patch.object(m, 'verify_upstream'), self.assertRaises(RuntimeError): m.overlay_engine(upstream, project, root / 'bad-work')
+
+    @unittest.skipUnless(shutil.which('ffmpeg') and shutil.which('ffprobe'), 'encoder unavailable')
+    def test_actual_video_and_dense_frame_evidence(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d); source = root / 'test.mp4'; out = root / 'out'; out.mkdir(); work = root / 'work'; work.mkdir()
+            subprocess.run(['ffmpeg', '-y', '-v', 'error', '-f', 'lavfi', '-i', 'testsrc2=size=1280x720:rate=60',
+                            '-frames:v', '60', '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p', str(source)], check=True)
+            m.verify_video(source, 1280, 720, frames=60)
+            with self.assertRaises(RuntimeError): m.verify_video(source, 1280, 720, frames=61)
+            with self.assertRaises(RuntimeError): m.verify_video(source, 1280, 720, frames=60, audio=True)
+            with patch.object(m, 'SCENES', [{'id': 'test', 'range': [0, 1], 'still': .3}]), patch.object(m, 'WINDOWS', [{'id': 'test-window', 'start': .1, 'end': .2, 'transition': .15}]), patch.object(m, 'TRAJECTORY_FRAMES', [0, 15, 30, 45, 59]):
+                report = m.extract_evidence(source, source, out, work)
+            self.assertEqual(report['denseWindows'][0]['frames'], list(range(6, 13)))
+            self.assertTrue((out / 'dense-test-window-01.jpg').is_file())
+            self.assertEqual(report['trajectory']['frames'], [0, 15, 30, 45, 59])
+            self.assertTrue((out / 'trajectory-01.jpg').is_file())
+            m.verify_video(out / 'window-test-window-60fps.mp4', 1280, 720, frames=7)
+            audio = root / 'music.wav'
+            subprocess.run(['ffmpeg', '-y', '-v', 'error', '-f', 'lavfi', '-i', 'sine=frequency=440:sample_rate=48000', '-t', '1', '-ac', '2', str(audio)], check=True)
+            target = root / 'review.mp4'
+            with patch.object(m, 'DURATION', 1): m.encode_review(source, audio, target, work, out)
+            m.verify_video(target, 1280, 720, frames=60, audio=True)
+            with patch.object(m,'WIND_CLIP',{'start':0,'end':.5,'frames':30}):
+                clip=m.extract_wind_clip(target,out)
+            m.verify_video(out/clip['file'],1280,720,frames=30,audio=True)
+
+
+if __name__ == '__main__': unittest.main()

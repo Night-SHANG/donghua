@@ -1,0 +1,1 @@
+window.PUNCH=0;window.FILM_DURATION=15;window.FILM_SIZE=[1920,1080];window.SCENE_DIR='wind_montage';window.SCENE_LIBS=['lib/three.min.js','wind_montage/world.js'];window.ERAS=[{id:'spring',dur:3.6},{id:'summer',dur:3.6},{id:'autumn',dur:3.8},{id:'winter',dur:4}];

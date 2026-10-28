@@ -1,0 +1,73 @@
+name: Native Wind Montage (four 3D shots) complete 15-second sample
+run-name: Wind Montage (four 3D shots) / ${{ github.sha }}
+on:
+  push:
+    branches: ['feat/huashu-wind-montage', 'render/huashu-wind-montage', 'render/huashu-wind-montage-*', 'feat/huashu-fox-stork']
+    paths:
+      - '.github/workflows/huashu-wind-montage.yml'
+      - 'huashu/tools/render_wind.py'
+      - 'huashu/tools/webgl_wind_runtime.py'
+      - 'huashu/wind-tests/**'
+      - 'huashu/wind-montage/**'
+      - 'requirements-huashu-wind.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: native-wind-montage-${{ github.ref }}
+  cancel-in-progress: false
+env:
+  PYTHONUNBUFFERED: '1'
+  PYTHONUTF8: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  complete-short:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install standard native renderer and audio tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg
+          python -m pip install --only-binary=:all: -r requirements-huashu-wind.txt
+          python -m playwright install --with-deps chromium
+      - name: Verify render/evidence contracts
+        run: python -m unittest discover -s huashu/wind-tests -v
+      - name: Fetch clean exact native engine
+        env:
+          HUASHU_SHA: 8a0d7d72ca65fcce6f8ba82c4a6c8dfe35b8422c
+        run: |
+          set -euo pipefail
+          mkdir -p .native-wind/upstream
+          git -C .native-wind/upstream init
+          git -C .native-wind/upstream remote add origin https://github.com/alchaincyf/huashu-art-motion.git
+          git -C .native-wind/upstream fetch --depth=1 origin "$HUASHU_SHA"
+          git -C .native-wind/upstream checkout --detach FETCH_HEAD
+          test "$(git -C .native-wind/upstream rev-parse HEAD)" = "$HUASHU_SHA"
+          test -z "$(git -C .native-wind/upstream status --porcelain --untracked-files=no)"
+      - name: Verify actual WebGL, then one complete 15-second spatial render
+        run: python huashu/tools/render_wind.py render --out wind-output
+      - name: Guard every upload including diagnostic artifacts
+        id: size
+        if: always()
+        continue-on-error: true
+        run: python huashu/tools/render_wind.py check-size --out wind-output
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.size.outcome == 'success'
+        with:
+          name: wind-montage-15s-${{ github.sha }}-${{ github.run_attempt }}
+          path: wind-output/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error

@@ -1,0 +1,418 @@
+{
+  "duration": 15,
+  "sampleRate": 48000,
+  "seed": 281017,
+  "shots": [
+    {
+      "start": 0,
+      "end": 3.6,
+      "name": "spring"
+    },
+    {
+      "start": 3.6,
+      "end": 7.2,
+      "name": "summer"
+    },
+    {
+      "start": 7.2,
+      "end": 11.0,
+      "name": "autumn"
+    },
+    {
+      "start": 11.0,
+      "end": 15,
+      "name": "winter"
+    }
+  ],
+  "cues": [
+    {
+      "time": 0.28,
+      "start": 0.0,
+      "duration": 0.58,
+      "kind": "gust",
+      "description": "春：枝头轻颤"
+    },
+    {
+      "time": 0.6,
+      "start": 0.52,
+      "duration": 0.88,
+      "kind": "gust",
+      "description": "春：阵风上卷"
+    },
+    {
+      "time": 2.1,
+      "start": 2.02,
+      "duration": 0.76,
+      "kind": "gust",
+      "description": "春：翻面离枝"
+    },
+    {
+      "time": 3.6,
+      "start": 3.38,
+      "duration": 0.62,
+      "kind": "gust",
+      "description": "切夏：近水气流掠过"
+    },
+    {
+      "time": 4.7,
+      "start": 4.05,
+      "duration": 1.55,
+      "kind": "gust",
+      "description": "夏：低空侧摆气流"
+    },
+    {
+      "time": 6.6,
+      "start": 6.15,
+      "duration": 0.9,
+      "kind": "gust",
+      "description": "夏：风抬升准备切镜"
+    },
+    {
+      "time": 7.2,
+      "start": 7.04,
+      "duration": 1.5,
+      "kind": "gust",
+      "description": "切秋：骤升阵风和翻滚"
+    },
+    {
+      "time": 8.8,
+      "start": 8.45,
+      "duration": 0.78,
+      "kind": "gust",
+      "description": "秋：旋转尾流渐弱至失速"
+    },
+    {
+      "time": 11.0,
+      "start": 10.76,
+      "duration": 0.7,
+      "kind": "gust",
+      "description": "切冬：近叶掠镜风声"
+    },
+    {
+      "time": 12.4,
+      "start": 11.7,
+      "duration": 1.5,
+      "kind": "gust",
+      "description": "冬：缓落微风"
+    },
+    {
+      "time": 14.2,
+      "start": 14.2,
+      "duration": 0.36,
+      "kind": "snow_contact",
+      "description": "叶片触雪轻响，尾音自然散去"
+    }
+  ],
+  "notes": [
+    {
+      "time": 0.08,
+      "midi": 74,
+      "kind": "piano",
+      "gain": 0.052,
+      "pan": 0.0
+    },
+    {
+      "time": 0.29,
+      "midi": 76,
+      "kind": "piano",
+      "gain": 0.045,
+      "pan": 0.11499119036474503
+    },
+    {
+      "time": 0.51,
+      "midi": 74,
+      "kind": "piano",
+      "gain": 0.04,
+      "pan": 0.19606561921351578
+    },
+    {
+      "time": 0.64,
+      "midi": 62,
+      "kind": "piano",
+      "gain": 0.095,
+      "pan": 0.21931030625986217
+    },
+    {
+      "time": 0.79,
+      "midi": 66,
+      "kind": "piano",
+      "gain": 0.105,
+      "pan": 0.17786920884030982
+    },
+    {
+      "time": 0.94,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.11,
+      "pan": 0.08396541825151296
+    },
+    {
+      "time": 1.1,
+      "midi": 74,
+      "kind": "piano",
+      "gain": 0.11,
+      "pan": -0.03470405271151471
+    },
+    {
+      "time": 2.12,
+      "midi": 78,
+      "kind": "piano",
+      "gain": 0.09,
+      "pan": -0.1431375301543369
+    },
+    {
+      "time": 2.36,
+      "midi": 74,
+      "kind": "piano",
+      "gain": 0.085,
+      "pan": -0.20935245625569351
+    },
+    {
+      "time": 2.73,
+      "midi": 71,
+      "kind": "piano",
+      "gain": 0.075,
+      "pan": -0.21381867526840057
+    },
+    {
+      "time": 3.12,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.065,
+      "pan": -0.15521887162548623
+    },
+    {
+      "time": 3.62,
+      "midi": 66,
+      "kind": "piano",
+      "gain": 0.105,
+      "pan": -0.0508371134258661
+    },
+    {
+      "time": 3.86,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.09,
+      "pan": 0.06853909997294332
+    },
+    {
+      "time": 4.13,
+      "midi": 74,
+      "kind": "piano",
+      "gain": 0.095,
+      "pan": 0.16769964031951046
+    },
+    {
+      "time": 4.39,
+      "midi": 76,
+      "kind": "piano",
+      "gain": 0.08,
+      "pan": 0.2173970114529401
+    },
+    {
+      "time": 4.82,
+      "midi": 74,
+      "kind": "piano",
+      "gain": 0.08,
+      "pan": 0.20297292625265487
+    },
+    {
+      "time": 5.23,
+      "midi": 71,
+      "kind": "piano",
+      "gain": 0.085,
+      "pan": 0.12868178243618758
+    },
+    {
+      "time": 5.49,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.085,
+      "pan": 0.016435823885697264
+    },
+    {
+      "time": 5.76,
+      "midi": 66,
+      "kind": "piano",
+      "gain": 0.07,
+      "pan": -0.10065789663057069
+    },
+    {
+      "time": 6.24,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.085,
+      "pan": -0.18806247431868242
+    },
+    {
+      "time": 6.52,
+      "midi": 74,
+      "kind": "piano",
+      "gain": 0.09,
+      "pan": -0.21999784544115478
+    },
+    {
+      "time": 6.83,
+      "midi": 78,
+      "kind": "piano",
+      "gain": 0.08,
+      "pan": -0.1870446417590006
+    },
+    {
+      "time": 7.22,
+      "midi": 55,
+      "kind": "piano",
+      "gain": 0.13,
+      "pan": -0.09892244219761197
+    },
+    {
+      "time": 7.39,
+      "midi": 62,
+      "kind": "piano",
+      "gain": 0.12,
+      "pan": 0.018377026248043802
+    },
+    {
+      "time": 7.57,
+      "midi": 67,
+      "kind": "piano",
+      "gain": 0.125,
+      "pan": 0.13025617323558938
+    },
+    {
+      "time": 7.76,
+      "midi": 71,
+      "kind": "piano",
+      "gain": 0.12,
+      "pan": 0.20371613741789812
+    },
+    {
+      "time": 8.0,
+      "midi": 78,
+      "kind": "piano",
+      "gain": 0.1,
+      "pan": 0.21708983214041494
+    },
+    {
+      "time": 8.22,
+      "midi": 76,
+      "kind": "piano",
+      "gain": 0.095,
+      "pan": 0.16643267336107298
+    },
+    {
+      "time": 8.46,
+      "midi": 71,
+      "kind": "piano",
+      "gain": 0.1,
+      "pan": 0.06668603848405413
+    },
+    {
+      "time": 8.73,
+      "midi": 67,
+      "kind": "piano",
+      "gain": 0.09,
+      "pan": -0.05272970718775257
+    },
+    {
+      "time": 9.06,
+      "midi": 62,
+      "kind": "piano",
+      "gain": 0.07,
+      "pan": -0.15659277532120708
+    },
+    {
+      "time": 9.78,
+      "midi": 66,
+      "kind": "piano",
+      "gain": 0.065,
+      "pan": -0.21426865468961495
+    },
+    {
+      "time": 10.34,
+      "midi": 62,
+      "kind": "piano",
+      "gain": 0.055,
+      "pan": -0.20874578954198728
+    },
+    {
+      "time": 11.08,
+      "midi": 74,
+      "kind": "piano",
+      "gain": 0.07,
+      "pan": -0.14165315423281866
+    },
+    {
+      "time": 11.72,
+      "midi": 71,
+      "kind": "piano",
+      "gain": 0.065,
+      "pan": -0.032779785679122965
+    },
+    {
+      "time": 12.39,
+      "midi": 69,
+      "kind": "piano",
+      "gain": 0.06,
+      "pan": 0.08576201199420329
+    },
+    {
+      "time": 13.12,
+      "midi": 66,
+      "kind": "piano",
+      "gain": 0.055,
+      "pan": 0.17900822225156318
+    },
+    {
+      "time": 13.69,
+      "midi": 62,
+      "kind": "piano",
+      "gain": 0.05,
+      "pan": 0.21945578624526796
+    },
+    {
+      "time": 14.2,
+      "midi": 50,
+      "kind": "piano",
+      "gain": 0.045,
+      "pan": 0.19517465631231687
+    },
+    {
+      "time": 1.16,
+      "midi": 86,
+      "kind": "glass",
+      "gain": 0.012,
+      "pan": 0.12
+    },
+    {
+      "time": 3.6,
+      "midi": 81,
+      "kind": "glass",
+      "gain": 0.016,
+      "pan": 0.12
+    },
+    {
+      "time": 7.2,
+      "midi": 86,
+      "kind": "glass",
+      "gain": 0.022,
+      "pan": 0.12
+    },
+    {
+      "time": 11.0,
+      "midi": 81,
+      "kind": "glass",
+      "gain": 0.014,
+      "pan": 0.12
+    },
+    {
+      "time": 14.2,
+      "midi": 74,
+      "kind": "glass",
+      "gain": 0.013,
+      "pan": 0.12
+    }
+  ],
+  "score": "Original D-major gesture-scored montage: anticipation, upward pickup, suspension, skim, tumble, stall and landing. Piano, glass and synthesized gusts; no samples.",
+  "end": "Natural instrumental decay with final 0.8-second cos² tail; exact zero endpoints."
+}
