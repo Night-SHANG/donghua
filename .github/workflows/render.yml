@@ -3,6 +3,9 @@ on:
   push:
     paths: ['.github/workflows/render.yml']
   workflow_dispatch:
+concurrency:
+  group: original-render-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:

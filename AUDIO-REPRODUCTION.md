@@ -8,4 +8,6 @@ The script synthesizes original custom foley, the engine's built-in SFX and orig
 
 Verified locally 2026-10-28: build completed; 12.000 seconds, AAC 192k, stereo 48000 Hz; original mix measured -14.01 LUFS and -1.91 dBTP; encoded AAC true peak -1.9056977 dBTP. `scripts/verify-audio.py` rejects wrong encoding, rate, channels, duration or excessive peak. Detailed original `tools/audio/qa.py` is included but requires optional librosa and is not run by this minimal script. Earlier independent original QA of byte-identical WAV/AAC passed 30/30 cues, with six marginal onset and eight sound-class balance warnings. No human listening review is claimed.
 
-Outputs: film/audio/mix.wav, film/audio/mix-aac.m4a, film/audio/stems, film/audio/technical-qa.json. Stream-copy the AAC into **newly rendered** picture, never the source project's published picture. The supplied `source-files.txt` is the upload manifest; generated audio and environments are not source files.
+Outputs: film/audio/mix.wav, film/audio/mix-aac.m4a, film/audio/stems, film/audio/technical-qa.json. Stream-copy the AAC into **newly rendered** picture, never the source project's published picture. The source-provenance JSON is the source identity; generated audio and environments are not source files.
+
+Final GitHub-produced MP4 passed a separate 30/30-cue QA; see `RENDER-RESULT.md` for its encoder-specific peak/loudness and warnings.

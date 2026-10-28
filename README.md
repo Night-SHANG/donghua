@@ -1,5 +1,7 @@
 # Clawd and the Leaf — original-source rerender
 
+**Verified full render:** [results and validation](RENDER-RESULT.md).
+
 This repository reproduces the MIT-licensed [OpenVideoHarness showcase](https://github.com/ZLHad/OpenVideoHarness/tree/main/showcase/01-handdrawn-clawd-leaf). The published author MP4 is **not** a rendering input.
 
 - Original scene/engine JS retained byte-for-byte (SHA256 in `source-provenance.json`). The upstream snapshot was collected from `main`; a full upstream commit was not recorded, so file hashes are the provenance identity.
