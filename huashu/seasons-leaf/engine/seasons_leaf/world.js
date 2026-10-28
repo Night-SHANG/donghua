@@ -21,17 +21,20 @@ function tree(c,x,y,s,season,seed){const r=U.rng(seed),p=pal[season];c.save();c.
  else {c.strokeStyle='#edf3ed';c.lineWidth=8;c.beginPath();c.moveTo(0,by+18);c.quadraticCurveTo(bx*.5,by-44,bx,by-78);c.stroke();c.strokeStyle=p.trunk;}}
  if(season!==3)for(let j=0;j<45;j++){let a=r()*TAU,rr=Math.sqrt(r())*115;ellipse(c,Math.cos(a)*rr,-260+Math.sin(a)*rr*.65,18+r()*28,12+r()*20,p.leaf[(r()*4)|0],r());}
  c.restore();}
-function layer(season,depth){return P.cached('leaf_season_'+season+'_'+depth,3200,1080,c=>{const p=pal[season],r=U.rng(702+season*71+depth*101);
+function layer(season,depth){return P.cached('leaf_season_wrap_v2_'+season+'_'+depth,3200,1080,c=>{const p=pal[season],r=U.rng(702+season*71+depth*101);
  if(depth===0){const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,p.sky[0]);g.addColorStop(1,p.sky[1]);c.fillStyle=g;c.fillRect(0,0,3200,H);
  for(let k=0;k<3;k++){c.fillStyle=[p.hill,p.far,p.land][k];c.globalAlpha=.25+k*.1;c.beginPath();c.moveTo(0,H);for(let x=0;x<=3200;x+=25)c.lineTo(x,510+k*100+70*Math.sin(x*.003+k)+45*P.fbm(x*.002,k+2));c.lineTo(3200,H);c.closePath();c.fill();}c.globalAlpha=1;
  // airy watercolor sky granulation, stationary with the scene
  for(let j=0;j<1500;j++){c.globalAlpha=.035;ellipse(c,r()*3200,r()*700,10+r()*25,3+r()*10,j%2?'#fff8dd':p.hill);}c.globalAlpha=1;
  } else if(depth===1){
- for(let j=0;j<13;j++)tree(c,j*270+90,season===3?680:600,.65+r()*.4,season,170+j*19+season*113);
+ for(let j=0;j<12;j++){const x=j*(3200/12)+90,scale=.65+r()*.4,seed=170+j*19+season*113;for(const wrap of [-3200,0,3200])tree(c,x+wrap,season===3?680:600,scale,season,seed);}
  c.fillStyle=p.water;c.beginPath();c.moveTo(0,760);c.bezierCurveTo(700,690,1700,750,3200,630);c.lineTo(3200,1080);c.lineTo(0,1080);c.fill();
  c.fillStyle=p.land;c.beginPath();c.moveTo(0,840);c.bezierCurveTo(900,640,1300,960,2050,870);c.bezierCurveTo(2500,810,2800,700,3200,760);c.lineTo(3200,1080);c.lineTo(0,1080);c.fill();
  for(let j=0;j<1100;j++){let x=r()*3200,y=850+r()*230;c.globalAlpha=.2+r()*.25;c.strokeStyle=p.leaf[j%4];c.lineWidth=2+r()*3;c.beginPath();c.moveTo(x,y);c.lineTo(x+8+r()*16,y-7-r()*18);c.stroke();}c.globalAlpha=1;
- } else {for(let j=0;j<5;j++)tree(c,j*810+80,850,1.25+r()*.32,season,900+j*37+season*90);}
+ } else {
+ // Periodic artwork must wrap its geometry BEFORE the cache is clipped.
+ // Drawing unrelated trees at the two edges severed branches at the tile seam.
+ for(let j=0;j<4;j++){const x=j*800+80,scale=1.25+r()*.32,seed=900+j*37+season*90;for(const wrap of [-3200,0,3200])tree(c,x+wrap,850,scale,season,seed);}}
  });}
 function repeat(c,img,shift,y,scale){const width=img.width*scale,off=((shift%width)+width)%width;c.drawImage(img,-off,y,img.width*scale,img.height*scale);c.drawImage(img,width-off,y,img.width*scale,img.height*scale);}
 function landscape(c,season,t){let s=F.state(t),p=pal[season];c.save();
