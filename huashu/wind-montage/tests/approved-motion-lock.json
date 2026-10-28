@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "approvedSource": {
+    "repository": "Night-SHANG/donghua",
+    "path": "huashu/wind-montage/engine/wind_montage/world.js",
+    "githubBlobSha": "d43b45189a0f223f2e28487785fd028ce0ad5fca",
+    "worldSha256": "7f0a1c547488dad068f61c039e3f676d43c495856f8796c3fb1494dac7218b73"
+  },
+  "fps": 60,
+  "samples": 901,
+  "roundingDecimals": 10,
+  "samplesSha256": "6071e5f22a8424fb4ff2f12ba01a43bd1f948733fa6d10aa30160302f9fac714",
+  "heroSourceSha256": {
+    "point": "c6c2e0b3f2230b28ca71719d0662fdda0472963e2a806888608e292b9c965c0a",
+    "heroGeometry": "f9bda18fb1dd7610032d46946e7838b5df845fc6bfe6d26baac97231978929e3",
+    "heroDraw": "9e5ec087c9968c95cc47d9b8b70292759170201e9de20fa440c60b14db188b8e",
+    "topology": "2fbfd8325d5a79f722fb3b3b9eec4ed2be099386d08bb43e6f0857261f15daa2"
+  },
+  "lockedFiles": {
+    "engine/eras_wind_montage.js": "0dfaf4da5169825546140747631309fac4116ba3e782ec96faba9f8ec9f9cd61",
+    "audio/synthesize.py": "8443100eedc80c4ded6dc882dd32dc202b1a333dc343855bbd641c0b98ca383b",
+    "audio/test_audio.py": "fb4cffe2842bafb3d4b42f0004d125f7b37aefe494c7614dd6959dfbe04e56d0",
+    "audio/audio-cues.json": "d0877206549fa45a042ddb7f8ae49fdff0f018580020b8e6439306c2a4c285c5"
+  }
+}
