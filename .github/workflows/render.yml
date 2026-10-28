@@ -53,7 +53,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install --only-binary=:all: -r requirements-audio.txt
+      - run: |
+          pip install --only-binary=:all: -r requirements-audio.txt
       - uses: actions/download-artifact@v4
         with:
           pattern: part-*
@@ -71,7 +72,7 @@ jobs:
           ffmpeg -hide_banner -loglevel error -y -i final/clawd-and-leaf-rerender-1080p.mp4 -vf 'select=eq(n\,12)+eq(n\,72)+eq(n\,120)+eq(n\,197)+eq(n\,252)+eq(n\,283),scale=640:360,tile=3x2' -frames:v 1 final/contact-sheet.jpg
           cp parts/manifest-*.json final/
           cp parts/f*.png parts/boundary-*.png final/
-          cp LICENSE-* AUDIO-REPRODUCTION.md final/
+          cp LICENSE-* AUDIO-REPRODUCTION.md film/audio/technical-qa.json final/
           sha256sum final/*.mp4 > final/SHA256SUMS
       - uses: actions/upload-artifact@v4
         with:
