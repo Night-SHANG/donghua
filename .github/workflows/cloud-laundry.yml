@@ -58,7 +58,6 @@ jobs:
       - name: Render
         working-directory: remotion/cloud-laundry
         env:
-          BROWSER_EXECUTABLE: /usr/bin/google-chrome
           MODE: ${{ steps.plan.outputs.mode }}
         run: |
           if [ "$MODE" = preview ]; then node scripts/render.mjs --stills; else node scripts/render.mjs; fi
