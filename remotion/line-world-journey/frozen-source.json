@@ -1,0 +1,84 @@
+{
+  "status": "frozen",
+  "durationInFrames": 720,
+  "fps": 30,
+  "review": "Director freeze and independent static reviewer GO, including 8-second composited architectural wipe. Actual runtime preview review pending.",
+  "sources": [
+    {
+      "path": "package.json",
+      "sha256": "379a7eb2d7b85c50579673a5045e679743f81b69acf30768c216e3e46643d92a"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "f2189a3ef4124b8b530ea5801416943999a4b5d1ec912f7f746225a3a994ee1d"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "95d3e207d5d467126ce8335572900129bb872bd11402701c5c334f641a38f1ad"
+    },
+    {
+      "path": "film-spec.json",
+      "sha256": "793a344e35a208c57452b10db3c302896ef55af12a4935779fe1cc5d7194024e"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "eb452f83ef3731b428fee29c0fdecc4fa40d270dbd7b108cdc1fd81680ee02cd"
+    },
+    {
+      "path": "src/index.ts",
+      "sha256": "6cfb588a3a6684c0ebf6bef9062c596fe7cac757944cd8948b5e126f1835eee5"
+    },
+    {
+      "path": "src/scene.tsx",
+      "sha256": "b6ec4f030bfc89c51629d8de7b89f6fc369550ac5a82f11ac16df9b6dd76001a"
+    },
+    {
+      "path": "scripts/codec-preflight.mjs",
+      "sha256": "8ec214f5ec0d96571f7e5733fe4ef4bcaa13e5cf58216ea4ecffcec988199fc1"
+    },
+    {
+      "path": "scripts/film-spec.mjs",
+      "sha256": "92dde708baa779b3644875750d4f3676d300383c36b862179992800cd6dca6f6"
+    },
+    {
+      "path": "scripts/frozen-source.mjs",
+      "sha256": "ed4d3a291b525228e4381de1f81a8924e0b3dc5553bf2b9b51cdb5571e112cf7"
+    },
+    {
+      "path": "scripts/render.mjs",
+      "sha256": "40677348288eadadc077ca3d1c1fb8e39a7cf1bcea6455458612214c7eef1741"
+    },
+    {
+      "path": "scripts/source-manifest.py",
+      "sha256": "6b9b65a924fa4a8a49bc6bd853ea7d545fa839addc4c34c0ff758cd38bbefd2f"
+    },
+    {
+      "path": "scripts/verify_output.py",
+      "sha256": "7e4c1cdcc23add5c878303551722bd82568433c2a9d655537529be8cf701cf72"
+    },
+    {
+      "path": "host-tests/film-spec.test.mjs",
+      "sha256": "868d08b0f568526f94a0d8bb71aece6fa978fcdb54edc2cb0ee489e2a3e5bb9b"
+    },
+    {
+      "path": "host-tests/frozen-source.test.mjs",
+      "sha256": "66d4bf810172f9d0d34e1b55322d1b554ee9761b9aafcd5cf6c27504ae39336c"
+    },
+    {
+      "path": "tests/timeline.test.ts",
+      "sha256": "cf20d38aa7ab2d781f965216ef2592ad975117b354ee0ebdd46d50606ebfe64d"
+    },
+    {
+      "path": "audio/generate.py",
+      "sha256": "5e0597320bd9dd0e29593cf95ca17926ec552867a9516d68f90bd4abb2754e00"
+    },
+    {
+      "path": "audio/test_audio.py",
+      "sha256": "6e9ed017bd3800b50fe6fe7df564e577002d777fb99b003f862c2da647eb4900"
+    },
+    {
+      "path": "audio/README.md",
+      "sha256": "ffffefc0abb87158eb38dd6ac263fae4ee2aa1c095dee469cdbd1c9eebff0c30"
+    }
+  ]
+}
