@@ -1,0 +1,60 @@
+{
+  "title": "云朵洗衣店 / Cloud Laundry",
+  "duration_seconds": 30,
+  "sample_rate": 48000,
+  "channels": 2,
+  "tempo_bpm": 80,
+  "original": true,
+  "source_assets": "None: procedural original composition and synthetic foley",
+  "cues": [
+    {
+      "time": 2,
+      "end": 5,
+      "action": "cloud enters; soft wind"
+    },
+    {
+      "time": 6.9,
+      "action": "brass hoop contact"
+    },
+    {
+      "time": 8.7,
+      "action": "squeeze and droplets"
+    },
+    {
+      "time": 9.1,
+      "action": "squeeze and droplets"
+    },
+    {
+      "time": 9.5,
+      "action": "squeeze and droplets"
+    },
+    {
+      "time": 12.6,
+      "action": "main droplet lands at sprout"
+    },
+    {
+      "time": 13.2,
+      "end": 14.6,
+      "action": "sprout growing figure"
+    },
+    {
+      "time": 19,
+      "end": 21.5,
+      "action": "cloth unfurl"
+    },
+    {
+      "time": 22,
+      "action": "wooden clothespin click"
+    },
+    {
+      "time": 24,
+      "end": 29.3,
+      "action": "warm musical resolution"
+    },
+    {
+      "time": 29.3,
+      "end": 30,
+      "action": "natural fade to silence"
+    }
+  ]
+}

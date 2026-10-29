@@ -1,0 +1,8 @@
+import test from 'node:test'; import assert from 'node:assert/strict';
+import {stateAt, cloudPath, cameraAt} from '../src/motion.ts';
+test('all 1800 states have finite geometry and deterministic paths',()=>{for(let f=0;f<1800;f++){const s=stateAt(f/60);for(const v of Object.values(s))assert.ok(Number.isFinite(v));assert.equal(cloudPath(s),cloudPath(stateAt(f/60)));assert.ok(!cloudPath(s).includes('NaN'));}});
+test('cloud crosses hoop without teleporting and reaches clothesline',()=>{let last=stateAt(0);for(let f=1;f<1800;f++){const s=stateAt(f/60);assert.ok(Math.hypot(s.x-last.x,s.y-last.y)<14);last=s;}assert.ok(stateAt(6).x<1000);assert.ok(stateAt(12).x>1000);assert.equal(stateAt(24).linen,1);});
+test('growth follows droplet and finishes before linen scene',()=>{assert.equal(stateAt(12.5).grow,0);assert.ok(stateAt(15).grow>0);assert.equal(stateAt(18).grow,1);});
+test('five cameras and no scale discontinuities within shots',()=>{for(let i=0;i<5;i++){assert.equal(cameraAt(i*6+.1).shot,i);let c=cameraAt(i*6);for(let f=1;f<360;f++){const n=cameraAt(i*6+f/60);assert.ok(Math.abs(n.scale-c.scale)<.03);c=n;}}});
+test('linen holds at the painted rope and hoop squeezes the cloud vertically',()=>{const s=stateAt(24);assert.ok(Math.abs(s.y-s.ry-163)<1);const c=stateAt(8.9);assert.ok(c.ry<65);assert.ok(c.rx>180);assert.ok(Math.abs(c.x-1000)<55);});
+test('camera never exposes blank stage beyond painted backdrop',()=>{for(let f=0;f<1800;f++){const c=cameraAt(f/60);assert.ok(c.x-960/c.scale>=-1e-6);assert.ok(c.x+960/c.scale<=1920+1e-6);assert.ok(c.y-540/c.scale>=-1e-6);assert.ok(c.y+540/c.scale<=1080+1e-6);}});
