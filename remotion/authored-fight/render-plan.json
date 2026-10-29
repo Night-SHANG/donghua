@@ -1,5 +1,5 @@
 {
-  "mode": "preview",
+  "mode": "final",
   "stillFrames": [
     0,
     15,
@@ -16,5 +16,6 @@
     164,
     177,
     209
-  ]
+  ],
+  "approvedPreviewCommit": "5c1a220a4da22fd0b6c270aecc31260c24b8d8dc"
 }
