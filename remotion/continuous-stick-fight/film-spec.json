@@ -1,0 +1,12 @@
+{
+  "id": "ContinuousFight",
+  "width": 1280,
+  "height": 720,
+  "fps": 60,
+  "durationInFrames": 676,
+  "impactQaFrame": 600,
+  "outputName": "continuous-stick-fight.mp4",
+  "status": "motion-locked-independent-dense-review-complete-export-pending",
+  "posesSha256": "d100c7f38b7d488d820804255ae8629f0e3af14ec34c1cfda9c6cecaea367e4b",
+  "visualSha256": "40f731ceb0c08000d678ada40343507f23bbb417183b62fe57ed90c6890a29f6"
+}

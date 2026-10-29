@@ -1,0 +1,314 @@
+{
+  "CrossLeft": {
+    "filename": "Male2_E3_CrossLeft.bvh",
+    "source_frames": 99,
+    "peak_frame": 21,
+    "active_start": 19,
+    "active_end": 29,
+    "peak_limb_speed_cm_s": 629.6248919475602,
+    "root_total_cm": [
+      0.10869999999999891,
+      -0.608399999999989,
+      -2.0180000000000007
+    ]
+  },
+  "CrossRight": {
+    "filename": "Male2_E4_CrossRight.bvh",
+    "source_frames": 74,
+    "peak_frame": 18,
+    "active_start": 16,
+    "active_end": 36,
+    "peak_limb_speed_cm_s": 749.8586623024206,
+    "root_total_cm": [
+      -2.6921999999999855,
+      -0.44649999999998613,
+      -2.2820000000000107
+    ]
+  },
+  "HookLeft": {
+    "filename": "Male2_E5_HookLeft.bvh",
+    "source_frames": 83,
+    "peak_frame": 27,
+    "active_start": 23,
+    "active_end": 39,
+    "peak_limb_speed_cm_s": 895.6621743209564,
+    "root_total_cm": [
+      -3.5440847000000004,
+      -0.1921000000000106,
+      0.04800000000000182
+    ]
+  },
+  "HookRight": {
+    "filename": "Male2_E6_HookRight.bvh",
+    "source_frames": 78,
+    "peak_frame": 31,
+    "active_start": 24,
+    "active_end": 37,
+    "peak_limb_speed_cm_s": 869.147068463315,
+    "root_total_cm": [
+      -6.493600000000008,
+      0.9073999999999955,
+      2.791999999999973
+    ]
+  },
+  "UppercutLeft": {
+    "filename": "Male2_E7_UppercutLeft.bvh",
+    "source_frames": 79,
+    "peak_frame": 25,
+    "active_start": 21,
+    "active_end": 28,
+    "peak_limb_speed_cm_s": 805.0698030996138,
+    "root_total_cm": [
+      -0.15619999999999834,
+      0.3140000000000214,
+      -2.920000000000016
+    ]
+  },
+  "UppercutRight": {
+    "filename": "Male2_E8_UppercutRight.bvh",
+    "source_frames": 75,
+    "peak_frame": 17,
+    "active_start": 9,
+    "active_end": 23,
+    "peak_limb_speed_cm_s": 860.0454661942553,
+    "root_total_cm": [
+      6.350099999999998,
+      -3.9913999999999987,
+      9.198999999999955
+    ]
+  },
+  "BodyHookLeft": {
+    "filename": "Male2_E9_BodyHookLeft.bvh",
+    "source_frames": 83,
+    "peak_frame": 34,
+    "active_start": 28,
+    "active_end": 47,
+    "peak_limb_speed_cm_s": 847.2440931421802,
+    "root_total_cm": [
+      -3.8880999999999943,
+      -0.20539999999999736,
+      -1.016999999999996
+    ]
+  },
+  "BodyHookRight": {
+    "filename": "Male2_E10_BodyHookRight.bvh",
+    "source_frames": 72,
+    "peak_frame": 20,
+    "active_start": 13,
+    "active_end": 25,
+    "peak_limb_speed_cm_s": 963.6452309378628,
+    "root_total_cm": [
+      0.2558000000000078,
+      1.1969000000000278,
+      -0.228999999999985
+    ]
+  },
+  "JabLeft": {
+    "filename": "Male2_E1_JabLeft.bvh",
+    "source_frames": 101,
+    "peak_frame": 32,
+    "active_start": 31,
+    "active_end": 40,
+    "peak_limb_speed_cm_s": 490.74032990726187,
+    "root_total_cm": [
+      3.7295000000000016,
+      0.35240000000001714,
+      3.370999999999981
+    ]
+  },
+  "JabRight": {
+    "filename": "Male2_E2_JabRight.bvh",
+    "source_frames": 86,
+    "peak_frame": 22,
+    "active_start": 21,
+    "active_end": 30,
+    "peak_limb_speed_cm_s": 515.633654152955,
+    "root_total_cm": [
+      -0.7177000000000007,
+      1.1861000000000104,
+      0.4269999999999925
+    ]
+  },
+  "DodgeLeft": {
+    "filename": "Male2_E19_DodgeLeft.bvh",
+    "source_frames": 78,
+    "peak_frame": 22,
+    "active_start": 13,
+    "active_end": 56,
+    "peak_limb_speed_cm_s": 102.11451681157253,
+    "root_total_cm": [
+      3.8558999999999983,
+      1.2718000000000131,
+      2.96769
+    ]
+  },
+  "DodgeRight": {
+    "filename": "Male2_E20_DodgeRight.bvh",
+    "source_frames": 85,
+    "peak_frame": 20,
+    "active_start": 16,
+    "active_end": 57,
+    "peak_limb_speed_cm_s": 108.22515083037172,
+    "root_total_cm": [
+      -0.44259999999999877,
+      0.024900000000002365,
+      2.8556410000000003
+    ]
+  },
+  "DuckLeft": {
+    "filename": "Male2_E21_DuckLeft.bvh",
+    "source_frames": 83,
+    "peak_frame": 37,
+    "active_start": 23,
+    "active_end": 50,
+    "peak_limb_speed_cm_s": 317.8215658254028,
+    "root_total_cm": [
+      63.051339999999996,
+      -0.8285999999999945,
+      9.395709999999994
+    ]
+  },
+  "DuckRight": {
+    "filename": "Male2_E22_DuckRight.bvh",
+    "source_frames": 77,
+    "peak_frame": 31,
+    "active_start": 11,
+    "active_end": 39,
+    "peak_limb_speed_cm_s": 232.0009601711837,
+    "root_total_cm": [
+      -52.373940000000005,
+      -0.3077000000000112,
+      41.202
+    ]
+  },
+  "Advance": {
+    "filename": "Male2_E3_Advance.bvh",
+    "source_frames": 186,
+    "peak_frame": 43,
+    "active_start": 12,
+    "active_end": 185,
+    "peak_limb_speed_cm_s": 239.62015505061734,
+    "root_total_cm": [
+      -12.13759,
+      1.856899999999996,
+      350.10799999999995
+    ]
+  },
+  "QuickAdvance": {
+    "filename": "Male2_E4_QuickAdvance.bvh",
+    "source_frames": 113,
+    "peak_frame": 63,
+    "active_start": 20,
+    "active_end": 87,
+    "peak_limb_speed_cm_s": 393.8872715423,
+    "root_total_cm": [
+      -16.02857,
+      -2.669899999999984,
+      386.19219999999996
+    ]
+  },
+  "Retreat": {
+    "filename": "Male2_E5_Retreat.bvh",
+    "source_frames": 232,
+    "peak_frame": 56,
+    "active_start": 0,
+    "active_end": 177,
+    "peak_limb_speed_cm_s": 246.25892211719366,
+    "root_total_cm": [
+      3.432699999999997,
+      -0.05750000000000455,
+      -284.126
+    ]
+  },
+  "QuickRetreat": {
+    "filename": "Male2_E6_QuickRetreat.bvh",
+    "source_frames": 162,
+    "peak_frame": 120,
+    "active_start": 10,
+    "active_end": 132,
+    "peak_limb_speed_cm_s": 439.26111673764586,
+    "root_total_cm": [
+      -7.996169999999999,
+      -5.429500000000019,
+      -431.85499999999996
+    ]
+  },
+  "SpinningBackKick": {
+    "filename": "Male2_G4_SpinningBackKick.bvh",
+    "source_frames": 83,
+    "peak_frame": 31,
+    "active_start": 15,
+    "active_end": 52,
+    "peak_limb_speed_cm_s": 799.9374538481123,
+    "root_total_cm": [
+      24.9795,
+      -1.9851999999999919,
+      25.1002
+    ]
+  },
+  "RoundhouseLeft": {
+    "filename": "Male2_G8_RoundhouseLeft.bvh",
+    "source_frames": 78,
+    "peak_frame": 16,
+    "active_start": 3,
+    "active_end": 50,
+    "peak_limb_speed_cm_s": 734.1689330854244,
+    "root_total_cm": [
+      4.204000000000008,
+      -4.056799999999981,
+      7.987499999999997
+    ]
+  },
+  "RoundhouseRight": {
+    "filename": "Male2_G9_RoundhouseRight.bvh",
+    "source_frames": 55,
+    "peak_frame": 8,
+    "active_start": 0,
+    "active_end": 30,
+    "peak_limb_speed_cm_s": 939.9839391360257,
+    "root_total_cm": [
+      15.795899999999989,
+      -1.2355000000000018,
+      0.7890100000000011
+    ]
+  },
+  "FrontKick": {
+    "filename": "Male2_G2_FrontKick.bvh",
+    "source_frames": 70,
+    "peak_frame": 20,
+    "active_start": 11,
+    "active_end": 39,
+    "peak_limb_speed_cm_s": 912.2487003228749,
+    "root_total_cm": [
+      13.83450000000002,
+      -3.929900000000032,
+      23.79679999999999
+    ]
+  },
+  "PushKickLeft": {
+    "filename": "Male2_G17_PushKickLeft.bvh",
+    "source_frames": 137,
+    "peak_frame": 70,
+    "active_start": 62,
+    "active_end": 104,
+    "peak_limb_speed_cm_s": 397.84978736397863,
+    "root_total_cm": [
+      42.90950000000001,
+      -4.1676000000000215,
+      62.37740000000002
+    ]
+  },
+  "PushKickRight": {
+    "filename": "Male2_G18_PushKickRight.bvh",
+    "source_frames": 88,
+    "peak_frame": 7,
+    "active_start": 4,
+    "active_end": 40,
+    "peak_limb_speed_cm_s": 428.6651755604653,
+    "root_total_cm": [
+      45.492599999999996,
+      1.6853000000000122,
+      62.42359999999999
+    ]
+  }
+}

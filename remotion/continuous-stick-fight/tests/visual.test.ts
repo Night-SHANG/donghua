@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import data from '../src/poses.json';import {svgFrame} from '../src/visual';
+test('every frame contains finite two-actor silhouette markup',()=>{for(let f=0;f<data.frames.length;f++){const svg=svgFrame(f,false);assert(!/NaN|undefined|Infinity/.test(svg),`nonfinite frame ${f}`);assert.equal((svg.match(/r="32"/g)||[]).length,2);assert.equal((svg.match(/stroke-width="16"/g)||[]).length,10);}});
+test('visual duration derives from generated motion, not stale hardcoded frame count',()=>{assert.equal(svgFrame(data.frames.length+100),svgFrame(data.frames.length-1));});

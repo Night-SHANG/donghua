@@ -1,0 +1,35 @@
+import data from './poses.json';
+const D:any=data; type P=number[];const names:string[]=D.names;const ix=(n:string)=>names.indexOf(n);const clamp=(n:number)=>Math.max(0,Math.min(1,n));const smooth=(n:number)=>{n=clamp(n);return n*n*(3-2*n)};const mix=(a:P,b:P)=>a.map((v,i)=>(v+b[i])/2);const N=D.frames.length;
+const az=Math.PI/6, scale=2.05, floor=606;
+const horizontal=(p:P)=>p[0]*Math.cos(az)+p[2]*Math.sin(az);
+const centers:number[]=D.frames.map((e:any)=>horizontal(mix(e[0][0],e[1][0])));for(let i=1;i<N;i++)centers[i]=centers[i-1]*.96+centers[i]*.04;
+export const project=(p:P,f:number):P=>[640+(horizontal(p)-centers[Math.min(N-1,f)])*scale,floor-p[1]*scale];
+const num=(v:number)=>v.toFixed(2);const line=(p:P[])=>p.map((v,i)=>(i?'L':'M')+num(v[0])+','+num(v[1])).join(' ');
+const headCenter=(p:P[])=>D.headCenterMode==='midpoint'?mix(p[ix('Head')],p[ix('Head_end')]):p[ix('Head')];
+const fistCenter=(p:P[],side:string)=>{const h=p[ix(side+'Hand')],e=p[ix(side+'Hand_end')],k=D.handCenterFraction??0;return h.map((v,i)=>v+(e[i]-v)*k)};
+function paths(p:P[]){const sh=mix(p[ix('LeftArm')],p[ix('RightArm')]),hip=p[ix('Hips')];return [[hip,p[ix('Spine')],sh,headCenter(p)],[sh,p[ix('LeftForeArm')],p[ix('LeftHand')],fistCenter(p,'Left')],[sh,p[ix('RightForeArm')],p[ix('RightHand')],fistCenter(p,'Right')],[hip,p[ix('LeftLeg')],p[ix('LeftFoot')],p[ix('LeftToeBase')]],[hip,p[ix('RightLeg')],p[ix('RightFoot')],p[ix('RightToeBase')]]];}
+function actor(p:P[],color:string,f:number){let s='';let hip=project(p[0],f);s+=`<ellipse cx="${hip[0]}" cy="${floor+4}" rx="44" ry="7" fill="#121e19" opacity=".13"/>`;for(const path of paths(p))s+=`<path d="${line(path.map(q=>project(q,f)))}" fill="none" stroke="${color}" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>`;const h=project(headCenter(p),f);return s+`<circle cx="${h[0]}" cy="${h[1]}" r="32" fill="${color}"/>`;}
+export function svgFrame(frame:number,fx=true){const f=Math.max(0,Math.min(N-1,frame)),entry=D.frames[f],world=(x:number)=>640+(x-centers[f])*scale;const railBeat=(D.beats||[]).find((b:any)=>b.id==='rail-break');const hit=railBeat?.contactFrame??Math.round(N*.64);let railWorld=D.railWorld;
+if(!railWorld){const pose=D.frames[Math.min(N-1,hit)][0];railWorld=pose[ix('LeftToeBase')];}
+const rail=project(railWorld,f);const railX=rail[0],railY=rail[1];const fall=smooth((f-hit)/42);let shake=0;if(fx&&f>=hit&&f<hit+12)shake=Math.sin((f-hit)*1.9)*3.5*(1-(f-hit)/12);
+let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"><defs><linearGradient id="wall" x2="0" y2="1"><stop stop-color="#e5e7e4"/><stop offset="1" stop-color="#bec5c1"/></linearGradient><linearGradient id="floor" x2="0" y2="1"><stop stop-color="#9ea9a3"/><stop offset="1" stop-color="#75827b"/></linearGradient></defs><rect width="1280" height="720" fill="url(#wall)"/><g transform="translate(${shake} 0)">`;
+// Large-scale industrial world remains fixed while the camera follows native footwork.
+for(let x=-1600;x<=2000;x+=260){const sx=world(x);s+=`<path d="M${sx} 70V606M${sx+4} 73V602" stroke="#98a49d" stroke-width="3" fill="none"/><path d="M${sx} 110H${sx+210}V230H${sx}" stroke="#acb6af" stroke-width="3" fill="none"/>`;}
+s+=`<path d="M-200 95H1480M-200 112H1480" stroke="#79877e" stroke-width="8"/><path d="M-200 270H1480" stroke="#afbab2" stroke-width="4"/>`;
+const door=world(-160);s+=`<rect x="${door-140}" y="230" width="230" height="375" fill="#697a70" stroke="#35473c" stroke-width="7"/><rect x="${door-124}" y="244" width="198" height="358" fill="#8e9c93"/>`;for(let y=270;y<600;y+=32)s+=`<path d="M${door-120} ${y}H${door+70}" stroke="#65786a" stroke-width="4"/>`;
+s+=`<rect x="${door-75}" y="190" width="105" height="24" fill="#596b5d"/><text x="${door-22}" y="208" font-family="sans-serif" font-size="13" text-anchor="middle" fill="#dbe6db">SERVICE 04</text><rect x="-100" y="${floor}" width="1500" height="150" fill="url(#floor)"/><path d="M-100 ${floor}H1500" stroke="#33493b" stroke-width="6"/>`;
+for(let x=-1500;x<2000;x+=170){const sx=world(x);s+=`<path d="M${sx} 651h125m-45 40h94" stroke="#a6b2aa" stroke-width="2"/>`;}
+// Fixed structural column bounds the retreat lane from the opening frame.
+// It is not moved to chase an actor, and no wall impact is claimed.
+const wallEdge=world(-110);s+=`<path d="M${wallEdge-60} 135H${wallEdge}V${floor}H${wallEdge-60}Z" fill="#85968a" stroke="#53695a" stroke-width="5"/><path d="M${wallEdge-14} 140V${floor-4}" stroke="#b6c2b7" stroke-width="5"/><path d="M${wallEdge-59} 562H${wallEdge-3}M${wallEdge-59} 580H${wallEdge-3}" stroke="#b5b38b" stroke-width="8"/>`;
+// Fragile barrier is a real strike target; broken state persists, not an exit decoration.
+s+=`<path d="M${railX+110} ${railY}V${floor}" stroke="#455c4c" stroke-width="9"/>`;
+if(f<hit)s+=`<path d="M${railX} ${railY}H${railX+110}M${railX+8} ${railY+48}H${railX+110}" stroke="#52695a" stroke-width="9" stroke-linecap="round"/>`;
+else{s+=`<g transform="translate(${railX+110} ${railY}) rotate(${-fall*82})"><path d="M0 0H-110M0 48H-102" stroke="#52695a" stroke-width="9" stroke-linecap="round"/></g><path d="M${railX+102} ${railY}l8 -5l-4 12" fill="none" stroke="#dbe5d9" stroke-width="3"/>`;}
+// Short trails follow actual fast foot trajectories, never invented limb targets.
+if(fx&&f>3){for(let a=0;a<2;a++)for(const j of ['LeftToeBase','RightToeBase']){const i=ix(j),now=project(entry[a][i],f),prev=project(D.frames[f-2][a][i],f);if(Math.hypot(now[0]-prev[0],now[1]-prev[1])>28){const pts=[3,2,1,0].map(k=>project(D.frames[f-k][a][i],f));s+=`<path d="${line(pts)}" fill="none" stroke="${a?'#e7a18c':'#8ba68f'}" stroke-width="6" stroke-linecap="round"/>`;}}}
+// Depth order uses camera-space depth, not actor identity; each limb is still one opaque silhouette.
+const depth=(p:P[])=>p[0][2]*Math.cos(az)-p[0][0]*Math.sin(az);const order=depth(entry[0])>depth(entry[1])?[0,1]:[1,0];for(const a of order)s+=actor(entry[a],a?'#dc3e28':'#153c26',f);
+if(fx){for(const c of D.contacts||[]){const dt=f-c.frame;if(dt<0||dt>=10||!['block','impact','rail'].includes(c.kind))continue;const q=project(c.world,f),k=dt/10;for(let n=0;n<5;n++){const angle=n*1.256+.2,rr=8+18*k;s+=`<path d="M${q[0]+Math.cos(angle)*rr} ${q[1]+Math.sin(angle)*rr}l${Math.cos(angle)*(15-8*k)} ${Math.sin(angle)*(15-8*k)}" stroke="#fff8d1" stroke-width="${4*(1-k)}" stroke-linecap="round"/>`;}}
+if(f>=hit&&f<hit+60){const dt=f-hit;for(let i=0;i<7;i++){const x=railX+Math.cos(i*2.2)*dt*(1+i*.15),y=railY-Math.abs(Math.sin(i*2.2))*dt*2+dt*dt*.12;s+=`<path d="M${x} ${Math.min(floor,y)}l8 3" stroke="${i%2?'#dce4d6':'#596c5d'}" stroke-width="4" opacity="${1-dt/60}"/>`;}}}
+s+=`</g><rect width="1280" height="32" fill="#17291e"/><rect y="688" width="1280" height="32" fill="#17291e"/>${f>N-100?'<text x="1250" y="708" font-family="sans-serif" font-size="11" text-anchor="end" fill="#9eada0">Motion: ACCAD / Ohio State · CC BY 3.0 · Adapted'+(D.terminalReaction?((D.terminalReaction.source||'').includes('KayKit')?' · KayKit CC0':' · Quaternius CC0'):'')+'</text>':''}</svg>`;return s;}

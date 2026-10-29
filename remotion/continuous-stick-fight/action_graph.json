@@ -1,0 +1,157 @@
+{
+  "fps": 60,
+  "overlap_frames": 10,
+  "beats": [
+    {
+      "id": "opening-parry",
+      "duration": 0.95,
+      "a": {
+        "file": "Male2_E2_JabRight.bvh",
+        "start": 16,
+        "end": 36
+      },
+      "b": {
+        "file": "Male2_E16_BlockRightMiddle.bvh",
+        "start": 13,
+        "end": 36
+      },
+      "cause": "A initiates; B intercepts, does not pause"
+    },
+    {
+      "id": "cross-duck",
+      "duration": 1.1,
+      "a": {
+        "file": "Male2_E21_DuckLeft.bvh",
+        "start": 17,
+        "end": 56
+      },
+      "b": {
+        "file": "Male2_E3_CrossLeft.bvh",
+        "start": 13,
+        "end": 35
+      },
+      "cause": "B converts interception into cross; A moves underneath"
+    },
+    {
+      "id": "body-counter",
+      "duration": 0.9,
+      "a": {
+        "file": "Male2_E9_BodyHookLeft.bvh",
+        "start": 22,
+        "end": 49
+      },
+      "b": {
+        "file": "Male2_E18_BlockMiddleLow.bvh",
+        "start": 12,
+        "end": 44
+      },
+      "cause": "A rising from duck attacks body; B folds low block"
+    },
+    {
+      "id": "pressure-cross",
+      "duration": 1.0,
+      "a": {
+        "file": "Male2_E16_BlockRightMiddle.bvh",
+        "start": 10,
+        "end": 37
+      },
+      "b": {
+        "file": "Male2_E3_CrossLeft.bvh",
+        "start": 13,
+        "end": 35
+      },
+      "cause": "B punches behind forward step; A keeps retreating"
+    },
+    {
+      "id": "pressure-footwork",
+      "duration": 1.0,
+      "a": {
+        "file": "Male2_E6_QuickRetreat.bvh",
+        "start": 90,
+        "end": 110
+      },
+      "b": {
+        "file": "Male2_E4_QuickAdvance.bvh",
+        "start": 40,
+        "end": 60
+      },
+      "cause": "B steps into space surrendered by A"
+    },
+    {
+      "id": "kick-break",
+      "duration": 1.6,
+      "a": {
+        "file": "Male2_G14_RoundhouseBodyLeft.bvh",
+        "start": 6,
+        "end": 49
+      },
+      "b": {
+        "file": "Male2_E20_DodgeRight.bvh",
+        "start": 8,
+        "end": 48
+      },
+      "cause": "A uses rear leg to break pressure; B exits reach"
+    },
+    {
+      "id": "push-to-wall",
+      "duration": 1.5,
+      "a": {
+        "file": "Male2_E5_Retreat.bvh",
+        "start": 60,
+        "end": 85
+      },
+      "b": {
+        "file": "Male2_G18_PushKickRight.bvh",
+        "start": 0,
+        "end": 45
+      },
+      "cause": "B follows recovery with pushkick, A runs out of floor"
+    },
+    {
+      "id": "rail-break",
+      "duration": 1.75,
+      "a": {
+        "file": "Male2_G4_SpinningBackKick.bvh",
+        "start": 9,
+        "end": 49
+      },
+      "b": {
+        "file": "Male2_E22_DuckRight.bvh",
+        "start": 7,
+        "end": 45
+      },
+      "cause": "A spins away from wall; B drops; heel strikes rail behind B"
+    },
+    {
+      "id": "pursuit-hook",
+      "duration": 1.05,
+      "a": {
+        "file": "Male2_E22_DuckRight.bvh",
+        "start": 18,
+        "end": 39
+      },
+      "b": {
+        "file": "Male2_E6_HookRight.bvh",
+        "start": 24,
+        "end": 39
+      },
+      "cause": "B rising from evasion attacks before A fully resets"
+    },
+    {
+      "id": "final-pressure",
+      "duration": 1.15,
+      "a": {
+        "file": "Male2_G2_FrontKick.bvh",
+        "start": 8,
+        "end": 42
+      },
+      "b": {
+        "file": "Male2_E18_BlockMiddleLow.bvh",
+        "start": 12,
+        "end": 32
+      },
+      "cause": "A pushes B into gap created by broken rail; B cannot re-enter same lane"
+    }
+  ],
+  "release_build_id": "2026-10-29T07:48:07.815507+00:00"
+}

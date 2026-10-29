@@ -1,0 +1,143 @@
+{
+  "frames": 676,
+  "fps": 60,
+  "duration": 11.266666666666667,
+  "bpm": 138,
+  "music_action_start": 0.12,
+  "music_action_end": 10.116666666666667,
+  "events": [
+    {
+      "frame": 19,
+      "time": 0.31666666666666665,
+      "kind": "whoosh",
+      "duration": 0.11666666666666667,
+      "gain": 0.55,
+      "pan": 0.18,
+      "sourceBeat": "opening-parry",
+      "evidence": "attack anticipation, no impact implied"
+    },
+    {
+      "frame": 26,
+      "time": 0.43333333333333335,
+      "kind": "block",
+      "gain": 0.88,
+      "sourceBeat": "opening-parry",
+      "evidence": "verified visual contact kind=block"
+    },
+    {
+      "frame": 73,
+      "time": 1.2166666666666666,
+      "kind": "whoosh",
+      "duration": 0.11666666666666667,
+      "gain": 0.55,
+      "pan": -0.18,
+      "sourceBeat": "cross-duck",
+      "evidence": "attack anticipation, no impact implied"
+    },
+    {
+      "frame": 122,
+      "time": 2.033333333333333,
+      "kind": "whoosh",
+      "duration": 0.11666666666666667,
+      "gain": 0.55,
+      "pan": 0.18,
+      "sourceBeat": "body-counter",
+      "evidence": "attack anticipation, no impact implied"
+    },
+    {
+      "frame": 171,
+      "time": 2.85,
+      "kind": "whoosh",
+      "duration": 0.11666666666666667,
+      "gain": 0.55,
+      "pan": -0.18,
+      "sourceBeat": "pressure-cross",
+      "evidence": "attack anticipation, no impact implied"
+    },
+    {
+      "frame": 178,
+      "time": 2.966666666666667,
+      "kind": "block",
+      "gain": 0.88,
+      "sourceBeat": "pressure-cross",
+      "evidence": "verified visual contact kind=block"
+    },
+    {
+      "frame": 266,
+      "time": 4.433333333333334,
+      "kind": "whoosh",
+      "duration": 0.2,
+      "gain": 0.85,
+      "pan": -0.18,
+      "sourceBeat": "kick-break",
+      "evidence": "attack anticipation, no impact implied"
+    },
+    {
+      "frame": 371,
+      "time": 6.183333333333334,
+      "kind": "whoosh",
+      "duration": 0.2,
+      "gain": 0.85,
+      "pan": 0.18,
+      "sourceBeat": "push-to-wall",
+      "evidence": "attack anticipation, no impact implied"
+    },
+    {
+      "frame": 480,
+      "time": 8.0,
+      "kind": "whoosh",
+      "duration": 0.2,
+      "gain": 0.85,
+      "pan": -0.18,
+      "sourceBeat": "rail-break",
+      "evidence": "attack anticipation, no impact implied"
+    },
+    {
+      "frame": 492,
+      "time": 8.2,
+      "kind": "metal",
+      "gain": 1.1,
+      "sourceBeat": "rail-break",
+      "evidence": "verified visual contact kind=rail"
+    },
+    {
+      "frame": 523,
+      "time": 8.716666666666667,
+      "kind": "whoosh",
+      "duration": 0.11666666666666667,
+      "gain": 0.55,
+      "pan": 0.18,
+      "sourceBeat": "pursuit-hook",
+      "evidence": "attack anticipation, no impact implied"
+    },
+    {
+      "frame": 588,
+      "time": 9.8,
+      "kind": "whoosh",
+      "duration": 0.2,
+      "gain": 0.85,
+      "pan": -0.18,
+      "sourceBeat": "final-pressure",
+      "evidence": "attack anticipation, no impact implied"
+    },
+    {
+      "frame": 600,
+      "time": 10.0,
+      "kind": "heavy",
+      "gain": 1.15,
+      "sourceBeat": "final-pressure",
+      "evidence": "verified visual contact kind=impact"
+    },
+    {
+      "frame": 631,
+      "time": 10.516666666666667,
+      "kind": "land",
+      "gain": 0.8,
+      "evidence": "verified terminalReaction landingFrame"
+    }
+  ],
+  "source_sha256": {
+    "film-spec.json": "66c7271bc8f3299468c7fe7babbc01f7c4e5789658e2fc06708f5afda693165c",
+    "src/poses.json": "d100c7f38b7d488d820804255ae8629f0e3af14ec34c1cfda9c6cecaea367e4b"
+  }
+}
