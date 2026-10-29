@@ -1,0 +1,1 @@
+TRANSITIONS.leafOpen=(c,A,B,p,o)=>{c.save();c.scale(o.W/1920,o.H/1080);c.drawImage(A,0,0,1920,1080);let e=(p*p*(3-2*p)),r=2300*e;c.save();c.translate(960,590);c.rotate(-.35);c.beginPath();c.ellipse(0,0,Math.max(.01,r*.63),Math.max(.01,r),0,0,Math.PI*2);c.clip();c.rotate(.35);c.translate(-960,-590);c.drawImage(B,0,0,1920,1080);c.restore();c.restore();};

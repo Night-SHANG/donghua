@@ -1,0 +1,52 @@
+name: Music AB - Huashu silent visual
+on:
+  push:
+    branches: [feat/huashu-fox-stork]
+    paths: ['music-ab/B/**', 'music-ab/host/**', '.github/workflows/music-ab-b.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: music-ab
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install renderer dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          python -m pip install playwright==1.55.0
+          python -m playwright install --with-deps chromium
+      - name: Source and codec preflight
+        run: |
+          mkdir -p out
+          python -m unittest discover -s host
+          python -m compileall -q B/engine
+          find B/engine -name '*.js' -exec node --check {} \;
+          ffmpeg -y -v error -f lavfi -i color=s=16x16:r=30:d=0.1 -c:v libx264 -pix_fmt yuv420p out/preflight.mp4
+          ffmpeg -v error -i out/preflight.mp4 -f null -
+      - name: Render silent Huashu film
+        run: |
+          python B/engine/render.py --fps 30 --from 0 --to 30 --width 1280 --height 720 --out out/B-huashu-silent.mp4 --crf 17
+          python host/verify_media.py out/B-huashu-silent.mp4 --report out/verification.json
+          ffmpeg -v error -i out/B-huashu-silent.mp4 -vf "fps=1/2,scale=640:360" out/frame-%02d.png
+          git rev-parse HEAD > out/source-commit.txt
+          sha256sum out/B-huashu-silent.mp4 > out/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: music-ab-b-silent
+          path: |
+            music-ab/out/B-huashu-silent.mp4
+            music-ab/out/frame-*.png
+            music-ab/out/verification.json
+            music-ab/out/source-commit.txt
+            music-ab/out/SHA256SUMS.txt
+          retention-days: 1

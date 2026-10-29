@@ -1,0 +1,11 @@
+window.BPM=140;window.FILM_DURATION=30;window.FILM_SIZE=[1920,1080];window.PUNCH=0;window.SCENE_LIBS=['scenes/rise.js'];
+window.ERAS=[
+{id:'seed',dur:24/7},
+{id:'sprout',dur:24/7,transition:{type:'leafOpen',dur:3/7,punch:0}},
+{id:'bloom',dur:30/7,transition:{type:'leafOpen',dur:6/7,punch:0}},
+{id:'valley',dur:30/7,transition:{type:'ridgeWipe',dur:3/7,punch:0.025}},
+{id:'bird',dur:30/7},
+{id:'flight',dur:24/7,transition:{type:'leafOpen',dur:3/7,punch:0}},
+{id:'sunrise',dur:24/7,transition:{type:'sunShaft',dur:6/7,punch:0}},
+{id:'home',dur:24/7}
+];

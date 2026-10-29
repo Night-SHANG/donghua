@@ -1,0 +1,1 @@
+TRANSITIONS.ridgeWipe=(c,A,B,p,o)=>{c.save();c.scale(o.W/1920,o.H/1080);c.drawImage(A,0,0,1920,1080);const edge=1080-1500*(p*p*(3-2*p));c.save();c.beginPath();c.moveTo(0,1080);for(let x=0;x<=1920;x+=30)c.lineTo(x,edge+Math.sin(x*.005)*95);c.lineTo(1920,1080);c.closePath();c.clip();c.drawImage(B,0,0,1920,1080);c.restore();c.restore();};
