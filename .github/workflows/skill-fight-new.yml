@@ -1,0 +1,85 @@
+name: Choreographed Stick Fight
+on:
+  push:
+    branches: [feat/huashu-fox-stork]
+    paths: ['remotion/skill-fight-new/**', '.github/workflows/skill-fight-new.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    defaults:
+      run:
+        working-directory: remotion/skill-fight-new
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read plan
+        id: plan
+        run: |
+          mkdir -p out
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          p=json.load(open('render-plan.json'))
+          assert p['mode'] in ('keyframes','preview','final')
+          print('mode='+p['mode'])
+          print('approved='+p.get('approvedPreviewCommit',''))
+          PY
+      - name: Guard final against approved preview
+        if: steps.plan.outputs.mode == 'final'
+        env:
+          APPROVED: ${{ steps.plan.outputs.approved }}
+        run: |
+          test -n "$APPROVED"
+          git cat-file -e "$APPROVED^{commit}"
+          git diff --exit-code "$APPROVED" HEAD -- . ":!render-plan.json"
+      - name: Install Ubuntu media verification tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          ffprobe -version
+      - name: Install pinned dependencies
+        run: |
+          npm ci --no-audit --no-fund
+          python -m pip install numpy==2.2.6 scipy==1.15.3
+      - name: Generate original audio
+        run: |
+          python audio/generate.py
+      - name: Preflight
+        run: |
+          npm run typecheck
+          npm test
+          node --test host-tests/*.test.mjs
+          python -m unittest discover -s audio -p 'test_*.py'
+      - name: Render and validate
+        run: |
+          node scripts/render.mjs
+          python scripts/verify_output.py
+          git rev-parse HEAD > out/source-commit.txt
+          python - <<'PY'
+          import hashlib,pathlib
+          root=pathlib.Path('out')
+          paths=sorted([p for p in root.iterdir() if p.is_file() and p.suffix in ('.mp4','.png','.txt','.json') and p.name not in ('SHA256SUMS.txt','source-manifest.json')])
+          (root/'SHA256SUMS.txt').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name+'\n' for p in paths))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: skill-fight-${{ steps.plan.outputs.mode }}
+          path: |
+            remotion/skill-fight-new/out/*.mp4
+            remotion/skill-fight-new/out/*.png
+            remotion/skill-fight-new/out/fx-prop-gate.json
+            remotion/skill-fight-new/out/verification.json
+            remotion/skill-fight-new/out/source-commit.txt
+            remotion/skill-fight-new/out/SHA256SUMS.txt
+          retention-days: 1

@@ -1,0 +1,14 @@
+{
+  "durationSeconds": 20.0,
+  "sampleRate": 48000,
+  "channels": 2,
+  "samplePeakDbFS": -2.2487023290299595,
+  "clippedSamples": 0,
+  "integratedLufs": -19.08,
+  "truePeakDbTP": -2.25,
+  "loudnessRangeLu": 6.3,
+  "sourceEventCount": 14,
+  "foleyCueCount": 15,
+  "listeningVerified": false,
+  "check": "Objective measurements only; subjective listening not claimed."
+}

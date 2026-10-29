@@ -1,0 +1,247 @@
+{
+  "fps": 30,
+  "durationFrames": 600,
+  "durationSeconds": 20,
+  "sampleRate": 48000,
+  "master": "audio/master.wav",
+  "masterVolume": 1,
+  "provenance": "Original deterministic procedural instruments and Foley; no recordings, voices, external APIs or licensed samples.",
+  "source": "src/timeline.ts EVENTS",
+  "storyAnchors": [
+    {
+      "frame": 60,
+      "name": "block"
+    },
+    {
+      "frame": 94,
+      "name": "whoosh"
+    },
+    {
+      "frame": 124,
+      "name": "body"
+    },
+    {
+      "frame": 155,
+      "name": "sweep"
+    },
+    {
+      "frame": 190,
+      "name": "whoosh"
+    },
+    {
+      "frame": 224,
+      "name": "block"
+    },
+    {
+      "frame": 260,
+      "name": "clash"
+    },
+    {
+      "frame": 294,
+      "name": "jump"
+    },
+    {
+      "frame": 332,
+      "name": "kick"
+    },
+    {
+      "frame": 360,
+      "name": "land"
+    },
+    {
+      "frame": 398,
+      "name": "block"
+    },
+    {
+      "frame": 425,
+      "name": "whoosh"
+    },
+    {
+      "frame": 456,
+      "name": "body"
+    },
+    {
+      "frame": 480,
+      "name": "post"
+    }
+  ],
+  "sections": [
+    {
+      "start": 0,
+      "end": 1.5,
+      "name": "setup"
+    },
+    {
+      "start": 1.5,
+      "end": 15.2,
+      "name": "rising_action"
+    },
+    {
+      "start": 15.2,
+      "end": 16,
+      "name": "decisive_release"
+    },
+    {
+      "start": 16,
+      "end": 17.65,
+      "name": "bell_and_surprise"
+    },
+    {
+      "start": 17.65,
+      "end": 20,
+      "name": "light_bow_resolve"
+    }
+  ],
+  "cues": [
+    {
+      "frame": 60,
+      "seconds": 2.0,
+      "name": "guard_contact_block",
+      "sourceKind": "block",
+      "durationSeconds": 0.24,
+      "gain": 0.23,
+      "pan": -0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 94,
+      "seconds": 3.1333333333333333,
+      "name": "miss_air_whoosh",
+      "sourceKind": "whoosh",
+      "durationSeconds": 0.28,
+      "gain": 0.28,
+      "pan": -0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 124,
+      "seconds": 4.133333333333334,
+      "name": "body_palm",
+      "sourceKind": "body",
+      "durationSeconds": 0.3,
+      "gain": 0.29,
+      "pan": -0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 155,
+      "seconds": 5.166666666666667,
+      "name": "miss_air_sweep",
+      "sourceKind": "sweep",
+      "durationSeconds": 0.28,
+      "gain": 0.28,
+      "pan": -0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 190,
+      "seconds": 6.333333333333333,
+      "name": "miss_air_whoosh",
+      "sourceKind": "whoosh",
+      "durationSeconds": 0.28,
+      "gain": 0.28,
+      "pan": -0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 224,
+      "seconds": 7.466666666666667,
+      "name": "guard_contact_block",
+      "sourceKind": "block",
+      "durationSeconds": 0.24,
+      "gain": 0.23,
+      "pan": -0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 260,
+      "seconds": 8.666666666666666,
+      "name": "guard_contact_clash",
+      "sourceKind": "clash",
+      "durationSeconds": 0.24,
+      "gain": 0.27,
+      "pan": -0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 294,
+      "seconds": 9.8,
+      "name": "takeoff",
+      "sourceKind": "jump",
+      "durationSeconds": 0.22,
+      "gain": 0.18,
+      "pan": -0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 332,
+      "seconds": 11.066666666666666,
+      "name": "guard_contact_kick",
+      "sourceKind": "kick",
+      "durationSeconds": 0.24,
+      "gain": 0.23,
+      "pan": 0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 360,
+      "seconds": 12.0,
+      "name": "landing",
+      "sourceKind": "land",
+      "durationSeconds": 0.34,
+      "gain": 0.27,
+      "pan": 0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 398,
+      "seconds": 13.266666666666667,
+      "name": "guard_contact_block",
+      "sourceKind": "block",
+      "durationSeconds": 0.24,
+      "gain": 0.23,
+      "pan": 0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 425,
+      "seconds": 14.166666666666666,
+      "name": "miss_air_whoosh",
+      "sourceKind": "whoosh",
+      "durationSeconds": 0.28,
+      "gain": 0.28,
+      "pan": 0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 456,
+      "seconds": 15.2,
+      "name": "body_palm",
+      "sourceKind": "body",
+      "durationSeconds": 0.3,
+      "gain": 0.36,
+      "pan": 0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 480,
+      "seconds": 16.0,
+      "name": "wood_post_contact",
+      "sourceKind": "post",
+      "durationSeconds": 0.34,
+      "gain": 0.3,
+      "pan": 0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 480,
+      "seconds": 16.0,
+      "name": "bell_ring",
+      "sourceKind": "post",
+      "durationSeconds": 3.5,
+      "gain": 0.32,
+      "pan": 0.28,
+      "synthetic": true
+    }
+  ]
+}
