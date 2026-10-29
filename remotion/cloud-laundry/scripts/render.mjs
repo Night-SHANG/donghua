@@ -7,7 +7,8 @@ if(process.env.REMOTION_LOOPBACK_ONLY==='1'){
  const config=require(path.join(rendererDir,'port-config.js'));
  config.getPortConfig=()=>({host:'127.0.0.1',hostsToTry:['127.0.0.1']});
 }
-const {bundle}=await import('@remotion/bundler');const {ensureBrowser,openBrowser,selectComposition,renderStill,renderMedia}=require('@remotion/renderer');
+const {bundle}=await import('@remotion/bundler');const {RenderInternals,ensureBrowser,openBrowser,selectComposition,renderStill,renderMedia}=require('@remotion/renderer');
+const ffmpeg=RenderInternals.getExecutablePath({type:'ffmpeg',indent:false,logLevel:'warn',binariesDirectory:null});execFileSync(ffmpeg,['-version'],{stdio:'ignore'});
 const out=path.resolve('out');fs.mkdirSync(out,{recursive:true});
 const serveUrl=await bundle({entryPoint:path.resolve('src/index.ts'),outDir:path.resolve('build')});
 await ensureBrowser({logLevel:'info'});
@@ -21,4 +22,4 @@ if(process.argv.includes('--stills')){
 
 await browser.close({silent:true});
 
-if(!process.argv.includes('--stills')){const source=path.join(out,'cloud-laundry-30s.mp4'),trimmed=path.join(out,'trimmed.mp4');execFileSync('ffmpeg',['-y','-v','error','-i',source,'-t','30','-c:v','copy','-c:a','aac','-b:a','192k','-movflags','+faststart',trimmed]);fs.renameSync(trimmed,source);}
+if(!process.argv.includes('--stills')){const source=path.join(out,'cloud-laundry-30s.mp4'),trimmed=path.join(out,'trimmed.mp4');execFileSync(ffmpeg,['-y','-v','error','-i',source,'-t','30','-c:v','copy','-c:a','aac','-b:a','192k','-movflags','+faststart',trimmed]);fs.renameSync(trimmed,source);}
