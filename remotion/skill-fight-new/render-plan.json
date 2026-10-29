@@ -1,6 +1,6 @@
 {
-  "mode": "preview",
-  "approvedPreviewCommit": "",
+  "mode": "final",
+  "approvedPreviewCommit": "16137e1ca9efb746585d6c011ae6410cf03ca00c",
   "stillFrames": [
     0,
     30,
