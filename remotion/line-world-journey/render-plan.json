@@ -1,5 +1,5 @@
 {
-  "mode": "preview",
+  "mode": "final",
   "inputProps": {
     "withAudio": true
   },
@@ -28,5 +28,6 @@
     660,
     697,
     719
-  ]
+  ],
+  "approvedPreviewCommit": "20e515b2bc6f8d52a57edb87ab2273a1a4b91670"
 }
