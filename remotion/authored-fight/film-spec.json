@@ -1,0 +1,9 @@
+{
+  "id": "AuthoredFight",
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "durationInFrames": 210,
+  "impactQaFrame": 26,
+  "outputName": "authored-fight.mp4"
+}

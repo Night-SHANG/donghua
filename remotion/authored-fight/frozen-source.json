@@ -1,0 +1,11 @@
+{
+  "status": "frozen",
+  "revision": "review-v11",
+  "posesSha256": "293e5366627214a7ad43acab36c08f93c9bd67691477e5d70ec1a9b5a14c119f",
+  "durationInFrames": 210,
+  "fps": 30,
+  "width": 1280,
+  "height": 720,
+  "motionSource": "paired-action-validation/review-v11",
+  "renderGate": "Parent approval still required; this file is data freeze, not artistic approval."
+}
