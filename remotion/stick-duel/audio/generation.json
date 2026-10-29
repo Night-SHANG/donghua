@@ -1,0 +1,9 @@
+{
+  "duration": 12,
+  "sample_rate": 48000,
+  "channels": 2,
+  "gain": 2.7377255719693543,
+  "rms": 0.089,
+  "peak": 0.45616743990202313,
+  "sha256": "eb4203a1f9b950d173830f018f15f3c3da78ad5a96fdcb8e92964bc2e905c3bc"
+}

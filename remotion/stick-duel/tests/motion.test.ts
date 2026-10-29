@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {skeletonAt,events,dist,bones,frameTime} from '../src/motion.ts';
+test('720 frames keep joints finite and each rigid bone fixed length',()=>{for(let f=0;f<720;f++)for(const id of [0,1]){const s=skeletonAt(f,id);for(const p of Object.values(s.joints)){assert.ok(Number.isFinite(p.x)&&Number.isFinite(p.y));assert.ok(p.x>-500&&p.x<2400&&p.y>-400&&p.y<1100)}for(const [a,b,length] of bones)assert.ok(Math.abs(dist(s.joints[a],s.joints[b])-length)<.01)}});
+test('hitstop freezes animation clock on authored contact',()=>{for(const e of events.filter(e=>e.hold>0)){assert.equal(frameTime(e.frame),frameTime(e.frame+e.hold-1));}});
+test('authored strike target and contact point agree',()=>{for(const e of events.filter(e=>e.kind==='hit'||e.kind==='block')){const a=skeletonAt(e.frame,e.attacker),b=skeletonAt(e.frame,1-e.attacker);assert.ok(dist(a.joints[e.limb],b.joints[e.target])<22,`${e.name}: missed contact`)}});
+test('support foot stays pinned through anticipation and contact',()=>{for(const [id,start,end,joint] of [[0,72,98,'footB'],[1,74,126,'footB'],[0,410,460,'footB']] as [number,number,number,'footB'][]){const a=skeletonAt(start,id).joints[joint];for(let f=start;f<=end;f++)assert.ok(dist(a,skeletonAt(f,id).joints[joint])<.1,`${id}:${f}`)}});

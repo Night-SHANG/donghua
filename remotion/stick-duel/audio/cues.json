@@ -1,0 +1,199 @@
+{
+  "title": "Stick Duel — original action soundtrack",
+  "duration": 12,
+  "fps": 60,
+  "events": [
+    {
+      "frame": 42,
+      "time": 0.7,
+      "kind": "whoosh",
+      "note": "Black rush accelerates",
+      "duration": 0.32,
+      "gain": 0.65,
+      "pan": -0.25
+    },
+    {
+      "frame": 54,
+      "time": 0.9,
+      "kind": "step",
+      "note": "Rush foot contact",
+      "gain": 0.55,
+      "pan": -0.2
+    },
+    {
+      "frame": 67,
+      "time": 1.1166666666666667,
+      "kind": "step",
+      "note": "Rush foot contact",
+      "gain": 0.55,
+      "pan": -0.1
+    },
+    {
+      "frame": 76,
+      "time": 1.2666666666666666,
+      "kind": "whoosh",
+      "note": "Jab anticipation and burst",
+      "duration": 0.12,
+      "gain": 0.65
+    },
+    {
+      "frame": 84,
+      "time": 1.4,
+      "kind": "block",
+      "note": "Red blocks black jab; three-frame hold",
+      "pan": 0.08
+    },
+    {
+      "frame": 126,
+      "time": 2.1,
+      "kind": "whoosh",
+      "note": "Red counter punch misses ducking black",
+      "duration": 0.22,
+      "pan": 0.16
+    },
+    {
+      "frame": 150,
+      "time": 2.5,
+      "kind": "whoosh",
+      "note": "Black low sweep misses jumping red",
+      "duration": 0.22,
+      "pan": -0.12
+    },
+    {
+      "frame": 162,
+      "time": 2.7,
+      "kind": "whoosh",
+      "note": "Red airborne kick accelerates",
+      "duration": 0.18,
+      "pan": 0.1
+    },
+    {
+      "frame": 174,
+      "time": 2.9,
+      "kind": "hit",
+      "note": "Red air kick lands; four-frame hold",
+      "pan": -0.08
+    },
+    {
+      "frame": 204,
+      "time": 3.4,
+      "kind": "land",
+      "note": "Black hand plant after recoil",
+      "gain": 0.65,
+      "pan": -0.22
+    },
+    {
+      "frame": 210,
+      "time": 3.5,
+      "kind": "slide",
+      "note": "Black skid dissipates momentum",
+      "gain": 0.6,
+      "pan": -0.25
+    },
+    {
+      "frame": 258,
+      "time": 4.3,
+      "kind": "whoosh",
+      "note": "Black launches jump",
+      "duration": 0.24,
+      "gain": 0.7,
+      "pan": -0.12
+    },
+    {
+      "frame": 283,
+      "time": 4.716666666666667,
+      "kind": "whoosh",
+      "note": "Black descending kick approaches block",
+      "duration": 0.17,
+      "gain": 0.75,
+      "pan": 0.05
+    },
+    {
+      "frame": 294,
+      "time": 4.9,
+      "kind": "block",
+      "note": "Red blocks descending kick; three-frame hold",
+      "gain": 1.1,
+      "pan": 0.12
+    },
+    {
+      "frame": 321,
+      "time": 5.35,
+      "kind": "land",
+      "note": "Both fighters land",
+      "gain": 0.8
+    },
+    {
+      "frame": 341,
+      "time": 5.683333333333334,
+      "kind": "whoosh",
+      "note": "Red body shot accelerates",
+      "duration": 0.13,
+      "gain": 0.65,
+      "pan": 0.1
+    },
+    {
+      "frame": 350,
+      "time": 5.833333333333333,
+      "kind": "hit",
+      "note": "Red body shot lands; three-frame hold",
+      "pan": -0.05
+    },
+    {
+      "frame": 423,
+      "time": 7.05,
+      "kind": "step",
+      "note": "Black lowers stance and braces",
+      "gain": 0.5,
+      "pan": -0.12
+    },
+    {
+      "frame": 445,
+      "time": 7.416666666666667,
+      "kind": "whoosh",
+      "note": "Black uppercut bursts from anticipation",
+      "duration": 0.16666666666666666,
+      "gain": 1.05
+    },
+    {
+      "frame": 455,
+      "time": 7.583333333333333,
+      "kind": "heavy",
+      "note": "Black uppercut finisher; five-frame hold",
+      "pan": 0.06
+    },
+    {
+      "frame": 480,
+      "time": 8.0,
+      "kind": "whoosh",
+      "note": "Red flight passes through air",
+      "duration": 0.55,
+      "gain": 0.55,
+      "pan": 0.3
+    },
+    {
+      "frame": 550,
+      "time": 9.166666666666666,
+      "kind": "land",
+      "note": "Red tumble lands",
+      "gain": 1.2,
+      "pan": 0.35
+    },
+    {
+      "frame": 558,
+      "time": 9.3,
+      "kind": "roll",
+      "note": "Body roll transfers into skid",
+      "gain": 0.65,
+      "pan": 0.35
+    },
+    {
+      "frame": 573,
+      "time": 9.55,
+      "kind": "slide",
+      "note": "Floor skid dissipates speed",
+      "gain": 0.6,
+      "pan": 0.35
+    }
+  ]
+}
