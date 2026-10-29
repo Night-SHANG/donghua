@@ -10,3 +10,4 @@ Actual uploaded reference analyses were supplied by three independent reviewers.
 
 ## Local review corrections
 Changed raised antler-like elbow IK bend directions to downward boxing guards; removed slow unstepped initial red root translation; added world-space support foot locks during weight transfer; lowered handplant root to make ground contact reachable; all actual bones remain fixed length. These are procedural animation tests and auxiliary frame checks, not artistic approval.
+Actual Remotion preview review caught the opening rush reading as a ground slide. Added an explicit fixed rear-foot push-off, short airborne dash pose, and fixed front-foot landing before the first jab. The contact/audio schedule is unchanged; a failing regression test was observed before the correction, then all5 motion tests passed.
