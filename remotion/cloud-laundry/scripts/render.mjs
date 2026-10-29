@@ -1,3 +1,4 @@
+import {execFileSync} from 'node:child_process';
 import {createRequire} from 'node:module';import path from 'node:path';import fs from 'node:fs';
 const require=createRequire(import.meta.url);
 // Cloud sandbox cannot enumerate network devices. Bind only its permitted loopback interface.
@@ -19,3 +20,5 @@ if(process.argv.includes('--stills')){
 }else{await renderMedia({...opts,composition,codec:'h264',audioCodec:'aac',crf:19,scale:2/3,concurrency:2,outputLocation:path.join(out,'cloud-laundry-30s.mp4'),onProgress:({progress})=>{console.log('PROGRESS',Math.round(progress*100))}});}
 
 await browser.close({silent:true});
+
+if(!process.argv.includes('--stills')){const source=path.join(out,'cloud-laundry-30s.mp4'),trimmed=path.join(out,'trimmed.mp4');execFileSync('ffmpeg',['-y','-v','error','-i',source,'-t','30','-c:v','copy','-c:a','aac','-b:a','192k','-movflags','+faststart',trimmed]);fs.renameSync(trimmed,source);}
