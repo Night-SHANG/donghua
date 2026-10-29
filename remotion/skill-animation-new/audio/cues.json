@@ -1,0 +1,509 @@
+{
+  "fps": 30,
+  "durationFrames": 720,
+  "durationSeconds": 24,
+  "sampleRate": 48000,
+  "master": "audio/master.wav",
+  "masterVolume": 1,
+  "provenance": "All original deterministic synthesis; no samples, voices, external APIs or copyrighted recordings.",
+  "storyAnchors": [
+    {
+      "frame": 0,
+      "name": "walk_hat_bob"
+    },
+    {
+      "frame": 60,
+      "name": "gust"
+    },
+    {
+      "frame": 76,
+      "name": "hat_detach_pop"
+    },
+    {
+      "frame": 96,
+      "name": "missed_reach"
+    },
+    {
+      "frame": 110,
+      "name": "run"
+    },
+    {
+      "frame": 195,
+      "name": "duck_anticipation"
+    },
+    {
+      "frame": 218,
+      "name": "branch_pass"
+    },
+    {
+      "frame": 255,
+      "name": "stand_run"
+    },
+    {
+      "frame": 282,
+      "name": "jump_crouch"
+    },
+    {
+      "frame": 294,
+      "name": "takeoff"
+    },
+    {
+      "frame": 325,
+      "name": "apex"
+    },
+    {
+      "frame": 358,
+      "name": "landing"
+    },
+    {
+      "frame": 375,
+      "name": "skid"
+    },
+    {
+      "frame": 405,
+      "name": "hat_settles"
+    },
+    {
+      "frame": 430,
+      "name": "slow_reach"
+    },
+    {
+      "frame": 456,
+      "name": "lift_brim"
+    },
+    {
+      "frame": 465,
+      "name": "bird_reveal_shiver"
+    },
+    {
+      "frame": 505,
+      "name": "hand_relax"
+    },
+    {
+      "frame": 530,
+      "name": "lower_tuck"
+    },
+    {
+      "frame": 557,
+      "name": "withdraw"
+    },
+    {
+      "frame": 590,
+      "name": "step_back"
+    },
+    {
+      "frame": 625,
+      "name": "leaf_enters"
+    },
+    {
+      "frame": 663,
+      "name": "leaf_lands"
+    },
+    {
+      "frame": 678,
+      "name": "happy_tilt"
+    },
+    {
+      "frame": 719,
+      "name": "stable_end"
+    }
+  ],
+  "sections": [
+    {
+      "start": 0,
+      "end": 3.5,
+      "name": "light_pizzicato"
+    },
+    {
+      "start": 3.5,
+      "end": 12.5,
+      "name": "chase"
+    },
+    {
+      "start": 12.5,
+      "end": 15.5,
+      "name": "soften"
+    },
+    {
+      "start": 15.5,
+      "end": 20,
+      "name": "warm_reveal"
+    },
+    {
+      "start": 20,
+      "end": 24,
+      "name": "resolve"
+    }
+  ],
+  "cues": [
+    {
+      "frame": 7,
+      "seconds": 0.23333333333333334,
+      "name": "walking_leaf_step",
+      "durationSeconds": 0.16,
+      "gain": 0.062,
+      "pan": -0.2,
+      "synthetic": true
+    },
+    {
+      "frame": 23,
+      "seconds": 0.7666666666666667,
+      "name": "walking_leaf_step",
+      "durationSeconds": 0.16,
+      "gain": 0.062,
+      "pan": -0.2,
+      "synthetic": true
+    },
+    {
+      "frame": 39,
+      "seconds": 1.3,
+      "name": "walking_leaf_step",
+      "durationSeconds": 0.16,
+      "gain": 0.062,
+      "pan": -0.2,
+      "synthetic": true
+    },
+    {
+      "frame": 55,
+      "seconds": 1.8333333333333333,
+      "name": "walking_leaf_step",
+      "durationSeconds": 0.16,
+      "gain": 0.062,
+      "pan": -0.2,
+      "synthetic": true
+    },
+    {
+      "frame": 60,
+      "seconds": 2.0,
+      "name": "wind_gust",
+      "durationSeconds": 1.25,
+      "gain": 0.19,
+      "pan": 0.3,
+      "synthetic": true
+    },
+    {
+      "frame": 76,
+      "seconds": 2.533333333333333,
+      "name": "hat_detaches",
+      "durationSeconds": 0.11,
+      "gain": 0.12,
+      "pan": 0.15,
+      "synthetic": true
+    },
+    {
+      "frame": 96,
+      "seconds": 3.2,
+      "name": "missed_grab_swish",
+      "durationSeconds": 0.24,
+      "gain": 0.09,
+      "pan": 0.25,
+      "synthetic": true
+    },
+    {
+      "frame": 110,
+      "seconds": 3.6666666666666665,
+      "name": "running_step",
+      "durationSeconds": 0.14,
+      "gain": 0.095,
+      "pan": 0.12,
+      "synthetic": true
+    },
+    {
+      "frame": 119,
+      "seconds": 3.966666666666667,
+      "name": "running_step",
+      "durationSeconds": 0.14,
+      "gain": 0.095,
+      "pan": -0.12,
+      "synthetic": true
+    },
+    {
+      "frame": 128,
+      "seconds": 4.266666666666667,
+      "name": "running_step",
+      "durationSeconds": 0.14,
+      "gain": 0.095,
+      "pan": 0.12,
+      "synthetic": true
+    },
+    {
+      "frame": 137,
+      "seconds": 4.566666666666666,
+      "name": "running_step",
+      "durationSeconds": 0.14,
+      "gain": 0.095,
+      "pan": -0.12,
+      "synthetic": true
+    },
+    {
+      "frame": 146,
+      "seconds": 4.866666666666666,
+      "name": "running_step",
+      "durationSeconds": 0.14,
+      "gain": 0.095,
+      "pan": 0.12,
+      "synthetic": true
+    },
+    {
+      "frame": 155,
+      "seconds": 5.166666666666667,
+      "name": "running_step",
+      "durationSeconds": 0.14,
+      "gain": 0.095,
+      "pan": -0.12,
+      "synthetic": true
+    },
+    {
+      "frame": 164,
+      "seconds": 5.466666666666667,
+      "name": "running_step",
+      "durationSeconds": 0.14,
+      "gain": 0.095,
+      "pan": 0.12,
+      "synthetic": true
+    },
+    {
+      "frame": 173,
+      "seconds": 5.766666666666667,
+      "name": "running_step",
+      "durationSeconds": 0.14,
+      "gain": 0.095,
+      "pan": -0.12,
+      "synthetic": true
+    },
+    {
+      "frame": 182,
+      "seconds": 6.066666666666666,
+      "name": "running_step",
+      "durationSeconds": 0.14,
+      "gain": 0.095,
+      "pan": 0.12,
+      "synthetic": true
+    },
+    {
+      "frame": 191,
+      "seconds": 6.366666666666666,
+      "name": "running_step",
+      "durationSeconds": 0.14,
+      "gain": 0.095,
+      "pan": -0.12,
+      "synthetic": true
+    },
+    {
+      "frame": 255,
+      "seconds": 8.5,
+      "name": "running_step",
+      "durationSeconds": 0.14,
+      "gain": 0.095,
+      "pan": 0.12,
+      "synthetic": true
+    },
+    {
+      "frame": 264,
+      "seconds": 8.8,
+      "name": "running_step",
+      "durationSeconds": 0.14,
+      "gain": 0.095,
+      "pan": -0.12,
+      "synthetic": true
+    },
+    {
+      "frame": 273,
+      "seconds": 9.1,
+      "name": "running_step",
+      "durationSeconds": 0.14,
+      "gain": 0.095,
+      "pan": 0.12,
+      "synthetic": true
+    },
+    {
+      "frame": 195,
+      "seconds": 6.5,
+      "name": "duck_cloth",
+      "durationSeconds": 0.23,
+      "gain": 0.1,
+      "pan": 0,
+      "synthetic": true
+    },
+    {
+      "frame": 218,
+      "seconds": 7.266666666666667,
+      "name": "branch_near_miss",
+      "durationSeconds": 0.33,
+      "gain": 0.135,
+      "pan": 0.4,
+      "synthetic": true
+    },
+    {
+      "frame": 282,
+      "seconds": 9.4,
+      "name": "crouch_scuff",
+      "durationSeconds": 0.28,
+      "gain": 0.115,
+      "pan": 0,
+      "synthetic": true
+    },
+    {
+      "frame": 294,
+      "seconds": 9.8,
+      "name": "jump_push_off",
+      "durationSeconds": 0.23,
+      "gain": 0.13,
+      "pan": 0,
+      "synthetic": true
+    },
+    {
+      "frame": 296,
+      "seconds": 9.866666666666667,
+      "name": "jump_air",
+      "durationSeconds": 0.56,
+      "gain": 0.075,
+      "pan": 0.15,
+      "synthetic": true
+    },
+    {
+      "frame": 358,
+      "seconds": 11.933333333333334,
+      "name": "landing_weight",
+      "durationSeconds": 0.32,
+      "gain": 0.24,
+      "pan": 0,
+      "synthetic": true
+    },
+    {
+      "frame": 358,
+      "seconds": 11.933333333333334,
+      "name": "puddle_splash",
+      "durationSeconds": 0.37,
+      "gain": 0.2,
+      "pan": 0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 375,
+      "seconds": 12.5,
+      "name": "shoe_skid",
+      "durationSeconds": 0.45,
+      "gain": 0.14,
+      "pan": 0.2,
+      "synthetic": true
+    },
+    {
+      "frame": 405,
+      "seconds": 13.5,
+      "name": "hat_settles_on_leaves",
+      "durationSeconds": 0.3,
+      "gain": 0.08,
+      "pan": 0.15,
+      "synthetic": true
+    },
+    {
+      "frame": 430,
+      "seconds": 14.333333333333334,
+      "name": "sleeve_reach",
+      "durationSeconds": 0.35,
+      "gain": 0.035,
+      "pan": 0,
+      "synthetic": true
+    },
+    {
+      "frame": 456,
+      "seconds": 15.2,
+      "name": "brim_lift",
+      "durationSeconds": 0.21,
+      "gain": 0.06,
+      "pan": 0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 465,
+      "seconds": 15.5,
+      "name": "bird_chirp_reveal",
+      "durationSeconds": 0.15,
+      "gain": 0.1,
+      "pan": 0.28,
+      "synthetic": true
+    },
+    {
+      "frame": 472,
+      "seconds": 15.733333333333333,
+      "name": "bird_chirp_reply",
+      "durationSeconds": 0.12,
+      "gain": 0.075,
+      "pan": 0.28,
+      "synthetic": true
+    },
+    {
+      "frame": 478,
+      "seconds": 15.933333333333334,
+      "name": "bird_feather_shiver",
+      "durationSeconds": 0.36,
+      "gain": 0.04,
+      "pan": 0.28,
+      "synthetic": true
+    },
+    {
+      "frame": 530,
+      "seconds": 17.666666666666668,
+      "name": "hat_tuck",
+      "durationSeconds": 0.4,
+      "gain": 0.062,
+      "pan": 0.18,
+      "synthetic": true
+    },
+    {
+      "frame": 557,
+      "seconds": 18.566666666666666,
+      "name": "sleeve_withdraw",
+      "durationSeconds": 0.25,
+      "gain": 0.03,
+      "pan": 0,
+      "synthetic": true
+    },
+    {
+      "frame": 590,
+      "seconds": 19.666666666666668,
+      "name": "step_back",
+      "durationSeconds": 0.18,
+      "gain": 0.055,
+      "pan": -0.1,
+      "synthetic": true
+    },
+    {
+      "frame": 601,
+      "seconds": 20.033333333333335,
+      "name": "bird_comfort_chirp",
+      "durationSeconds": 0.12,
+      "gain": 0.05,
+      "pan": 0.3,
+      "synthetic": true
+    },
+    {
+      "frame": 625,
+      "seconds": 20.833333333333332,
+      "name": "leaf_drift",
+      "durationSeconds": 1.1,
+      "gain": 0.07,
+      "pan": 0.05,
+      "synthetic": true
+    },
+    {
+      "frame": 663,
+      "seconds": 22.1,
+      "name": "leaf_soft_landing",
+      "durationSeconds": 0.2,
+      "gain": 0.052,
+      "pan": 0,
+      "synthetic": true
+    },
+    {
+      "frame": 678,
+      "seconds": 22.6,
+      "name": "happy_tilt_wood_note",
+      "durationSeconds": 0.5,
+      "gain": 0.035,
+      "pan": 0.1,
+      "synthetic": true
+    }
+  ]
+}

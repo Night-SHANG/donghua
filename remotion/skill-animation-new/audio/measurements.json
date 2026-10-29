@@ -1,0 +1,10 @@
+{
+  "durationSeconds": 24.0,
+  "samplePeakDbFS": -3.0245202782376683,
+  "clippedSamples": 0,
+  "integratedLufs": -18.43,
+  "truePeakDbTP": -3.02,
+  "loudnessRangeLu": 2.7,
+  "listeningVerified": false,
+  "check": "Measured only; final subjective listening in context still required."
+}
