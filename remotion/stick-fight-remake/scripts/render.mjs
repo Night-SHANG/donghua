@@ -10,8 +10,7 @@ const plan=JSON.parse(fs.readFileSync('render-plan.json','utf8'));
 if(!['preview','final'].includes(plan.mode)) throw Error('Invalid render mode');
 const ffmpeg=RenderInternals.getExecutablePath({type:'ffmpeg',indent:false,logLevel:'warn',binariesDirectory:null});
 execFileSync(ffmpeg,['-version'],{stdio:'ignore'});
-// Bundled compositor ffmpeg lacks wrapped_avframe; runner ffmpeg performs full decode QA.
-execFileSync('ffmpeg',['-version'],{stdio:'ignore'});
+// ffprobe is explicitly installed by CI; bundled ffmpeg decodes via supported rawvideo codec.
 execFileSync('ffprobe',['-version'],{stdio:'ignore'});
 const serveUrl=await bundle({entryPoint:path.resolve('src/index.ts'),outDir:path.resolve('build')});
 await ensureBrowser({logLevel:'info'});
@@ -26,7 +25,7 @@ try {
   await renderMedia({...base,composition,inputProps:{fx},codec:'h264',audioCodec:'aac',crf:plan.mode==='preview'?25:19,scale,concurrency:2,outputLocation:raw,onProgress:({progress})=>console.log(name,Math.round(progress*100))});
   // AAC encoder padding must not extend the advertised 15-second duration.
   execFileSync(ffmpeg,['-y','-v','error','-i',raw,'-t','15','-c:v','copy','-c:a','aac','-b:a','192k','-metadata','comment=Motion derived and modified from ACCAD, The Ohio State University; CC BY 3.0; https://accad.ohio-state.edu/sites/accad.osu.edu/files/Male2_bvh.zip ; https://creativecommons.org/licenses/by/3.0/','-movflags','+faststart',dest]);
-  execFileSync('ffmpeg',['-v','error','-i',dest,'-f','null','-'],{stdio:'inherit'});
+  execFileSync(ffmpeg,['-v','error','-i',dest,'-c:v','rawvideo','-c:a','pcm_s16le','-f','null','-'],{stdio:'inherit'});
   fs.unlinkSync(raw);
  };
  if(plan.mode==='preview'){
