@@ -7,7 +7,7 @@ const {RenderInternals,ensureBrowser,openBrowser,selectComposition,renderStill,r
 const spec=readFilmSpec(),out=path.resolve('out');fs.mkdirSync(out,{recursive:true});
 const plan=JSON.parse(fs.readFileSync('render-plan.json','utf8'));if(!['keyframes','preview','final'].includes(plan.mode))throw Error('Invalid mode');
 const ffmpeg=RenderInternals.getExecutablePath({type:'ffmpeg',indent:false,logLevel:'warn',binariesDirectory:null});
-execFileSync(ffmpeg,['-version'],{stdio:'ignore'});execFileSync('ffprobe',['-version'],{stdio:'ignore'});
+execFileSync(ffmpeg,['-version'],{stdio:'ignore'});execFileSync('ffprobe',['-version'],{stdio:'ignore'});execFileSync('ffmpeg',['-version'],{stdio:'ignore'});
 const serveUrl=await bundle({entryPoint:path.resolve('src/index.ts'),outDir:path.resolve('build')});
 await ensureBrowser({logLevel:'info'});const browser=await openBrowser('chrome',{chromiumOptions:{gl:'swangle'},logLevel:'info'});
 try{
@@ -19,7 +19,7 @@ try{
   await renderStill({...target,frame:spec.impactQaFrame,output:path.join(out,`qa-impact-${fx}.png`)});
  }
  // Compare decoded RGBA pixels, not file metadata. This gate precedes costly full-film rendering.
- const pixels=fx=>execFileSync(ffmpeg,['-v','error','-i',path.join(out,`qa-impact-${fx}.png`),'-frames:v','1','-pix_fmt','rgba','-c:v','rawvideo','-f','rawvideo','-'],{maxBuffer:spec.width*spec.height*4+1048576});
+ const pixels=fx=>execFileSync('ffmpeg',['-v','error','-i',path.join(out,`qa-impact-${fx}.png`),'-frames:v','1','-pix_fmt','rgba','-c:v','rawvideo','-f','rawvideo','-'],{maxBuffer:spec.width*spec.height*4+1048576});
  const hashes=[true,false].map(fx=>crypto.createHash('sha256').update(pixels(fx)).digest('hex'));
  fs.writeFileSync(path.join(out,'fx-prop-gate.json'),JSON.stringify({frame:spec.impactQaFrame,purpose:'FX visibility check only; not an asserted action/audio contact cue',hashes,pass:hashes[0]!==hashes[1]},null,2));
  if(hashes[0]===hashes[1])throw Error('FX/Clean impact pixels identical; wrong props or impactQaFrame');
