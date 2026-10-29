@@ -1,0 +1,158 @@
+{
+  "title": "Industrial Exit — original full-fight score",
+  "status": "15-second final cue mix, verified principal and low-level native foot contacts",
+  "duration": 15,
+  "fps": 60,
+  "music_action_start": 0.6,
+  "music_action_end": 11.8,
+  "events": [
+    {
+      "frame": 18,
+      "time": 0.3,
+      "kind": "alarm",
+      "note": "Low-volume industrial warning ambience",
+      "gain": 0.45,
+      "pan": -0.25
+    },
+    {
+      "frame": 68,
+      "time": 1.1333333333333333,
+      "kind": "whoosh",
+      "note": "First punch accelerates toward forearm guard",
+      "duration": 0.1,
+      "gain": 0.65,
+      "pan": -0.05
+    },
+    {
+      "frame": 74,
+      "time": 1.2333333333333334,
+      "kind": "block",
+      "note": "Verified first forearm block, not body hit",
+      "pan": 0.03
+    },
+    {
+      "frame": 186,
+      "time": 3.1,
+      "kind": "whoosh",
+      "note": "Counter punch accelerates toward opposing forearm guard",
+      "duration": 0.1,
+      "gain": 0.65,
+      "pan": 0.08
+    },
+    {
+      "frame": 192,
+      "time": 3.2,
+      "kind": "block",
+      "note": "Verified counter forearm block, not body hit",
+      "gain": 1.08,
+      "pan": -0.02
+    },
+    {
+      "frame": 370,
+      "time": 6.166666666666667,
+      "kind": "whoosh",
+      "note": "Spinning kick passes defender and approaches control box",
+      "duration": 0.2,
+      "gain": 0.9,
+      "pan": 0.12
+    },
+    {
+      "frame": 382,
+      "time": 6.366666666666666,
+      "kind": "metal",
+      "note": "Kick contacts control cabinet only, no human impact",
+      "gain": 1.2,
+      "pan": -0.2
+    },
+    {
+      "frame": 388,
+      "time": 6.466666666666667,
+      "kind": "control",
+      "note": "Short circuit and control acknowledgement",
+      "gain": 0.9,
+      "pan": -0.25
+    },
+    {
+      "frame": 398,
+      "time": 6.633333333333334,
+      "kind": "door_open",
+      "note": "Motor raises exit shutter until frame498",
+      "gain": 1.0,
+      "pan": -0.35
+    },
+    {
+      "frame": 578,
+      "time": 9.633333333333333,
+      "kind": "slide",
+      "note": "Verified native Left ToeBase minimum: gentle start scuff",
+      "gain": 0.18,
+      "pan": -0.12
+    },
+    {
+      "frame": 584,
+      "time": 9.733333333333333,
+      "kind": "whoosh",
+      "note": "Low-level fabric/air rush as black starts running; not foot impact",
+      "duration": 0.6,
+      "gain": 0.22,
+      "pan": -0.2
+    },
+    {
+      "frame": 611,
+      "time": 10.183333333333334,
+      "kind": "step",
+      "note": "Verified Left ToeBase minimum during run",
+      "gain": 0.3,
+      "pan": -0.18
+    },
+    {
+      "frame": 630,
+      "time": 10.5,
+      "kind": "whoosh",
+      "note": "Low-level cloth movement during exit; not foot impact",
+      "duration": 0.5,
+      "gain": 0.15,
+      "pan": -0.4
+    },
+    {
+      "frame": 631,
+      "time": 10.516666666666667,
+      "kind": "step",
+      "note": "Verified Right ToeBase minimum during run",
+      "gain": 0.3,
+      "pan": -0.24
+    },
+    {
+      "frame": 647,
+      "time": 10.783333333333333,
+      "kind": "step",
+      "note": "Verified Left ToeBase minimum approaching exit",
+      "gain": 0.28,
+      "pan": -0.32
+    },
+    {
+      "frame": 667,
+      "time": 11.116666666666667,
+      "kind": "step",
+      "note": "Verified Right ToeBase minimum near left exit",
+      "gain": 0.24,
+      "pan": -0.4
+    },
+    {
+      "frame": 718,
+      "time": 11.966666666666667,
+      "kind": "door_close",
+      "note": "Automatic exit shutter descends until frame818",
+      "gain": 0.8,
+      "pan": -0.4
+    },
+    {
+      "frame": 818,
+      "time": 13.633333333333333,
+      "kind": "metal",
+      "note": "Shutter locks closed and red light returns",
+      "gain": 0.38,
+      "pan": -0.4
+    }
+  ]
+}

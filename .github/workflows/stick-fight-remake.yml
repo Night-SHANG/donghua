@@ -1,0 +1,88 @@
+name: Exit Fight 15s
+on:
+  push:
+    branches: [feat/huashu-fox-stork]
+    paths: ['remotion/stick-fight-remake/**', '.github/workflows/stick-fight-remake.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    defaults:
+      run:
+        working-directory: remotion/stick-fight-remake
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read plan
+        id: plan
+        run: |
+          mkdir -p out
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          p=json.load(open('render-plan.json'))
+          assert p['mode'] in ('preview','final')
+          print('mode='+p['mode'])
+          print('approved='+p.get('approvedPreviewCommit',''))
+          PY
+      - name: Guard final against approved preview
+        if: steps.plan.outputs.mode == 'final'
+        env:
+          APPROVED: ${{ steps.plan.outputs.approved }}
+        run: |
+          test -n "$APPROVED"
+          git cat-file -e "$APPROVED^{commit}"
+          git diff --exit-code "$APPROVED" HEAD -- src public audio scripts choreography.json package.json package-lock.json tsconfig.json
+      - name: Install pinned dependencies
+        run: |
+          npm ci --no-audit --no-fund
+          python -m pip install numpy==2.2.6 scipy==1.15.3
+      - name: Obtain hash-pinned official ACCAD data (never execute archive contents)
+        run: |
+          mkdir -p cache
+          curl --fail --location --retry 2 'https://accad.ohio-state.edu/sites/accad.osu.edu/files/Male2_bvh.zip' -o cache/Male2_bvh.zip
+          echo 'f30dc56f8557d4b9f1bd6b8b0c4218c076471de0a9c1a20f3bc4a8b776cc14b1  cache/Male2_bvh.zip' | sha256sum --check
+      - name: Generate whole-body motion
+        run: python scripts/export_motion.py
+      - name: Generate original audio
+        run: |
+          python audio/synthesize.py
+          mkdir -p public/audio
+          cp audio/master.wav public/audio/exit-fight.wav
+      - name: Preflight
+        run: |
+          npm run typecheck
+          npm test
+          python -m unittest discover -s audio -p 'test_audio.py'
+      - name: Render and validate
+        run: |
+          node scripts/render.mjs
+          python scripts/verify_output.py
+          git rev-parse HEAD > out/source-commit.txt
+          python - <<'PY'
+          import hashlib,pathlib
+          root=pathlib.Path('out')
+          paths=sorted([p for p in root.iterdir() if p.is_file() and p.suffix in ('.mp4','.png','.txt','.json') and p.name not in ('SHA256SUMS.txt','source-manifest.json')])
+          (root/'SHA256SUMS.txt').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name+'\n' for p in paths))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: exit-fight-${{ steps.plan.outputs.mode }}
+          path: |
+            remotion/stick-fight-remake/out/*.mp4
+            remotion/stick-fight-remake/out/*.png
+            remotion/stick-fight-remake/out/composition.json
+            remotion/stick-fight-remake/out/verification.json
+            remotion/stick-fight-remake/out/source-commit.txt
+            remotion/stick-fight-remake/out/SHA256SUMS.txt
+          retention-days: 1

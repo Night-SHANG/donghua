@@ -1,0 +1,121 @@
+{
+  "azimuth": 30,
+  "center": 45,
+  "kickAzimuth": 42.32361711446128,
+  "kickCenter": 40.13070826441615,
+  "kickStart": 300,
+  "boxWorld": [
+    23.375585832435327,
+    102.0,
+    136.50170961888486
+  ],
+  "impactWorld": [
+    16.72140326490105,
+    101.24590391,
+    130.4418536526767
+  ],
+  "cabinetFrame": 382,
+  "contacts": [],
+  "actors": [
+    [
+      {
+        "at": 42,
+        "filename": "Male2_E3_CrossLeft.bvh",
+        "start": 8,
+        "end": 60,
+        "yaw": 0,
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "at": 160,
+        "filename": "Male2_E16_BlockRightMiddle.bvh",
+        "start": 9,
+        "end": 61,
+        "yaw": 0,
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "at": 300,
+        "filename": "Male2_G4_SpinningBackKick.bvh",
+        "start": 0,
+        "end": 9999,
+        "yaw": -12.323617114461278,
+        "offset": [
+          -1.435433767144744,
+          0.0,
+          -5.655577864754747
+        ]
+      },
+      {
+        "at": 522,
+        "filename": "Male2_D6_ReadyToRun.bvh",
+        "start": 0,
+        "end": 9999,
+        "yaw": 167.67638288553871,
+        "offset": [
+          17.611267059328,
+          0.0,
+          24.19770751419212
+        ]
+      }
+    ],
+    [
+      {
+        "at": 42,
+        "filename": "Male2_E16_BlockRightMiddle.bvh",
+        "start": 9,
+        "end": 61,
+        "yaw": 180,
+        "offset": [
+          37.07096951030516,
+          0.0,
+          146.0588146846484
+        ]
+      },
+      {
+        "at": 160,
+        "filename": "Male2_E3_CrossLeft.bvh",
+        "start": 8,
+        "end": 60,
+        "yaw": 180,
+        "offset": [
+          37.07096951030516,
+          0.0,
+          146.0588146846484
+        ]
+      },
+      {
+        "at": 300,
+        "filename": "Male2_E20_DodgeRight.bvh",
+        "start": 0,
+        "end": 9999,
+        "yaw": 167.67638288553871,
+        "offset": [
+          37.07096951030516,
+          0.0,
+          146.0588146846484
+        ]
+      },
+      {
+        "at": 522,
+        "filename": "Male2_D4_ReadyToRelax.bvh",
+        "start": 0,
+        "end": 9999,
+        "yaw": 167.67638288553871,
+        "offset": [
+          37.07096951030516,
+          0.0,
+          146.0588146846484
+        ]
+      }
+    ]
+  ]
+}
