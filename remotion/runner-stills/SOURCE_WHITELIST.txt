@@ -1,0 +1,11 @@
+package.json
+package-lock.json
+tsconfig.json
+README.md
+SOURCE_WHITELIST.txt
+render-plan.json
+src/index.ts
+src/scene.tsx
+scripts/plan.mjs
+scripts/render-stills.mjs
+host-tests/plan.test.mjs

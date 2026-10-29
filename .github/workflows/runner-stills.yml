@@ -1,0 +1,37 @@
+name: Runner Two Remotion Stills
+on:
+  push:
+    branches: [feat/huashu-fox-stork]
+    paths: ['remotion/runner-stills/**', '.github/workflows/runner-stills.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render-stills:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: remotion/runner-stills
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned dependencies without lifecycle scripts
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate source
+        run: |
+          npm run typecheck
+          npm test
+      - name: Render exactly two actual scene PNGs
+        run: npm run render
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: runner-stills
+          path: |
+            remotion/runner-stills/out/*.png
+            remotion/runner-stills/out/*.json
+            remotion/runner-stills/out/*.txt
+          retention-days: 1
